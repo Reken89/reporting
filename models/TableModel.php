@@ -595,17 +595,23 @@ class TableModel extends Model {
                               # Заглушка
                           } else {
                           
+                              
+                              
                           $total1 = ($credit_year_all_x + $fact_x - $debit_year_all_x - $kassa_x) - (0 - 0) + $return_old_x;
                           $total2 = $lbo_x - $fact_x + $prepaid_x - $credit_year_all_x;
                               
+                          
                             $sql = "UPDATE reporting_meaning SET lbo = '$lbo_x', fact_all = '$fact_x', "
                            . "kassa_all = '$kassa_x', return_old = '$return_old_x', prepaid = '$prepaid_x', credit_year_all = '$credit_year_all_x', "
                                     . "credit_year_term = '$credit_year_term_x', debit_year_all = '$debit_year_all_x', debit_year_term = '$debit_year_term_x', "
                                     . "total1 = '$total1', total2 = '$total2' WHERE id_name = '$a' AND mounth = '$mounth' "
                            . "AND name = '$title' AND variant_table = '$chapter'";
-                   
+                           
+
                    $stmt = $this->db->prepare($sql);
                    $stmt->execute();
+                               
+                               
                           }
                           
                       }
@@ -631,19 +637,26 @@ class TableModel extends Model {
                           # Ставим проверку, что бы лишний раз не трогать БД
                           if($proverka == '0'){
                               #Заглушка
+                              
                           } else {
+                              
                               
                           $total1 = ($credit_year_all_x + $fact_x - $debit_year_all_x - $kassa_x) - (0 - 0) + $return_old_x;
                           $total2 = $lbo_x - $fact_x + $prepaid_x - $credit_year_all_x;
+                          
                           
                             $sql = "UPDATE reporting_meaning SET lbo = '$lbo_x', fact_all = '$fact_x', "
                            . "kassa_all = '$kassa_x', return_old = '$return_old_x', prepaid = '$prepaid_x', credit_year_all = '$credit_year_all_x', "
                                     . "credit_year_term = '$credit_year_term_x', debit_year_all = '$debit_year_all_x', debit_year_term = '$debit_year_term_x', "
                                     . "total1 = '$total1', total2 = '$total2' WHERE id_name = '$b' AND mounth = '$mounth' "
                            . "AND name = '$title' AND variant_table = '$chapter'";
+                           
+
                    
                          $stmt = $this->db->prepare($sql);
                          $stmt->execute();
+                               
+                               
                          
                           }
                           

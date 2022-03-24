@@ -622,7 +622,7 @@
                 echo "</br><input type='button' style='width:250px;height:25px' id='btn2' class='btn' value='Отправить в ФУ'>";
                 
                 echo "</br><pre><input type='button' style='width:250px;height:25px' id='filling' class='btn' value='Наполнение данными прошлого периода'>";
-                echo "<p><b><font color='red'>Процесс наполнения данными длится около 5-10 сек. !</font></b></p>";
+                echo "<p><b><font color='red'>Процесс наполнения данными длится около 5-10 сек. ! После нажатия на кнопку, дождитесь результата, не нужно нажимать кнопку повторно во время выполнения процесса!</font></b></p>";
                  }
        
                  if($status == '10' || $status == '66'){

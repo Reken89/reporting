@@ -101,13 +101,12 @@
                          }
                            ?> 
                          
-                         
+                         </br><p><b>Выберите учреждение</b></p>
                          <?php 
-                         if($_SESSION['id'] == '1' || $_SESSION['id'] == '2'){
+                         if($_SESSION['role'] == 'admin'){
                            ?>  
                          
                          
-                         </br><p><b>Выберите учреждение</b></p>
                          
                          <div class="size_block">
                          
@@ -221,6 +220,140 @@
    </label> 
                              
                          </div>
+            
+                    <?php
+                         }if($_SESSION['role'] == 'report_school'){
+                         ?>  
+                         
+                                                  <label class="container">
+   <input type="checkbox" name="svod_title[]" value="СОШ1">
+   <span class="checkmark">Школа №1</span>
+   </label>  
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="СОШ2">
+   <span class="checkmark">Школа №2</span>
+   </label>  
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="СОШ3">
+   <span class="checkmark">Школа №3</span>
+   </label>  
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="Гимназия">
+   <span class="checkmark">Гимназия</span>
+   </label>  
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="Лицей">
+   <span class="checkmark">Лицей</span>
+   </label> 
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="ВСОШ">
+   <span class="checkmark">ВСОШ</span>
+   </label> 
+                         
+                         <?php
+                         }if($_SESSION['role'] == 'report_kultura'){
+                         ?> 
+                         
+                             <label class="container">
+   <input type="checkbox" name="svod_title[]" value="ЦВР">
+   <span class="checkmark">ЦВР</span>
+   </label> 
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="ДХШ">
+   <span class="checkmark">ДХШ</span>
+   </label>               
+                         
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="ДМШ">
+   <span class="checkmark">ДМШ</span>
+   </label> 
+                         
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="ДЮСШ2">
+   <span class="checkmark">ДЮСШ2</span>
+   </label> 
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="МАиЦБ">
+   <span class="checkmark">МАиЦБ</span>
+   </label> 
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="ЦКР">
+   <span class="checkmark">ЦКР</span>
+   </label> 
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="ЦРО">
+   <span class="checkmark">ЦРО</span>
+   </label>                      
+                         
+                         <?php
+                         }if($_SESSION['role'] == 'report_kinder'){
+                         ?> 
+                         
+                             <label class="container">
+   <input type="checkbox" name="svod_title[]" value="Ауринко">
+   <span class="checkmark">Ауринко</span>
+   </label> 
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="Солнышко">
+   <span class="checkmark">Солнышко</span>
+   </label> 
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="Гномик">
+   <span class="checkmark">Гномик</span>
+   </label> 
+                          <label class="container">
+   <input type="checkbox" name="svod_title[]" value="Сказка">
+   <span class="checkmark">Сказка</span>
+   </label> 
+                          <label class="container">
+   <input type="checkbox" name="svod_title[]" value="Кораблик">
+   <span class="checkmark">Кораблик</span>
+   </label> 
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="Золотой">
+   <span class="checkmark">Золотой Ключик</span>
+   </label> 
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="Березка">
+   <span class="checkmark">Березка</span>
+   </label>                      
+                         
+                         <?php
+                         }if($_SESSION['role'] == 'report'){
+                         ?> 
+                         
+                             <label class="container">
+   <input type="checkbox" name="svod_title[]" value="Администрация">
+   <span class="checkmark">Администрация</span>
+   </label> 
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="Закупки">
+   <span class="checkmark">Закупки</span>
+   </label> 
+                                                
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="КУМС">
+   <span class="checkmark">КУМС</span>
+   </label> 
+                                             
+                          <label class="container">
+   <input type="checkbox" name="svod_title[]" value="Совет">
+   <span class="checkmark">Совет</span>
+   </label> 
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="КСО">
+   <span class="checkmark">КСО</span>
+   </label> 
+                         <label class="container">
+   <input type="checkbox" name="svod_title[]" value="ЦБ">
+   <span class="checkmark">Централизованная бухгалтерия</span>
+   </label>                      
+                         
+                         <?php
+                         }
+                         ?> 
+                         
+                         
                          
      <body>
    <div class="div"><b>МБ МЗ(МБ)</b> = бюджетные и автономные учреждения - средства субсидии на муниципальное задание за счет местного бюджета 
@@ -238,9 +371,7 @@
 </div>
  </body>                      
                          
-                         <?php
-                         }
-                         ?>
+                        
         
               <p><input type="button" style="width:250px;height:25px" name="formSubmit" id="btn1" class="btn" value="Сформировать таблицу" /></p>           
                          
@@ -320,7 +451,7 @@
               
             <?php 
                         
-            if($_SESSION['id'] == '1'){
+            if($_SESSION['role'] == 'admin'){
                 
 
             
@@ -439,7 +570,7 @@
             
             }
             
-             if($_SESSION['id'] == '2' || $_SESSION['id'] == '3'){
+             if($_SESSION['role'] == 'report_school' || $_SESSION['role'] == 'report_kultura' || $_SESSION['role'] == 'report_kinder' || $_SESSION['role'] == 'report'){
                  
                  if($_SESSION['rendering'] == "simple"){
                      

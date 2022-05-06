@@ -23,6 +23,7 @@ class IndexModel extends Model {
        if (!empty($res)) {
    
             $_SESSION['user'] = $_POST['name'];
+            $_SESSION['role'] = $res['role'];
             $_SESSION['id'] = $res['id'];
             
             header("Location: /reporting/cabinet");

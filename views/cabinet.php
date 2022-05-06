@@ -29,17 +29,17 @@
             <form action="/reporting/table/fot" method="post">
             <input type='hidden' name='year' value='2020'>
         <input type='hidden' name='info' value='2'>
-            <button type="submit" style="width:400px;height:25px" class="btn">Отчет по ФОТ</button>
+            <button type="button" style="width:400px;height:25px" class="btn">Отчет по ФОТ</button>
             </form>
         
             <form action="/reporting/table/opz" method="post">
             <input type='hidden' name='year' value='2021'>
         <input type='hidden' name='info' value='2'>
-            <button type="submit" style="width:400px;height:25px" class="btn">Отчет по просроченной задолжнности</button>
+            <button type="button" style="width:400px;height:25px" class="btn">Отчет по просроченной задолжнности</button>
             </form>
             
             <?php
-            if($_SESSION['id'] == '1'){
+            if($_SESSION['role'] == 'admin'){
                 
                 echo <<<HTML
             
@@ -49,6 +49,11 @@
                         <button type="submit" style="width:400px;height:25px" class="btn">Редактор таблицы</button>
                         </form>
                 
+                        <form action="/reporting/editoruser/editor_user" method="post">
+                        <input type='hidden' name='year' value='2021'>
+                        <input type='hidden' name='info' value='2'>
+                        <button type="submit" style="width:400px;height:25px" class="btn">Редактор учетных записей</button>
+                        </form>
                 HTML;
                                 
             }

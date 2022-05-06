@@ -39,7 +39,7 @@ HTML;
 <?php
 
 # Таблица Финуправления
-if($_SESSION['id'] == '1'){
+if($_SESSION['role'] == 'admin'){
     
                 for ($j = 1 ; $j < 41 ; ++$j){
             
@@ -133,7 +133,7 @@ if($_SESSION['id'] == '1'){
 }
 
 # Таблица ЦБ и КУМС
-if($_SESSION['id'] == '2' || $_SESSION['id'] == '3'){
+if($_SESSION['role'] == 'report_school' || $_SESSION['role'] == 'report_kultura' || $_SESSION['role'] == 'report_kinder' || $_SESSION['role'] == 'report'){
     
                                     for ($j = 1 ; $j < 41 ; ++$j){
             

@@ -34,7 +34,7 @@ class TableController extends Controller {
             header("Location: /reporting");
         }
         
-        if($_SESSION['id'] == '1'){
+        if($_SESSION['role'] == 'admin'){
         $_SESSION['rendering'] = "simple";
         }
                 
@@ -133,17 +133,47 @@ class TableController extends Controller {
         $debit_end_term = str_replace(" ", "", $debit_end_term);
         $debit_end_term = str_replace(",", ".", $debit_end_term);
         
+        #Подставляем формулу арифметических действий в строку
+        $str = $debit_end_term;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $debit_end_term = $res;
+        
         $debit_end_all = str_replace(" ", "", $debit_end_all);
         $debit_end_all = str_replace(",", ".", $debit_end_all);
+        
+        #Подставляем формулу арифметических действий в строку
+        $str = $debit_end_all;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $debit_end_all = $res;
         
         $credit_end_term = str_replace(" ", "", $credit_end_term);
         $credit_end_term = str_replace(",", ".", $credit_end_term);
         
+        #Подставляем формулу арифметических действий в строку
+        $str = $credit_end_term;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $credit_end_term = $res;
+        
         $credit_end_all = str_replace(" ", "", $credit_end_all);
         $credit_end_all = str_replace(",", ".", $credit_end_all);
         
+        #Подставляем формулу арифметических действий в строку
+        $str = $credit_end_all;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $credit_end_all = $res;
+        
         $kassa_mounth = str_replace(" ", "", $kassa_mounth);
         $kassa_mounth = str_replace(",", ".", $kassa_mounth);
+        
+        #Подставляем формулу арифметических действий в строку
+        $str = $kassa_mounth;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $kassa_mounth = $res;
         
         $kassa_all = str_replace(" ", "", $kassa_all);
         $kassa_all = str_replace(",", ".", $kassa_all);
@@ -151,29 +181,77 @@ class TableController extends Controller {
         $fact_mounth = str_replace(" ", "", $fact_mounth);
         $fact_mounth = str_replace(",", ".", $fact_mounth);
         
+        #Подставляем формулу арифметических действий в строку
+        $str = $fact_mounth;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $fact_mounth = $res;
+        
         $fact_all = str_replace(" ", "", $fact_all);
         $fact_all = str_replace(",", ".", $fact_all);
         
         $debit_year_term = str_replace(" ", "", $debit_year_term);
         $debit_year_term = str_replace(",", ".", $debit_year_term);
         
+        #Подставляем формулу арифметических действий в строку
+        $str = $debit_year_term;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $debit_year_term = $res;
+        
         $debit_year_all = str_replace(" ", "", $debit_year_all);
         $debit_year_all = str_replace(",", ".", $debit_year_all);
+        
+        #Подставляем формулу арифметических действий в строку
+        $str = $debit_year_all;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $debit_year_all = $res;
         
         $credit_year_term = str_replace(" ", "", $credit_year_term);
         $credit_year_term = str_replace(",", ".", $credit_year_term);
         
+        #Подставляем формулу арифметических действий в строку
+        $str = $credit_year_term;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $credit_year_term = $res;
+        
         $credit_year_all = str_replace(" ", "", $credit_year_all);
         $credit_year_all = str_replace(",", ".", $credit_year_all);
+        
+        #Подставляем формулу арифметических действий в строку
+        $str = $credit_year_all;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $credit_year_all = $res;
         
         $lbo = str_replace(" ", "", $lbo);
         $lbo = str_replace(",", ".", $lbo);
         
+        #Подставляем формулу арифметических действий в строку
+        $str = $lbo;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $lbo = $res;
+        
         $return_old = str_replace(" ", "", $return_old);
         $return_old = str_replace(",", ".", $return_old);
         
+        #Подставляем формулу арифметических действий в строку
+        $str = $return_old;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $return_old = $res;
+        
         $prepaid = str_replace(" ", "", $prepaid);
         $prepaid = str_replace(",", ".", $prepaid);
+        
+        #Подставляем формулу арифметических действий в строку
+        $str = $prepaid;
+        $str2 = '$res='.$str.';';
+        eval($str2);
+        $prepaid = $res;
                 
         $mounth = $_SESSION['svod_mounth'];
         $mounth = $mounth[0];

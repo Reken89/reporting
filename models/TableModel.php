@@ -5,7 +5,7 @@ class TableModel extends Model {
 
     public function back($svod_mounth, $svod_chapter, $svod_title, $count_svod_mounth, $count_svod_chapter, $count_svod_title) {
 
-        if($_SESSION['id'] == '1'){
+        if($_SESSION['role'] == 'admin'){
             
                 if ($count_svod_mounth >= '1' && $count_svod_chapter >= '1' && $count_svod_title >= '1') {
                     
@@ -40,7 +40,7 @@ class TableModel extends Model {
            }
            
         
-    } if($_SESSION['id'] == '2' || $_SESSION['id'] == '3'){
+    } if($_SESSION['role'] == 'report_school' || $_SESSION['role'] == 'report_kultura' || $_SESSION['role'] == 'report_kinder' || $_SESSION['role'] == 'report'){
         
                if ($count_svod_mounth == '1' && $count_svod_chapter == '1' && $count_svod_title == '1') {
                 

@@ -25,7 +25,7 @@
               </thead>
           
           <?php
-          if($_SESSION['id'] == '1'){
+          if($_SESSION['role'] == 'admin'){
               
                           for ($j = 1 ; $j < 41 ; ++$j){
             

@@ -42,6 +42,12 @@
             if($_SESSION['role'] == 'admin'){
                 
                 echo <<<HTML
+                
+                        <form action="/reporting/communal/com" method="post">
+                        <input type='hidden' name='year' value='2021'>
+                        <input type='hidden' name='info' value='2'>
+                        <button type="submit" style="width:400px;height:25px" class="btn">Коммунальные услуги</button>
+                        </form>
             
                         <form action="/reporting/editor/editor_ofs" method="post">
                         <input type='hidden' name='year' value='2021'>

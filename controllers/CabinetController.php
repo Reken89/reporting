@@ -26,6 +26,11 @@ class CabinetController extends Controller {
         
         $_SESSION['rendering'] = "simple";
         
+        # Для корректного отображения таблицы коммунальные услуги (администратор)
+        $_SESSION['communal_year'] = ["2022"];
+        $_SESSION['communal_mounth'] = ["1"];
+        
+        
         $this->view->render($this->pageTpl, $this->pageData);
         
     }

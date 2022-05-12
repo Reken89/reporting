@@ -91,5 +91,51 @@ class CommunalModel extends Model {
         
     }
     
+    
+    public function email($year, $mounth){
+        
+                $quant_year = count($year);
+                $quant_mounth = count($mounth);
+        
+        if($quant_year == '1' and $quant_mounth == '1'){
+            
+            $sql = "SELECT `t1`. id, mail FROM `users_ku` as `t1` INNER JOIN `portal_ku` as `t2` WHERE `t2`.`status` = '2' AND year = '$year[0]' AND mounth = '$mounth[0]' AND `t1`.`name` = `t2`.`name`";
+            
+           $res = []; 
+           $stmt = $this->db->prepare($sql);
+           $stmt->execute();
+           
+           while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+               $res[$row['id']] = $row;
+           }
+           
+           
+           
+           $email = [];
+           foreach ($res as $key => $value) {
+               $email[] = $value['mail'];
+           }
+          
+           foreach ($email as $address){
+               echo "Вы отправили письмо на адрес $address";
+               
+           }
+           
+
+        } else {
+            echo "Для рассылки писем, нужно выбрать один месяц";
+        }
+        
+    }
+    
+    
+    public function update_status($id){
+        
+            $sql = "UPDATE portal_ku SET status = '2' WHERE id = '$id'";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+        
+    }
+    
 }
 

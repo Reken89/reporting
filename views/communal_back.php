@@ -100,6 +100,11 @@
                          
     <p><input type="button" style="width:250px;height:25px" name="formSubmit" id="communal" class="btn" value="Сформировать таблицу" /></p>                     
               </form>
+    <p><input type="button" style="width:250px;height:25px" name="formSubmit" id="email" class="btn" value="Отправить напоминания" /></p>
+    
+            <form action="/reporting/communal/excel" method="post">
+            <button type="submit" style="width:250px;height:25px" class="btn">Выгрузка в EXCEL</button>
+            </form>
 
                           <body>
                   <div class="div">
@@ -203,9 +208,8 @@
             
                 echo "<tr>";
                 echo "<input type=hidden class='id' value=" . $value['id'] . ">";
-                echo "<input type=hidden class='variant' value='20'>";
                 echo "<td bgcolor=$color>" . $value['full_name'] . "</td>";
-                echo "<td><input type=button id='btn_4' value='Доработка'></td>";
+                echo "<td><input type=button id='update_status' value='Доработка'></td>";
                 echo "<td>" . $value['volume1'] . "</td>";
                 echo "<td>" . $value['sum1'] . "</td>";
                 echo "<td>" . $value['volume2'] . "</td>";

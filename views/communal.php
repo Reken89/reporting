@@ -49,7 +49,47 @@
            })
 
         })
+        
+        
+        
+        
+                     $(document).on('click', '#email', function(){
+
+       $.ajax({  
+                url:"/reporting/communal/email",   
+                success:function(data)  
+                {  
+                     alert(data);
+                     fetch_data();  
+                }  
+
+           })
+
+        })
      
+     
+     
+     
+              $(document).on('click', '#update_status', function(){
+
+           var tr = this.closest('tr');
+           var id = $('.id', tr).val();
+    
+       $.ajax({  
+                url:"/reporting/communal/update_status",  
+                method:"POST",  
+                data:{ id:id },
+                dataType:"text",  
+                success:function(data)  
+                {  
+                     alert(data);
+                     fetch_data();  
+                }  
+
+
+           })
+
+        })
      
      
      

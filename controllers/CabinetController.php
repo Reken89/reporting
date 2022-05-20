@@ -36,3 +36,5 @@ class CabinetController extends Controller {
     }
     
 }
+
+# Проверочный комит

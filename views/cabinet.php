@@ -43,6 +43,12 @@
                 
                 echo <<<HTML
                 
+                        <form action="/reporting/budget/table" method="post">
+                        <input type='hidden' name='year' value='2021'>
+                        <input type='hidden' name='info' value='2'>
+                        <button type="submit" style="width:400px;height:25px" class="btn">Таблица смета</button>
+                        </form>
+                
                         <form action="/reporting/communal/com" method="post">
                         <input type='hidden' name='year' value='2021'>
                         <input type='hidden' name='info' value='2'>

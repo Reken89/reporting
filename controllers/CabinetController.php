@@ -30,7 +30,10 @@ class CabinetController extends Controller {
         $_SESSION['communal_year'] = ["2022"];
         $_SESSION['communal_mounth'] = ["1"];
         
+        # Для корректного отображения таблицы СМЕТА бюджет (Администратор)
+        $_SESSION['variant_budget'] = "one";
         
+
         $this->view->render($this->pageTpl, $this->pageData);
         
     }

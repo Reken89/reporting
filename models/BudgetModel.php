@@ -21,6 +21,13 @@ class BudgetModel extends Model {
                    $stmt->execute();
                    
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       
+               # Разделяем число на блоки
+               $block = ['glava', 'adm', 'sovet', 'kso', 'u_glava', 'u_adm', 'u_sovet', 'u_kso'];
+               for ($num = 0 ; $num <= 7 ; ++$num) {
+               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+               }
+                       
                        $res[$row['id']] = $row;
                    }
         

@@ -35,6 +35,7 @@ class BudgetController extends Controller {
         }
         
         $this->pageData['info'] = $this->model->budget_back($variant_budget);
+        $this->pageData['total'] = $this->model->total($variant_budget);
         
         $this->view->render($this->pageTpl_back, $this->pageData);
     }

@@ -50,6 +50,7 @@
               </form>
 
               <?php
+              
               # Определяем какую таблицу отображать
               switch ($_SESSION['variant_budget']) {
         
@@ -121,6 +122,20 @@
                       }
                       
                       #Итоговая строка
+                      foreach ($pageData['total'] as $key => $value) {
+                      echo "<tr>";
+                      echo "<td class='col-id-no' scope='row'><b>ИТОГО</td>";
+                      echo "<td></td>";
+                      echo "<td><b>" . $value['SUM(glava)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(adm)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(sovet)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(kso)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(u_glava)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(u_adm)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(u_sovet)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(u_kso)'] . "</b></td>";
+                      echo "</tr>";
+                      }
                       
                       ?>
                       

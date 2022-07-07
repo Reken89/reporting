@@ -226,7 +226,124 @@
        break;
    
        case "three":
-       echo "Третье сочетание";
+
+           ?>
+              
+              <table class="freeze-table" width="700px">
+                  
+                  <thead>
+                      <tr>
+                          <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Наименование расходов</th>
+                          <th style="min-width: 70px; width: 70px;">ЭКР</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Ауринко</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Березка</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Золотой ключик</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Кораблик</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Гномик</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Сказка</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Солнышко</th>
+                          
+                          <th style="min-width: 200px; width: 200px;">Детский сад Ауринко</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Березка</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Золотой ключик</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Кораблик</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Гномик</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Сказка</th>
+                          <th style="min-width: 200px; width: 200px;">Детский сад Солнышко</th>
+                      </tr>
+                  </thead>
+                  
+                  <tbody>
+                      
+                      <?php
+                     
+                      # Этот бред в цикле нужно убрать!!! Переменную J нужно получать иначе!!!
+                      for ($j = 1 ; $j < 44 ; ++$j){
+                          
+                          foreach ($pageData['info'] as $key => $value) {
+
+                              if ($value['marker_a'] == 10 && $value['marker_b'] == $j ) {
+                                  echo "<tr>";
+                                  echo "<td class='col-id-no' scope='row'><b>" . $value['name'] . "</td></b>";
+                                  echo "<td><b>" . $value['ekr'] . "</td></b>";
+                                  echo "<td><b>" . $value['aurinko'] . "</td></b>";
+                                  echo "<td><b>" . $value['berezka'] . "</td></b>";
+                                  echo "<td><b>" . $value['zoloto'] . "</td></b>";
+                                  echo "<td><b>" . $value['korablik'] . "</td></b>";
+                                  echo "<td><b>" . $value['gnomik'] . "</td></b>";
+                                  echo "<td><b>" . $value['skazka'] . "</td></b>";
+                                  echo "<td><b>" . $value['solnishko'] . "</td></b>";
+                                  
+                                  echo "<td><b>" . $value['u_aurinko'] . "</td></b>";
+                                  echo "<td><b>" . $value['u_berezka'] . "</td></b>";
+                                  echo "<td><b>" . $value['u_zoloto'] . "</td></b>";
+                                  echo "<td><b>" . $value['u_korablik'] . "</td></b>";
+                                  echo "<td><b>" . $value['u_gnomik'] . "</td></b>";
+                                  echo "<td><b>" . $value['u_skazka'] . "</td></b>";
+                                  echo "<td><b>" . $value['u_solnishko'] . "</td></b>";
+                                  echo "</tr>";
+                              }
+                              
+                              if ($value['marker_a'] == 0 && $value['marker_b'] == $j ) {
+                                  echo "<tr>";
+                                  echo "<input type=hidden class='marker_b' value=" . $j . ">";
+                                  echo "<input type=hidden class='id' value=" . $value['id'] . ">";
+                                  echo "<td class='col-id-no' scope='row'>" . $value['name'] . "</td>";
+                                  echo "<td>" . $value['ekr'] . "</td>";
+                                  echo <<<HTML
+                                  <td><input type="text" id='user' class='aurinko' value="$value[aurinko]"></td>
+                                  <td><input type="text" id='user' class='berezka' value="$value[berezka]"></td>
+                                  <td><input type="text" id='user' class='zoloto' value="$value[zoloto]"></td>
+                                  <td><input type="text" id='user' class='korablik' value="$value[korablik]"></td>
+                                  <td><input type="text" id='user' class='gnomik' value="$value[gnomik]"></td>
+                                  <td><input type="text" id='user' class='skazka' value="$value[skazka]"></td>
+                                  <td><input type="text" id='user' class='solnishko' value="$value[solnishko]"></td>
+                                  HTML;
+                                  echo "<td>" . $value['u_aurinko'] . "</td>";
+                                  echo "<td>" . $value['u_berezka'] . "</td>";
+                                  echo "<td>" . $value['u_zoloto'] . "</td>";
+                                  echo "<td>" . $value['u_korablik'] . "</td>";
+                                  echo "<td>" . $value['u_gnomik'] . "</td>";
+                                  echo "<td>" . $value['u_skazka'] . "</td>";
+                                  echo "<td>" . $value['u_solnishko'] . "</td>";
+                                  echo "</tr>";
+                              }
+                              
+                          }
+                          
+                      }
+                      
+                      #Итоговая строка
+                      foreach ($pageData['total'] as $key => $value) {
+                      echo "<tr>";
+                      echo "<td class='col-id-no' scope='row'><b>ИТОГО</td>";
+                      echo "<td></td>";
+                      echo "<td><b>" . $value['SUM(aurinko)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(berezka)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(zoloto)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(korablik)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(gnomik)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(skazka)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(solnishko)'] . "</b></td>";
+                      
+                      echo "<td><b>" . $value['SUM(u_aurinko)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(u_berezka)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(u_zoloto)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(u_korablik)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(u_gnomik)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(u_skazka)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(u_solnishko)'] . "</b></td>";
+                      echo "</tr>";
+                      }
+                      
+                      ?>
+                      
+                  </tbody>
+                  
+              </table>
+              
+              <?php
+           
        break;
    
        case "four":

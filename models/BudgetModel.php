@@ -59,6 +59,30 @@ class BudgetModel extends Model {
                 
                 
              break;
+             
+                    case "three":
+       
+                    $sql = "SELECT id, marker_a, marker_b, name, ekr, aurinko, berezka, zoloto, korablik, gnomik, skazka, solnishko, "
+                . "u_aurinko, u_berezka, u_zoloto, u_korablik, u_gnomik, u_skazka, u_solnishko from reporting_budget";
+
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       
+               # Разделяем число на блоки
+               $block = ['aurinko', 'berezka', 'zoloto', 'korablik', 'gnomik', 'skazka', 'solnishko', 'u_aurinko', 'u_berezka', 'u_zoloto', 'u_korablik', 'u_gnomik', 'u_skazka', 'u_solnishko'];
+               for ($num = 0 ; $num <= 13 ; ++$num) {
+               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+               }
+                       
+                       $res[$row['id']] = $row;
+                   }
+        
+                   return $res;
+                        
+                 break;
             
            }
 
@@ -239,6 +263,107 @@ class BudgetModel extends Model {
                     }
                             
                break;
+               
+                case "three":
+      
+                     $id = $value['id'];
+                              
+                     # Обновляем значения нужных нам учреждений
+                     $sql = "UPDATE reporting_budget SET aurinko = :aurinko, berezka = :berezka, zoloto = :zoloto, korablik = :korablik, "
+                             . "gnomik = :gnomik, skazka = :skazka, solnishko = :solnishko "
+                         . "WHERE id = '$id'";
+
+                     $stmt = $this->db->prepare($sql);
+                     $stmt->bindValue(":aurinko", $value['aurinko'], PDO::PARAM_STR);
+                     $stmt->bindValue(":berezka", $value['berezka'], PDO::PARAM_STR);
+                     $stmt->bindValue(":zoloto", $value['zoloto'], PDO::PARAM_STR);
+                     $stmt->bindValue(":korablik", $value['korablik'], PDO::PARAM_STR);
+                     $stmt->bindValue(":gnomik", $value['gnomik'], PDO::PARAM_STR);
+                     $stmt->bindValue(":skazka", $value['skazka'], PDO::PARAM_STR);
+                     $stmt->bindValue(":solnishko", $value['solnishko'], PDO::PARAM_STR);
+                     
+                     $stmt->execute();
+                     
+                     
+                     # Пересчитываем значение общего пункта
+                     $marker_b = $value['marker_b'];
+                     
+                     $sql = "SELECT SUM(aurinko), SUM(berezka), SUM(zoloto), SUM(korablik), SUM(gnomik), SUM(skazka), SUM(solnishko) from reporting_budget "
+                             . "WHERE marker_b = '$marker_b' AND marker_a = '0'";
+                     
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                   
+                   $aurinko = $row['SUM(aurinko)'];
+                   $berezka = $row['SUM(berezka)'];
+                   $zoloto = $row['SUM(zoloto)'];
+                   $korablik = $row['SUM(korablik)'];
+                   $gnomik = $row['SUM(gnomik)'];
+                   $skazka = $row['SUM(skazka)'];
+                   $solnishko = $row['SUM(solnishko)'];
+                                  
+                   $sql = "UPDATE reporting_budget SET aurinko = '$aurinko', berezka = '$berezka', zoloto = '$zoloto', korablik = '$korablik', "
+                           . "gnomik = '$gnomik', skazka = '$skazka', solnishko = '$solnishko'"
+                           . " WHERE marker_a = '10' AND marker_b = '$marker_b'";
+                   
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->execute();
+                    
+
+                    # Пересчитаем строки 240/260/290/340
+                    if($marker_b >= '16' && $marker_b <= '18' || $marker_b >= '20' && $marker_b <= '24' || $marker_b >= '26' && $marker_b <= '31' || $marker_b >= '35' && $marker_b <= '41'){
+                        
+            if($marker_b >= '16' && $marker_b <= '18'){
+                $B = 15;
+                $number1 = 16;
+                $number2 = 18;
+            }
+            
+            if($marker_b >= '20' && $marker_b <= '24'){
+                $B = 19;
+                $number1 = 20;
+                $number2 = 24;
+            }
+            
+            if($marker_b >= '26' && $marker_b <= '31'){
+                $B = 25;
+                $number1 = 26;
+                $number2 = 31;
+            }
+            
+            if($marker_b >= '35' && $marker_b <= '41'){
+                $B = 34;
+                $number1 = 35;
+                $number2 = 41;
+            }
+                       
+                 $sql = "SELECT SUM(aurinko), SUM(berezka), SUM(zoloto), SUM(korablik), SUM(gnomik), SUM(skazka), SUM(solnishko) FROM reporting_budget WHERE "
+                         . "marker_a = '10' AND marker_b BETWEEN '$number1' AND '$number2'";
+                 
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                   
+                   
+                   $aurinko = $row['SUM(aurinko)'];
+                   $berezka = $row['SUM(berezka)'];
+                   $zoloto = $row['SUM(zoloto)'];
+                   $korablik = $row['SUM(korablik)'];
+                   $gnomik = $row['SUM(gnomik)'];
+                   $skazka = $row['SUM(skazka)'];
+                   $solnishko = $row['SUM(solnishko)'];
+                   
+                   $sql = "UPDATE reporting_budget SET aurinko = '$aurinko', berezka = '$berezka', zoloto = '$zoloto', korablik = '$korablik', "
+                           . "gnomik = '$gnomik', skazka = '$skazka', solnishko = '$solnishko'"
+                           . " WHERE marker_a = '10' AND marker_b = '$B'";
+                   
+                           $stmt = $this->db->prepare($sql);
+                           $stmt->execute();
+            
+                    }
+                    
+                   break;
              }
              
          }
@@ -297,6 +422,33 @@ class BudgetModel extends Model {
                    return $res;
                        
             break;
+            
+                   case "three":
+       
+                    $sql = "SELECT id, SUM(aurinko), SUM(berezka), SUM(zoloto), SUM(korablik), SUM(gnomik), SUM(skazka), SUM(solnishko), "
+                           . "SUM(u_aurinko), SUM(u_berezka), SUM(u_zoloto), SUM(u_korablik), SUM(u_gnomik), SUM(u_skazka), SUM(u_solnishko)"
+                . " from reporting_budget WHERE marker_a = '10' AND "
+                    . "id != '118' AND id != '151' AND id != '171' AND id != '197'";
+
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       
+               # Разделяем число на блоки
+               $block = ['SUM(aurinko)', 'SUM(berezka)', 'SUM(zoloto)', 'SUM(korablik)', 'SUM(gnomik)', 'SUM(skazka)', 'SUM(solnishko)', 
+                   'SUM(u_aurinko)', 'SUM(u_berezka)', 'SUM(u_zoloto)', 'SUM(u_korablik)', 'SUM(u_gnomik)', 'SUM(u_skazka)', 'SUM(u_solnishko)'];
+               for ($num = 0 ; $num <= 13 ; ++$num) {
+               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+               }
+                       
+                       $res[$row['id']] = $row;
+                   }
+        
+                   return $res;
+                       
+                 break;
             
            }
              

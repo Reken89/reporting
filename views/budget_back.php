@@ -148,7 +148,81 @@
               break;
               
        case "two":
-       echo "Второе сочетание";
+       ?>
+              
+              <table class="freeze-table" width="700px">
+                  
+                  <thead>
+                      <tr>
+                          <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Наименование расходов</th>
+                          <th style="min-width: 70px; width: 70px;">ЭКР</th>
+                          <th style="min-width: 200px; width: 200px;">Централизованная бухгалтерия</th>
+                          <th style="min-width: 200px; width: 200px;">Закупки</th>
+                          <th style="min-width: 200px; width: 200px;">Централизованная бухгалтерия</th>
+                          <th style="min-width: 200px; width: 200px;">Закупки</th>
+                      </tr>
+                  </thead>
+                  
+                  <tbody>
+                      
+                      <?php
+                     
+                      # Этот бред в цикле нужно убрать!!! Переменную J нужно получать иначе!!!
+                      for ($j = 1 ; $j < 44 ; ++$j){
+                          
+                          foreach ($pageData['info'] as $key => $value) {
+
+                              if ($value['marker_a'] == 10 && $value['marker_b'] == $j ) {
+                                  echo "<tr>";
+                                  echo "<td class='col-id-no' scope='row'><b>" . $value['name'] . "</td></b>";
+                                  echo "<td><b>" . $value['ekr'] . "</td></b>";
+                                  echo "<td><b>" . $value['cb'] . "</td></b>";
+                                  echo "<td><b>" . $value['zakupki'] . "</td></b>";
+                                  echo "<td><b>" . $value['u_cb'] . "</td></b>";
+                                  echo "<td><b>" . $value['u_zakupki'] . "</td></b>";
+                                  echo "</tr>";
+                              }
+                              
+                              if ($value['marker_a'] == 0 && $value['marker_b'] == $j ) {
+                                  echo "<tr>";
+                                  echo "<input type=hidden class='marker_b' value=" . $j . ">";
+                                  echo "<input type=hidden class='id' value=" . $value['id'] . ">";
+                                  echo "<td class='col-id-no' scope='row'>" . $value['name'] . "</td>";
+                                  echo "<td>" . $value['ekr'] . "</td>";
+                                  echo <<<HTML
+                                  <td><input type="text" id='user' class='cb' value="$value[cb]"></td>
+                                  <td><input type="text" id='user' class='zakupki' value="$value[zakupki]"></td>
+                                  HTML;
+                                  echo "<td>" . $value['u_cb'] . "</td>";
+                                  echo "<td>" . $value['u_zakupki'] . "</td>";
+                                  echo "</tr>";
+                              }
+                              
+                          }
+                          
+                      }
+                      
+                      #Итоговая строка
+                      foreach ($pageData['total'] as $key => $value) {
+                      echo "<tr>";
+                      echo "<td class='col-id-no' scope='row'><b>ИТОГО</td>";
+                      echo "<td></td>";
+                      echo "<td><b>" . $value['SUM(cb)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(zakupki)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(u_cb)'] . "</b></td>";
+                      echo "<td><b>" . $value['SUM(u_zakupki)'] . "</b></td>";
+                      echo "</tr>";
+                      }
+                      
+                      ?>
+                      
+                  </tbody>
+                  
+              </table>
+              
+              <?php
+           
+           
        break;
    
        case "three":

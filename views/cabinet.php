@@ -38,6 +38,12 @@
             <button type="button" style="width:400px;height:25px" class="btn">Отчет по просроченной задолжнности</button>
             </form>
             
+                     <form action="/reporting/budgetuser/table" method="post">
+            <input type='hidden' name='year' value='2019'>
+        <input type='hidden' name='info' value='2'>
+            <button type="submit" style="width:400px;height:25px" class="btn">Таблица смета</button>
+            </form>
+            
             <?php
             if($_SESSION['role'] == 'admin'){
                 

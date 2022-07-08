@@ -107,6 +107,54 @@ class BudgetModel extends Model {
                    return $res;
                             
                    break;
+                   
+            case "five";
+                
+                $sql = "SELECT id, marker_a, marker_b, name, ekr, vsosh_ds, vsosh_school, u_vsosh_ds, u_vsosh_school"
+                . " from reporting_budget";
+
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       
+               # Разделяем число на блоки
+               $block = ['vsosh_ds', 'vsosh_school', 'u_vsosh_ds', 'u_vsosh_school'];
+               for ($num = 0 ; $num <= 3 ; ++$num) {
+               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+               }
+                       
+                       $res[$row['id']] = $row;
+                   }
+        
+                   return $res;
+                
+                break;
+                
+                case "six":
+                    
+                    $sql = "SELECT id, marker_a, marker_b, name, ekr, kums, uprava, edds, u_kums, u_uprava, u_edds"
+                . " from reporting_budget";
+
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       
+               # Разделяем число на блоки
+               $block = ['kums', 'uprava', 'edds', 'u_kums', 'u_uprava', 'u_edds'];
+               for ($num = 0 ; $num <= 5 ; ++$num) {
+               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+               }
+                       
+                       $res[$row['id']] = $row;
+                   }
+        
+                   return $res;
+                    
+                break;
             
            }
 
@@ -471,6 +519,175 @@ class BudgetModel extends Model {
                     }
                             
                         break;
+                        
+                        case "five":
+                            
+                       $id = $value['id'];
+                              
+                     # Обновляем значения нужных нам учреждений
+                     $sql = "UPDATE reporting_budget SET vsosh_ds = :vsosh_ds, vsosh_school = :vsosh_school "
+                         . "WHERE id = '$id'";
+
+                     $stmt = $this->db->prepare($sql);
+                     $stmt->bindValue(":vsosh_ds", $value['vsosh_ds'], PDO::PARAM_STR);
+                     $stmt->bindValue(":vsosh_school", $value['vsosh_school'], PDO::PARAM_STR);
+                     
+                     $stmt->execute();
+                     
+                     
+                     # Пересчитываем значение общего пункта
+                     $marker_b = $value['marker_b'];
+                     
+                     $sql = "SELECT SUM(vsosh_ds), SUM(vsosh_school) from reporting_budget "
+                             . "WHERE marker_b = '$marker_b' AND marker_a = '0'";
+                     
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                   
+                   $vsosh_ds = $row['SUM(vsosh_ds)'];
+                   $vsosh_school = $row['SUM(vsosh_school)'];
+                 
+                   $sql = "UPDATE reporting_budget SET vsosh_ds = '$vsosh_ds', vsosh_school = '$vsosh_school'"
+                           . " WHERE marker_a = '10' AND marker_b = '$marker_b'";
+                   
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->execute();
+                    
+
+                    # Пересчитаем строки 240/260/290/340
+                    if($marker_b >= '16' && $marker_b <= '18' || $marker_b >= '20' && $marker_b <= '24' || $marker_b >= '26' && $marker_b <= '31' || $marker_b >= '35' && $marker_b <= '41'){
+                        
+            if($marker_b >= '16' && $marker_b <= '18'){
+                $B = 15;
+                $number1 = 16;
+                $number2 = 18;
+            }
+            
+            if($marker_b >= '20' && $marker_b <= '24'){
+                $B = 19;
+                $number1 = 20;
+                $number2 = 24;
+            }
+            
+            if($marker_b >= '26' && $marker_b <= '31'){
+                $B = 25;
+                $number1 = 26;
+                $number2 = 31;
+            }
+            
+            if($marker_b >= '35' && $marker_b <= '41'){
+                $B = 34;
+                $number1 = 35;
+                $number2 = 41;
+            }
+                       
+                 $sql = "SELECT SUM(vsosh_ds), SUM(vsosh_school) FROM reporting_budget WHERE "
+                         . "marker_a = '10' AND marker_b BETWEEN '$number1' AND '$number2'";
+                 
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                   
+                   
+                   $vsosh_ds = $row['SUM(vsosh_ds)'];
+                   $vsosh_school = $row['SUM(vsosh_school)'];
+                   
+                   $sql = "UPDATE reporting_budget SET vsosh_ds = '$vsosh_ds', vsosh_school = '$vsosh_school' "
+                           . "WHERE marker_a = '10' AND marker_b = '$B'";
+                   
+                           $stmt = $this->db->prepare($sql);
+                           $stmt->execute();
+            
+                    }
+                            
+                        break;
+                        
+                 case "six";
+                     
+                     $id = $value['id'];
+                              
+                     # Обновляем значения нужных нам учреждений
+                     $sql = "UPDATE reporting_budget SET kums = :kums, uprava = :uprava, edds = :edds "
+                         . "WHERE id = '$id'";
+
+                     $stmt = $this->db->prepare($sql);
+                     $stmt->bindValue(":kums", $value['kums'], PDO::PARAM_STR);
+                     $stmt->bindValue(":uprava", $value['uprava'], PDO::PARAM_STR);
+                     $stmt->bindValue(":edds", $value['edds'], PDO::PARAM_STR);
+                     
+                     $stmt->execute();
+                     
+                     
+                     # Пересчитываем значение общего пункта
+                     $marker_b = $value['marker_b'];
+                     
+                     $sql = "SELECT SUM(kums), SUM(uprava), SUM(edds) from reporting_budget "
+                             . "WHERE marker_b = '$marker_b' AND marker_a = '0'";
+                     
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                   
+                   $kums = $row['SUM(kums)'];
+                   $uprava = $row['SUM(uprava)'];
+                   $edds = $row['SUM(edds)'];
+                 
+                   $sql = "UPDATE reporting_budget SET kums = '$kums', uprava = '$uprava', edds = '$edds'"
+                           . " WHERE marker_a = '10' AND marker_b = '$marker_b'";
+                   
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->execute();
+                    
+
+                    # Пересчитаем строки 240/260/290/340
+                    if($marker_b >= '16' && $marker_b <= '18' || $marker_b >= '20' && $marker_b <= '24' || $marker_b >= '26' && $marker_b <= '31' || $marker_b >= '35' && $marker_b <= '41'){
+                        
+            if($marker_b >= '16' && $marker_b <= '18'){
+                $B = 15;
+                $number1 = 16;
+                $number2 = 18;
+            }
+            
+            if($marker_b >= '20' && $marker_b <= '24'){
+                $B = 19;
+                $number1 = 20;
+                $number2 = 24;
+            }
+            
+            if($marker_b >= '26' && $marker_b <= '31'){
+                $B = 25;
+                $number1 = 26;
+                $number2 = 31;
+            }
+            
+            if($marker_b >= '35' && $marker_b <= '41'){
+                $B = 34;
+                $number1 = 35;
+                $number2 = 41;
+            }
+                       
+                 $sql = "SELECT SUM(kums), SUM(uprava), SUM(edds) FROM reporting_budget WHERE "
+                         . "marker_a = '10' AND marker_b BETWEEN '$number1' AND '$number2'";
+                 
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                   
+                   
+                   $kums = $row['SUM(kums)'];
+                   $uprava = $row['SUM(uprava)'];
+                   $edds = $row['SUM(edds)'];
+                   
+                   $sql = "UPDATE reporting_budget SET kums = '$kums', uprava = '$uprava', edds = '$edds' "
+                           . "WHERE marker_a = '10' AND marker_b = '$B'";
+                   
+                           $stmt = $this->db->prepare($sql);
+                           $stmt->execute();
+            
+                    }
+                     
+                     break;
              }
              
          }
@@ -581,12 +798,66 @@ class BudgetModel extends Model {
                    return $res;
                             
                    break;
+                   
+                   case "five":
+                       
+                    $sql = "SELECT id, SUM(vsosh_ds), SUM(vsosh_school), SUM(u_vsosh_ds), SUM(u_vsosh_school)"
+                . " from reporting_budget WHERE marker_a = '10' AND "
+                    . "id != '118' AND id != '151' AND id != '171' AND id != '197'";
+
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       
+               # Разделяем число на блоки
+               $block = ['SUM(vsosh_ds)', 'SUM(vsosh_school)', 'SUM(u_vsosh_ds)', 'SUM(u_vsosh_school)'];
+               for ($num = 0 ; $num <= 3 ; ++$num) {
+               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+               }
+                       
+                       $res[$row['id']] = $row;
+                   }
+        
+                   return $res;
+                       
+                   break;
+                   
+            case "six";
+                
+                    $sql = "SELECT id, SUM(kums), SUM(uprava), SUM(edds), SUM(u_kums), SUM(u_uprava), SUM(u_edds)"
+                . " from reporting_budget WHERE marker_a = '10' AND "
+                    . "id != '118' AND id != '151' AND id != '171' AND id != '197'";
+
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       
+               # Разделяем число на блоки
+               $block = ['SUM(kums)', 'SUM(uprava)', 'SUM(edds)', 'SUM(u_kums)', 'SUM(u_uprava)', 'SUM(u_edds)'];
+               for ($num = 0 ; $num <= 5 ; ++$num) {
+               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+               }
+                       
+                       $res[$row['id']] = $row;
+                   }
+        
+                   return $res;
+                
+                break;
                  
                  
             
            }
              
          }
+         
+             public function excel() {
+        
+             }
     
 }
 

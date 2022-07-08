@@ -4,6 +4,7 @@ class BudgetController extends Controller {
     
     private $pageTpl = "/views/budget.php";
     private $pageTpl_back = "/views/budget_back.php";
+    private $pageTpl_excel = "/views/budget_excel.php";
     
         public function __construct() {
         $this->model = new BudgetModel();
@@ -434,6 +435,27 @@ class BudgetController extends Controller {
         ];
         
         $this->model->update($value);
+    }
+    
+    
+    public function excel() {
+        
+            if (!$_SESSION['user']) {
+            header("Location: /reporting");
+        }
+        
+                if(isset($_POST['variant'])){
+            $variant_budget = $_POST['variant'];
+            $_SESSION['variant_budget'] = $_POST['variant'];
+        } else {
+            $variant_budget = $_SESSION['variant_budget'];
+        }
+        
+        $this->pageData['info'] = $this->model->budget_back($variant_budget);
+        $this->pageData['total'] = $this->model->total($variant_budget);
+        
+        $this->view->render($this->pageTpl_excel, $this->pageData);
+        
     }
     
 }

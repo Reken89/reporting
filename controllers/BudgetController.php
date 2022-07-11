@@ -37,6 +37,7 @@ class BudgetController extends Controller {
         
         $this->pageData['info'] = $this->model->budget_back($variant_budget);
         $this->pageData['total'] = $this->model->total($variant_budget);
+        $this->pageData['status'] = $this->model->status();
         
         $this->view->render($this->pageTpl_back, $this->pageData);
     }
@@ -456,6 +457,16 @@ class BudgetController extends Controller {
         
         $this->view->render($this->pageTpl_excel, $this->pageData);
         
+    }
+    
+            public function update_status(){
+            
+                    if (!$_SESSION['user']) {
+            header("Location: /reporting");
+        }
+        
+            
+            $this->model->update_status();
     }
     
 }

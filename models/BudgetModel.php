@@ -858,6 +858,60 @@ class BudgetModel extends Model {
              public function excel() {
         
              }
+             
+             public function status(){
+                 
+                   $sql = "SELECT * from reporting_budget_status";
+
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+                       $res[$row['id']] = $row;
+                   }
+        
+                   return $res;
+                 
+             }
+             
+             public function update_status(){
+                 
+             # Определяем у какого блока нужно обновить статус
+             switch ($_SESSION['variant_budget']){
+               
+                 case "one":
+                     $id = 1;
+                 break;
+             
+             case "two":
+                 $id = 1;
+                 break;
+             
+             case "three":
+                 $id = 4;
+                 break;
+             
+             case "four":
+                 $id = 3;
+                 break;
+             
+             case "five":
+                 $id = 2;
+                 break;
+             
+               case "six":
+                   $id = 1;
+                 break;
+             }
+             
+            $sql = "UPDATE reporting_budget_status SET `status` = 'open' WHERE id = '$id'";
+            
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+                 
+             }
     
 }
 

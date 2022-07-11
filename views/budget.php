@@ -142,6 +142,33 @@
            })
 
         })
+        
+        
+        
+        
+        
+        
+                $(document).on('click', '#open', function(){
+                                          
+
+       $.ajax({  
+                url:"/reporting/budget/update_status",  
+
+                success:function(data)  
+                {  
+                    // alert(data);
+                     fetch_data();  
+                   //$('#live_data').html(data);
+                   //setKeydownmyForm()
+                }  
+
+           })
+
+        })
+        
+        
+        
+        
      
      
      

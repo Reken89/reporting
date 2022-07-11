@@ -431,6 +431,17 @@ class BudgetuserController extends Controller {
         
         $this->model->update($value);
     }
+   
+    
+        public function update_status(){
+            
+                    if (!$_SESSION['user']) {
+            header("Location: /reporting");
+        }
+        
+            
+            $this->model->update_status();
+    }
     
 }
 

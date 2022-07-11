@@ -59,8 +59,22 @@
               switch ($_SESSION['variant_budget']) {
         
             case "one":
+                           if($pageData['status'][1]['status'] == "open"){
+              ?>
+              <body>
+              <div class="div">
+                  <b>Централизованная бухгалтерия ещё работает с таблицей</b>
+              </div>
+              </body>
+              <?php
+           } elseif ($pageData['status'][1]['status'] == "close") {
+           ?>
+              <input type="button" style="width:250px;height:25px" name="formSubmit" id="open" class="btn" value="Разрешить редактирование"><br>
+           <?php
+       }
               ?>
               
+              </br>
               <table class="freeze-table" width="700px">
                   
                   <thead>
@@ -152,8 +166,23 @@
               break;
               
        case "two":
+           
+                      if($pageData['status'][1]['status'] == "open"){
+              ?>
+              <body>
+              <div class="div">
+                  <b>Централизованная бухгалтерия ещё работает с таблицей</b>
+              </div>
+              </body>
+              <?php
+           } elseif ($pageData['status'][1]['status'] == "close") {
+           ?>
+              <input type="button" style="width:250px;height:25px" name="formSubmit" id="open" class="btn" value="Разрешить редактирование"><br>
+           <?php
+       }
        ?>
               
+              </br>
               <table class="freeze-table" width="700px">
                   
                   <thead>
@@ -231,8 +260,23 @@
    
        case "three":
 
+           if($pageData['status'][4]['status'] == "open"){
+              ?>
+              <body>
+              <div class="div">
+                  <b>Централизованная бухгалтерия ещё работает с таблицей</b>
+              </div>
+              </body>
+              <?php
+           } elseif ($pageData['status'][4]['status'] == "close") {
+           ?>
+              <input type="button" style="width:250px;height:25px" name="formSubmit" id="open" class="btn" value="Разрешить редактирование"><br>
+           <?php
+       }
+           
            ?>
               
+              </br>
               <table class="freeze-table" width="700px">
                   
                   <thead>
@@ -351,9 +395,24 @@
        break;
    
        case "four":
+           
+                      if($pageData['status'][3]['status'] == "open"){
+              ?>
+              <body>
+              <div class="div">
+                  <b>Централизованная бухгалтерия ещё работает с таблицей</b>
+              </div>
+              </body>
+              <?php
+           } elseif ($pageData['status'][3]['status'] == "close") {
+           ?>
+              <input type="button" style="width:250px;height:25px" name="formSubmit" id="open" class="btn" value="Разрешить редактирование"><br>
+           <?php
+       }
 
            ?>
               
+              </br>
               <table class="freeze-table" width="700px">
                   
                   <thead>
@@ -430,8 +489,22 @@
    
        case "five":
            
+                      if($pageData['status'][2]['status'] == "open"){
+              ?>
+              <body>
+              <div class="div">
+                  <b>Централизованная бухгалтерия ещё работает с таблицей</b>
+              </div>
+              </body>
+              <?php
+           } elseif ($pageData['status'][2]['status'] == "close") {
+           ?>
+              <input type="button" style="width:250px;height:25px" name="formSubmit" id="open" class="btn" value="Разрешить редактирование"><br>
+           <?php
+       }
                       ?>
               
+              </br>
               <table class="freeze-table" width="700px">
                   
                   <thead>
@@ -507,9 +580,24 @@
        break;
    
        case "six":
+           
+                      if($pageData['status'][1]['status'] == "open"){
+              ?>
+              <body>
+              <div class="div">
+                  <b>Централизованная бухгалтерия ещё работает с таблицей</b>
+              </div>
+              </body>
+              <?php
+           } elseif ($pageData['status'][1]['status'] == "close") {
+           ?>
+              <input type="button" style="width:250px;height:25px" name="formSubmit" id="open" class="btn" value="Разрешить редактирование"><br>
+           <?php
+       }
        
                                  ?>
               
+              </br>
               <table class="freeze-table" width="700px">
                   
                   <thead>

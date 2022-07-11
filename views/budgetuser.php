@@ -118,6 +118,28 @@
            });  
       } 
      fetch_data(); 
+     
+     
+     
+     
+     
+        $(document).on('click', '#btn1', function(){
+                                          
+
+       $.ajax({  
+                url:"/reporting/budgetuser/update_status",  
+
+                success:function(data)  
+                {  
+                    // alert(data);
+                     fetch_data();  
+                   //$('#live_data').html(data);
+                   //setKeydownmyForm()
+                }  
+
+           })
+
+        })
             
             
             

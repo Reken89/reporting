@@ -618,5 +618,34 @@ class BudgetuserModel extends Model {
                       
     }
     
+    public function update_status(){
+        
+        # Определяем роль пользователя, для того что бы установить статус у нужного пользователя
+        $role = $_SESSION['role'];
+
+            switch ($role) {
+              case "report":
+                  $id = 1;
+              break;
+          
+              case "report_school":
+                  $id = 2;
+              break;
+          
+              case "report_kultura":
+                  $id = 3;
+              break;
+          
+              case "report_kinder":
+                  $id = 4;
+              break;
+            }
+        
+            $sql = "UPDATE reporting_budget_status SET `status` = 'close' WHERE id = '$id'";
+            
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+    }
+    
 }
 

@@ -63,6 +63,14 @@
                       $sum1 = "teplo_sum1";
                       $sum2 = "teplo_sum2";
                       $sum = "teplo_sum";
+                      
+                      $sum_volume1 = "SUM(teplo_vol1)";
+                      $sum_volume2 = "SUM(teplo_vol2)";
+                      $sum_vol = "SUM(teplo_vol)";
+                      $sum_sum1 = "SUM(teplo_sum1)";
+                      $sum_sum2 = "SUM(teplo_sum2)";
+                      $sum_sum = "SUM(teplo_sum)";
+                      
                       $title = "Теплоснабжение";
                       $tarif1 = $pageData['tarif']['teplo']['tarif1'];
                       $tarif2 = $pageData['tarif']['teplo']['tarif2'];
@@ -75,6 +83,14 @@
                       $sum1 = "water_sum1";
                       $sum2 = "water_sum2";
                       $sum = "water_sum";
+                      
+                      $sum_volume1 = "SUM(water_vol1)";
+                      $sum_volume2 = "SUM(water_vol2)";
+                      $sum_vol = "SUM(water_vol)";
+                      $sum_sum1 = "SUM(water_sum1)";
+                      $sum_sum2 = "SUM(water_sum2)";
+                      $sum_sum = "SUM(water_sum)";
+                      
                       $title = "Водоснабжение";
                       $tarif1 = $pageData['tarif']['water']['tarif1'];
                       $tarif2 = $pageData['tarif']['water']['tarif2'];
@@ -87,6 +103,14 @@
                       $sum1 = "stoki_sum1";
                       $sum2 = "stoki_sum2";
                       $sum = "stoki_sum";
+                      
+                      $sum_volume1 = "SUM(stoki_vol1)";
+                      $sum_volume2 = "SUM(stoki_vol2)";
+                      $sum_vol = "SUM(stoki_vol)";
+                      $sum_sum1 = "SUM(stoki_sum1)";
+                      $sum_sum2 = "SUM(stoki_sum2)";
+                      $sum_sum = "SUM(stoki_sum)";
+                      
                       $title = "Водоотведение";
                       $tarif1 = $pageData['tarif']['stoki']['tarif1'];
                       $tarif2 = $pageData['tarif']['stoki']['tarif2'];
@@ -99,6 +123,14 @@
                       $sum1 = "elektro_sum1";
                       $sum2 = "elektro_sum2";
                       $sum = "elektro_sum";
+                      
+                      $sum_volume1 = "SUM(elektro_vol1)";
+                      $sum_volume2 = "SUM(elektro_vol2)";
+                      $sum_vol = "SUM(elektro_vol)";
+                      $sum_sum1 = "SUM(elektro_sum1)";
+                      $sum_sum2 = "SUM(elektro_sum2)";
+                      $sum_sum = "SUM(elektro_sum)";
+                      
                       $title = "Электроснабжение";
                       $tarif1 = $pageData['tarif']['elektro']['tarif1'];
                       $tarif2 = $pageData['tarif']['elektro']['tarif2'];
@@ -111,6 +143,14 @@
                       $sum1 = "trash_sum1";
                       $sum2 = "trash_sum2";
                       $sum = "trash_sum";
+                      
+                      $sum_volume1 = "SUM(trash_vol1)";
+                      $sum_volume2 = "SUM(trash_vol2)";
+                      $sum_vol = "SUM(trash_vol)";
+                      $sum_sum1 = "SUM(trash_sum1)";
+                      $sum_sum2 = "SUM(trash_sum2)";
+                      $sum_sum = "SUM(trash_sum)";
+                      
                       $title = "Вывоз мусора";
                       $tarif1 = $pageData['tarif']['trash']['tarif1'];
                       $tarif2 = $pageData['tarif']['trash']['tarif2'];
@@ -123,6 +163,14 @@
                       $sum1 = "negativka_sum1";
                       $sum2 = "negativka_sum2";
                       $sum = "negativka_sum";
+                      
+                      $sum_volume1 = "SUM(negativka_vol1)";
+                      $sum_volume2 = "SUM(negativka_vol2)";
+                      $sum_vol = "SUM(negativka_vol)";
+                      $sum_sum1 = "SUM(negativka_sum1)";
+                      $sum_sum2 = "SUM(negativka_sum2)";
+                      $sum_sum = "SUM(negativka_sum)";
+                      
                       $title = "Негативка";
                       $tarif1 = $pageData['tarif']['negativka']['tarif1'];
                       $tarif2 = $pageData['tarif']['negativka']['tarif2'];

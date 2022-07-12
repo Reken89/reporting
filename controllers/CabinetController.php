@@ -33,6 +33,9 @@ class CabinetController extends Controller {
         # Для корректного отображения таблицы СМЕТА бюджет (Администратор)
         $_SESSION['variant_budget'] = "one";
         
+        # Для корректного отображения таблицы прогноз коммуналки
+        $_SESSION['variant_prognoz'] = "teplo";
+        
 
         $this->view->render($this->pageTpl, $this->pageData);
         

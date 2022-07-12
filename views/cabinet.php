@@ -64,6 +64,12 @@
                         <button type="submit" style="width:400px;height:25px" class="btn">Таблица смета</button>
                         </form>
                 
+                        <form action="/reporting/prognoz/table" method="post">
+                        <input type='hidden' name='year' value='2021'>
+                        <input type='hidden' name='info' value='2'>
+                        <button type="submit" style="width:400px;height:25px" class="btn">Прогноз коммуналки</button>
+                        </form>
+                
                         <form action="/reporting/communal/com" method="post">
                         <input type='hidden' name='year' value='2021'>
                         <input type='hidden' name='info' value='2'>
@@ -73,7 +79,7 @@
                         <form action="/reporting/editor/editor_ofs" method="post">
                         <input type='hidden' name='year' value='2021'>
                         <input type='hidden' name='info' value='2'>
-                        <button type="submit" style="width:400px;height:25px" class="btn">Редактор таблицы</button>
+                        <button type="submit" style="width:400px;height:25px" class="btn">Редактор таблицы ОФС</button>
                         </form>
                 
                         <form action="/reporting/editoruser/editor_user" method="post">

@@ -43,6 +43,69 @@ class PrognozController extends Controller {
         $this->view->render($this->pageTpl_back, $this->pageData);
     }
     
+        public function update(){
+            
+                        if (!$_SESSION['user']) {
+                       header("Location: /reporting");
+        }
+        
+        # Определяем что мы получили из формы, тариф или значение объема
+                if(isset($_POST['id_tarif'])){
+                    
+                    $id_tarif = $_POST['id_tarif'];
+                    
+                    $tarif1 = $_POST['tarif1'];
+                    # Убираем пробелы и меняем запятые на точки
+                    $tarif1 = str_replace(" ", "", $tarif1);
+                    $tarif1 = str_replace(",", ".", $tarif1);
+        
+                    $tarif2 = $_POST['tarif2'];
+                    # Убираем пробелы и меняем запятые на точки
+                    $tarif2 = str_replace(" ", "", $tarif2);
+                    $tarif2 = str_replace(",", ".", $tarif2);
+                    
+                    $variant = "tarif";
+                    
+                    $info = [
+                        "id_tarif" => $id_tarif,
+                        "tarif1" => $tarif1,
+                        "tarif2" => $tarif2,
+                        "variant" => $variant
+                    ];
+                    
+                    $this->model->update($info);
+                    
+                }
+                
+                if(isset($_POST['id'])){
+                    
+                    $id = $_POST['id'];
+                    
+                    $volume1 = $_POST['volume1'];
+                    # Убираем пробелы и меняем запятые на точки
+                    $volume1 = str_replace(" ", "", $volume1);
+                    $volume1 = str_replace(",", ".", $volume1);
+                    
+                    $volume2 = $_POST['volume2'];
+                    # Убираем пробелы и меняем запятые на точки
+                    $volume2 = str_replace(" ", "", $volume2);
+                    $volume2 = str_replace(",", ".", $volume2);
+                    
+                    $variant = "ob";
+                    
+                    $info = [
+                        "id" => $id,
+                        "volume1" => $volume1,
+                        "volume2" => $volume2,
+                        "variant" => $variant
+                    ];
+                    
+                    $this->model->update($info);
+                    
+                }
+            
+        }
+    
 }
 
 

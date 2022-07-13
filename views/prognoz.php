@@ -11,6 +11,53 @@
             
             
             
+                           function setKeydownmyForm() {
+	    $('input').keydown(function(e) {
+	        if (e.keyCode === 13) {
+                    
+           
+                               var tr = this.closest('tr');
+           var id_tarif = $('.id_tarif', tr).val();
+           
+                              var tr = this.closest('tr');
+           var tarif1 = $('.tarif1', tr).val();
+           
+                              var tr = this.closest('tr');
+           var tarif2 = $('.tarif2', tr).val();
+           
+                              var tr = this.closest('tr');
+           var id = $('.id', tr).val();
+           
+                              var tr = this.closest('tr');
+           var volume1 = $('.volume1', tr).val();
+           
+                              var tr = this.closest('tr');
+           var volume2 = $('.volume2', tr).val();
+           
+                      $.ajax({  
+                url:"/reporting/prognoz/update",  
+                method:"POST",  
+                data:{ id:id, id_tarif:id_tarif, tarif1:tarif1, tarif2:tarif2, volume1:volume1, volume2:volume2 },
+                dataType:"text",  
+                success:function(data)  
+                {  
+                     //alert(data);
+                     fetch_data();  
+                }  
+
+
+           })  
+      } 
+
+      })  
+
+     }  
+            
+            
+            
+            
+            
+            
             
             
             

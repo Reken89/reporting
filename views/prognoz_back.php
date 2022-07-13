@@ -66,14 +66,15 @@
                       
                       $sum_volume1 = "SUM(teplo_vol1)";
                       $sum_volume2 = "SUM(teplo_vol2)";
-                      $sum_vol = "SUM(teplo_vol)";
+                      $sum_vol = "teplo_vol";
                       $sum_sum1 = "SUM(teplo_sum1)";
                       $sum_sum2 = "SUM(teplo_sum2)";
-                      $sum_sum = "SUM(teplo_sum)";
+                      $sum_sum = "teplo_sum";
                       
                       $title = "Теплоснабжение";
                       $tarif1 = $pageData['tarif']['teplo']['tarif1'];
                       $tarif2 = $pageData['tarif']['teplo']['tarif2'];
+                      $id_tarif = $pageData['tarif']['teplo']['id'];
                       break;
                   
                   case "water":
@@ -86,14 +87,15 @@
                       
                       $sum_volume1 = "SUM(water_vol1)";
                       $sum_volume2 = "SUM(water_vol2)";
-                      $sum_vol = "SUM(water_vol)";
+                      $sum_vol = "water_vol";
                       $sum_sum1 = "SUM(water_sum1)";
                       $sum_sum2 = "SUM(water_sum2)";
-                      $sum_sum = "SUM(water_sum)";
+                      $sum_sum = "water_sum";
                       
                       $title = "Водоснабжение";
                       $tarif1 = $pageData['tarif']['water']['tarif1'];
                       $tarif2 = $pageData['tarif']['water']['tarif2'];
+                      $id_tarif = $pageData['tarif']['water']['id'];
                       break;
                   
                   case "stoki":
@@ -106,14 +108,15 @@
                       
                       $sum_volume1 = "SUM(stoki_vol1)";
                       $sum_volume2 = "SUM(stoki_vol2)";
-                      $sum_vol = "SUM(stoki_vol)";
+                      $sum_vol = "stoki_vol";
                       $sum_sum1 = "SUM(stoki_sum1)";
                       $sum_sum2 = "SUM(stoki_sum2)";
-                      $sum_sum = "SUM(stoki_sum)";
+                      $sum_sum = "stoki_sum";
                       
                       $title = "Водоотведение";
                       $tarif1 = $pageData['tarif']['stoki']['tarif1'];
                       $tarif2 = $pageData['tarif']['stoki']['tarif2'];
+                      $id_tarif = $pageData['tarif']['stoki']['id'];
                       break;
                   
                   case "elektro":
@@ -126,14 +129,15 @@
                       
                       $sum_volume1 = "SUM(elektro_vol1)";
                       $sum_volume2 = "SUM(elektro_vol2)";
-                      $sum_vol = "SUM(elektro_vol)";
+                      $sum_vol = "elektro_vol";
                       $sum_sum1 = "SUM(elektro_sum1)";
                       $sum_sum2 = "SUM(elektro_sum2)";
-                      $sum_sum = "SUM(elektro_sum)";
+                      $sum_sum = "elektro_sum";
                       
                       $title = "Электроснабжение";
                       $tarif1 = $pageData['tarif']['elektro']['tarif1'];
                       $tarif2 = $pageData['tarif']['elektro']['tarif2'];
+                      $id_tarif = $pageData['tarif']['elektro']['id'];
                       break;
                   
                   case "trash":
@@ -146,14 +150,15 @@
                       
                       $sum_volume1 = "SUM(trash_vol1)";
                       $sum_volume2 = "SUM(trash_vol2)";
-                      $sum_vol = "SUM(trash_vol)";
+                      $sum_vol = "trash_vol";
                       $sum_sum1 = "SUM(trash_sum1)";
                       $sum_sum2 = "SUM(trash_sum2)";
-                      $sum_sum = "SUM(trash_sum)";
+                      $sum_sum = "trash_sum";
                       
                       $title = "Вывоз мусора";
                       $tarif1 = $pageData['tarif']['trash']['tarif1'];
                       $tarif2 = $pageData['tarif']['trash']['tarif2'];
+                      $id_tarif = $pageData['tarif']['trash']['id'];
                       break;
                   
                   case "negativka":
@@ -166,14 +171,15 @@
                       
                       $sum_volume1 = "SUM(negativka_vol1)";
                       $sum_volume2 = "SUM(negativka_vol2)";
-                      $sum_vol = "SUM(negativka_vol)";
+                      $sum_vol = "negativka_vol";
                       $sum_sum1 = "SUM(negativka_sum1)";
                       $sum_sum2 = "SUM(negativka_sum2)";
-                      $sum_sum = "SUM(negativka_sum)";
+                      $sum_sum = "negativka_sum";
                       
                       $title = "Негативка";
                       $tarif1 = $pageData['tarif']['negativka']['tarif1'];
                       $tarif2 = $pageData['tarif']['negativka']['tarif2'];
+                      $id_tarif = $pageData['tarif']['negativka']['id'];
                       break;
               }
               
@@ -183,6 +189,7 @@
               <table class="freeze-table" width="700px">
                   <tr>
                       <?php
+                      echo "<input type=hidden class='id_tarif' value=" . $id_tarif . ">";
                       echo "<td>" . $title . "</td>";
                       echo <<<HTML
                       <td><input type="text" id='user' class='tarif1' value="$tarif1"></td>
@@ -213,7 +220,8 @@
                       foreach ($pageData['info'] as $key => $value) {
                           
                           echo "<tr>";
-                          echo "<td>" . $value['full_name'] . "</td>";
+                          echo "<input type=hidden class='id' value=" . $value['id'] . ">";
+                          echo "<td class='col-id-no' scope='row'>" . $value['full_name'] . "</td>";
                           echo <<<HTML
                           <td><input type="text" id='user' class='volume1' value="$value[$volume1]"></td>
                           HTML;
@@ -224,6 +232,21 @@
                           echo "<td>" . $value[$sum2] . "</td>";                       
                           echo "<td>" . $value[$vol] . "</td>";
                           echo "<td>" . $value[$sum] . "</td>";
+                          echo "</tr>";
+                          
+                      }
+                      
+                      # Итоговая строчка
+                        foreach ($pageData['total'] as $key => $value) {
+                          
+                          echo "<tr>";
+                          echo "<td class='col-id-no' scope='row'><b>ИТОГО</td>";
+                          echo "<td>" . $value[$sum_volume1] . "</td>";
+                          echo "<td>" . $value[$sum_sum1] . "</td>";
+                          echo "<td>" . $value[$sum_volume2] . "</td>";
+                          echo "<td>" . $value[$sum_sum2] . "</td>";
+                          echo "<td>" . $value[$sum_vol] . "</td>";
+                          echo "<td>" . $value[$sum_sum] . "</td>";
                           echo "</tr>";
                           
                       }

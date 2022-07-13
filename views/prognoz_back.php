@@ -45,13 +45,23 @@
    <span class="checkmark">Негативка</span>
    </label>
                   
+                     <label class="container">
+   <input type="checkbox" name="variant" value="itogo">
+   <span class="checkmark">ИТОГО (Суммы)</span>
+   </label>
+                  
                   <p><input type="button" style="width:250px;height:25px" name="formSubmit" id="btn1" class="btn" value="Сформировать таблицу" /></p>              
                   
               </form>
               
+              <?php
+              if ($_SESSION['variant_prognoz'] !== "itogo"){
+              ?>
+              
               <p><input type="button" style="width:250px;height:25px" name="formSubmit" id="btn2" class="btn" value="Синхронизация с таблицей КУ" /></p> 
               
               <?php
+              }
               
               # Определяем какой раздел таблицы показывать
               switch ($_SESSION['variant_prognoz']) {
@@ -183,6 +193,11 @@
                       break;
               }
               
+              # Оределяем какую таблицу показывать, общую или итоговую
+              if ($_SESSION['variant_prognoz'] !== "itogo"){
+              
+              
+              
                   # Выводим часть таблицы с тарифом
               ?>
 
@@ -256,3 +271,65 @@
                   </tbody>
                             </table>
 
+      <?php
+      
+              } elseif ($_SESSION['variant_prognoz'] == "itogo") {
+              
+                  ?>
+              
+              <p><input type="button" style="width:250px;height:25px" name="formSubmit" id="btn3" class="btn" value="Синхронизация с таблицей Смета" /></p>
+              
+                                  <table class="freeze-table" width="700px">
+                  
+                  <thead>
+                      <tr>
+                          <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Учреждение</th>
+                          <th style="min-width: 200px; width: 200px;">Теплоснабжение</th>
+                          <th style="min-width: 200px; width: 200px;">Водоснабжение</th>
+                          <th style="min-width: 200px; width: 200px;">Водоотведение</th>
+                          <th style="min-width: 200px; width: 200px;">Электроснабжение</th>
+                          <th style="min-width: 200px; width: 200px;">Вывоз мусора</th>
+                          <th style="min-width: 200px; width: 200px;">Негативка</th>
+                      </tr>
+                  </thead>
+                  
+                  <tbody>
+                      
+                      <?php
+                                    foreach ($pageData['info'] as $key => $value) {
+                          
+                          echo "<tr>";
+                          echo "<td class='col-id-no' scope='row'>" . $value['full_name'] . "</td>";
+                          echo "<td>" . $value['teplo_sum'] . "</td>";
+                          echo "<td>" . $value['water_sum'] . "</td>";
+                          echo "<td>" . $value['stoki_sum'] . "</td>";
+                          echo "<td>" . $value['elektro_sum'] . "</td>";
+                          echo "<td>" . $value['trash_sum'] . "</td>";
+                          echo "<td>" . $value['negativka_sum'] . "</td>";
+                          echo "</tr>";
+                          
+                      }
+                      
+                                            # Итоговая строчка
+                        foreach ($pageData['total'] as $key => $value) {
+                          
+                          echo "<tr>";
+                          echo "<td class='col-id-no' scope='row'><b>ИТОГО</td>";
+                          echo "<td>" . $value['teplo_sum'] . "</td>";
+                          echo "<td>" . $value['water_sum'] . "</td>";
+                          echo "<td>" . $value['stoki_sum'] . "</td>";
+                          echo "<td>" . $value['elektro_sum'] . "</td>";
+                          echo "<td>" . $value['trash_sum'] . "</td>";
+                          echo "<td>" . $value['negativka_sum'] . "</td>";
+                          echo "</tr>";
+                          
+                      }
+                      ?>
+                      
+                      
+                  </tbody>
+                    </table>
+              
+              <?php
+                  
+          }

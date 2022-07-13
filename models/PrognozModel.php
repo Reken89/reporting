@@ -480,6 +480,68 @@ class PrognozModel extends Model {
                              public function excel() {
                          
                                   }
+                                  
+                           public function synch_smeta(){
+            
+                               # Получаем нужные суммы из таблицы прогноза КУ
+                               
+                               $sql = "SELECT id, (teplo_sum1 + teplo_sum2) AS teplo_sum, (water_sum1 + water_sum2) AS water_sum, "
+                                       . "(stoki_sum1 + stoki_sum2) AS stoki_sum, (elektro_sum1 + elektro_sum2) AS elektro_sum, "
+                                       . "(trash_sum1 + trash_sum2) AS trash_sum, (negativka_sum1 + negativka_sum2) AS negativka_sum "
+                                       . "FROM reporting_prognoz";
+                               
+                                                  $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+                       $res[$row['id']] = $row;
+                       
+                   }
+                   
+                   
+                   # Запишем в таблицу Смета ауринко
+                   
+                   # Нужно загнать код в двойной цикл!!!
+                   $teplo = $res[7]['teplo_sum'];
+                   $water = $res[7]['water_sum'];
+                   $stoki = $res[7]['stoki_sum'];
+                   $elektro = $res[7]['elektro_sum'];
+                   $trash = $res[7]['trash_sum'];
+                   $negativka = $res[7]['negativka_sum'];
+                               
+                   $sql = "UPDATE reporting_budget SET aurinko = '$teplo' WHERE id = '25'";
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   $sql = "UPDATE reporting_budget SET aurinko = '$water' WHERE id = '27'";
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   $sql = "UPDATE reporting_budget SET aurinko = '$stoki' WHERE id = '28'";
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   $sql = "UPDATE reporting_budget SET aurinko = '$elektro' WHERE id = '26'";
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   $sql = "UPDATE reporting_budget SET aurinko = '$trash' WHERE id = '29'";
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   $sql = "UPDATE reporting_budget SET aurinko = '$negativka' WHERE id = '227'";
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   $sql = "UPDATE reporting_budget SET aurinko = '$teplo' + '$water' + '$stoki' + '$elektro' + '$trash' + '$negativka' WHERE id = '24'";
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                       echo "Синхронизация выполненна";
+            
+                       }
     
 }
 

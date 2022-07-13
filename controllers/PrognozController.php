@@ -135,6 +135,17 @@ class PrognozController extends Controller {
                            
                      $this->view->render($this->pageTpl_excel, $this->pageData);
              }
+             
+             
+                     public function synch_smeta(){
+            
+                                   if (!$_SESSION['user']) {
+                       header("Location: /reporting");
+        }
+            
+            $this->model->synch_smeta();
+            
+        }
     
 }
 

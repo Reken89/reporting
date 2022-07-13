@@ -122,6 +122,29 @@
 
      
      
+     
+     
+                     $(document).on('click', '#btn3', function(){
+                                          
+
+       $.ajax({  
+                url:"/reporting/prognoz/synch_smeta",  
+
+                success:function(data)  
+                {  
+                     alert(data);
+                     fetch_data();  
+                   //$('#live_data').html(data);
+                   //setKeydownmyForm()
+                }  
+
+           })
+
+        })
+     
+     
+     
+     
             
         });
         

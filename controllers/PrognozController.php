@@ -105,6 +105,16 @@ class PrognozController extends Controller {
                 }
             
         }
+        
+        public function synch_ku(){
+            
+                                   if (!$_SESSION['user']) {
+                       header("Location: /reporting");
+        }
+            
+            $this->model->synch_ku();
+            
+        }
     
 }
 

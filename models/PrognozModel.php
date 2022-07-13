@@ -308,6 +308,144 @@ class PrognozModel extends Model {
  }
      
  }
+ 
+         public function synch_ku(){
+            
+                  # Определяем с каким разделом таблиц работаем
+                           switch ($_SESSION['variant_prognoz']) {
+                  
+                  case "teplo":
+                      $zn = "SUM(volume1)";
+                      $num = 1;
+                       break;
+                  
+                 case "water":
+                      $zn = "SUM(volume4)";
+                      $num = 2;
+                      break;
+                  
+                  case "stoki":
+                      $zn = "SUM(volume2)";
+                      $num = 3;
+                      break;
+                  
+                  case "elektro":
+                      $zn = "SUM(volume5)";
+                      $num = 4;
+                      break;
+                  
+                  case "trash":
+                      $zn = "SUM(volume6)";
+                      $num = 5;
+                      break;
+                  
+                  case "negativka":
+                      $zn = "SUM(volume3)";
+                      $num = 6;
+                      break;
+                  
+                           }
+                      
+                      # Получаем объемы за первое полугодие из таблицы КУ:
+                      
+                      $mounth = [1, 2, 3, 4, 5, 6];
+                      $mounth = implode(",",$mounth);
+                      
+                      $sql = "SELECT id, name, $zn FROM `portal_ku` WHERE `year` = '2022' AND `mounth` IN($mounth) GROUP BY `name` order by `id` ASC";
+                      
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+           
+                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $res[$row['id']] = $row;
+                    }
+                    
+                    # Массив info содержит информацию за первое полугодие
+                    $info = $res;
+                    
+                      # Получаем тарифы
+                      $sql = "SELECT * FROM reporting_prognoz_tarif WHERE id = '$num'";
+                      
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       $res[$row['id']] = $row;
+                   }
+                   
+                   $tarif1 = $res[$num]['tarif1'];
+                   $tarif2 = $res[$num]['tarif2'];
+                   
+                   # Выполняем запись в таблицу прогноз
+                   
+                   # Используем ЦИКЛ, ЭТО НЕ СОВСЕМ ПРАВИЛЬНО!!!
+                   foreach ($info as $key => $value) {
+                       
+                       $teplo_vol1 = $value[$zn];
+                       $name = $value['name'];
+                       
+                       $sql = "UPDATE reporting_prognoz SET teplo_vol1 = '$teplo_vol1', teplo_sum1 = '$teplo_vol1' * '$tarif1' "
+                               . "WHERE name = '$name'";
+                       
+                                 $stmt = $this->db->prepare($sql);
+                                 $stmt->execute();
+                       
+                   }
+                      
+                   ##################################################################################################
+                   
+                                         # Получаем объемы за второе полугодие из таблицы КУ:
+                      
+                      $mounth = [7, 8, 9, 10, 11, 12];
+                      $mounth = implode(",",$mounth);
+                      
+                      $sql = "SELECT id, name, $zn FROM `portal_ku` WHERE `year` = '2021' AND `mounth` IN($mounth) GROUP BY `name` order by `id` ASC";
+                      
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+           
+                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $res[$row['id']] = $row;
+                    }
+                    
+                    # Массив info содержит информацию за первое полугодие
+                    $info = $res;
+                    
+                      # Получаем тарифы
+                      $sql = "SELECT * FROM reporting_prognoz_tarif WHERE id = '$num'";
+                      
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       $res[$row['id']] = $row;
+                   }
+                   
+                   $tarif1 = $res[$num]['tarif1'];
+                   $tarif2 = $res[$num]['tarif2'];
+                   
+                   # Выполняем запись в таблицу прогноз
+                   
+                   # Используем ЦИКЛ, ЭТО НЕ СОВСЕМ ПРАВИЛЬНО!!!
+                   foreach ($info as $key => $value) {
+                       
+                       $teplo_vol1 = $value[$zn];
+                       $name = $value['name'];
+                       
+                       $sql = "UPDATE reporting_prognoz SET teplo_vol2 = '$teplo_vol1', teplo_sum2 = '$teplo_vol1' * '$tarif2' "
+                               . "WHERE name = '$name'";
+                       
+                                 $stmt = $this->db->prepare($sql);
+                                 $stmt->execute();
+                       
+                   }
+                     
+             
+        }
     
 }
 

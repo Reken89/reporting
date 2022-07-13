@@ -77,6 +77,8 @@
      
      
      
+     
+     
                 $(document).on('click', '#btn1', function(){
 
        $.ajax({  
@@ -97,6 +99,27 @@
 
         })
      
+     
+     
+
+                $(document).on('click', '#btn2', function(){
+                                          
+
+       $.ajax({  
+                url:"/reporting/prognoz/synch_ku",  
+
+                success:function(data)  
+                {  
+                    // alert(data);
+                     fetch_data();  
+                   //$('#live_data').html(data);
+                   //setKeydownmyForm()
+                }  
+
+           })
+
+        })
+
      
      
             

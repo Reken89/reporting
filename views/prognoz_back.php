@@ -54,6 +54,10 @@
                   
               </form>
               
+                                    <form action="/reporting/prognoz/excel" method="post">       
+            <button type="submit" style="width:250px;height:25px" class="btn">EXCEL</button>
+            </form>
+              
               <?php
               if ($_SESSION['variant_prognoz'] !== "itogo"){
               ?>

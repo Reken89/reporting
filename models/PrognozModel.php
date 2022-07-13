@@ -476,6 +476,10 @@ class PrognozModel extends Model {
                      
              
         }
+        
+                             public function excel() {
+                         
+                                  }
     
 }
 

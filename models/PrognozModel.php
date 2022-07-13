@@ -317,31 +317,61 @@ class PrognozModel extends Model {
                   case "teplo":
                       $zn = "SUM(volume1)";
                       $num = 1;
+                      
+                      $vol1 = "teplo_vol1";
+                      $sum1 = "teplo_sum1";
+                      $vol2 = "teplo_vol2";
+                      $sum2 = "teplo_sum2";
                        break;
                   
                  case "water":
                       $zn = "SUM(volume4)";
                       $num = 2;
+                      
+                      $vol1 = "water_vol1";
+                      $sum1 = "water_sum1";
+                      $vol2 = "water_vol2";
+                      $sum2 = "water_sum2";
                       break;
                   
                   case "stoki":
                       $zn = "SUM(volume2)";
                       $num = 3;
+                      
+                      $vol1 = "stoki_vol1";
+                      $sum1 = "stoki_sum1";
+                      $vol2 = "stoki_vol2";
+                      $sum2 = "stoki_sum2";
                       break;
                   
                   case "elektro":
                       $zn = "SUM(volume5)";
                       $num = 4;
+                      
+                      $vol1 = "elektro_vol1";
+                      $sum1 = "elektro_sum1";
+                      $vol2 = "elektro_vol2";
+                      $sum2 = "elektro_sum2";
                       break;
                   
                   case "trash":
                       $zn = "SUM(volume6)";
                       $num = 5;
+                      
+                      $vol1 = "trash_vol1";
+                      $sum1 = "trash_sum1";
+                      $vol2 = "trash_vol2";
+                      $sum2 = "trash_sum2";
                       break;
                   
                   case "negativka":
                       $zn = "SUM(volume3)";
                       $num = 6;
+                      
+                      $vol1 = "negativka_vol1";
+                      $sum1 = "negativka_sum1";
+                      $vol2 = "negativka_vol2";
+                      $sum2 = "negativka_sum2";
                       break;
                   
                            }
@@ -386,7 +416,7 @@ class PrognozModel extends Model {
                        $teplo_vol1 = $value[$zn];
                        $name = $value['name'];
                        
-                       $sql = "UPDATE reporting_prognoz SET teplo_vol1 = '$teplo_vol1', teplo_sum1 = '$teplo_vol1' * '$tarif1' "
+                       $sql = "UPDATE reporting_prognoz SET $vol1 = '$teplo_vol1', $sum1 = '$teplo_vol1' * '$tarif1' "
                                . "WHERE name = '$name'";
                        
                                  $stmt = $this->db->prepare($sql);
@@ -436,7 +466,7 @@ class PrognozModel extends Model {
                        $teplo_vol1 = $value[$zn];
                        $name = $value['name'];
                        
-                       $sql = "UPDATE reporting_prognoz SET teplo_vol2 = '$teplo_vol1', teplo_sum2 = '$teplo_vol1' * '$tarif2' "
+                       $sql = "UPDATE reporting_prognoz SET $vol2 = '$teplo_vol1', $sum2 = '$teplo_vol1' * '$tarif2' "
                                . "WHERE name = '$name'";
                        
                                  $stmt = $this->db->prepare($sql);

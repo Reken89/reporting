@@ -504,6 +504,11 @@ class PrognozModel extends Model {
                    # Запишем в таблицу Смета ауринко
                    
                    # Нужно загнать код в двойной цикл!!!
+                   $name = ["aurinko", "berezka", "zoloto", "korablik", "gnomik", "skazka", "solnishko",
+                       "dmsh", "dhsh", "vsosh_school", "uprava"];
+                   
+                   $num = [7, 8, 10, 11, 9, 12, 13, 17, 16, 6, 21];
+                   
                    $teplo = $res[7]['teplo_sum'];
                    $water = $res[7]['water_sum'];
                    $stoki = $res[7]['stoki_sum'];

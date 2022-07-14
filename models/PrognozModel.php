@@ -501,48 +501,56 @@ class PrognozModel extends Model {
                    }
                    
                    
-                   # Запишем в таблицу Смета ауринко
-                   
                    # Нужно загнать код в двойной цикл!!!
                    $name = ["aurinko", "berezka", "zoloto", "korablik", "gnomik", "skazka", "solnishko",
                        "dmsh", "dhsh", "vsosh_school", "uprava"];
                    
                    $num = [7, 8, 10, 11, 9, 12, 13, 17, 16, 6, 21];
                    
-                   $teplo = $res[7]['teplo_sum'];
-                   $water = $res[7]['water_sum'];
-                   $stoki = $res[7]['stoki_sum'];
-                   $elektro = $res[7]['elektro_sum'];
-                   $trash = $res[7]['trash_sum'];
-                   $negativka = $res[7]['negativka_sum'];
+                   foreach ( $name as $key=>$a ) {
+                      foreach($num as $key1=>$b) {
+                            if ($key == $key1){
+                                $name_value = $a;
+                                $num_value = $b;
+                                    }
+                                }
+                   
+                   $teplo = $res[$num_value]['teplo_sum'];
+                   $water = $res[$num_value]['water_sum'];
+                   $stoki = $res[$num_value]['stoki_sum'];
+                   $elektro = $res[$num_value]['elektro_sum'];
+                   $trash = $res[$num_value]['trash_sum'];
+                   $negativka = $res[$num_value]['negativka_sum'];
                                
-                   $sql = "UPDATE reporting_budget SET aurinko = '$teplo' WHERE id = '25'";
+                   $sql = "UPDATE reporting_budget SET $name_value = '$teplo' WHERE id = '25'";
                    $stmt = $this->db->prepare($sql);
                    $stmt->execute();
                    
-                   $sql = "UPDATE reporting_budget SET aurinko = '$water' WHERE id = '27'";
+                   $sql = "UPDATE reporting_budget SET $name_value = '$water' WHERE id = '27'";
                    $stmt = $this->db->prepare($sql);
                    $stmt->execute();
                    
-                   $sql = "UPDATE reporting_budget SET aurinko = '$stoki' WHERE id = '28'";
+                   $sql = "UPDATE reporting_budget SET $name_value = '$stoki' WHERE id = '28'";
                    $stmt = $this->db->prepare($sql);
                    $stmt->execute();
                    
-                   $sql = "UPDATE reporting_budget SET aurinko = '$elektro' WHERE id = '26'";
+                   $sql = "UPDATE reporting_budget SET $name_value = '$elektro' WHERE id = '26'";
                    $stmt = $this->db->prepare($sql);
                    $stmt->execute();
                    
-                   $sql = "UPDATE reporting_budget SET aurinko = '$trash' WHERE id = '29'";
+                   $sql = "UPDATE reporting_budget SET $name_value = '$trash' WHERE id = '29'";
                    $stmt = $this->db->prepare($sql);
                    $stmt->execute();
                    
-                   $sql = "UPDATE reporting_budget SET aurinko = '$negativka' WHERE id = '227'";
+                   $sql = "UPDATE reporting_budget SET $name_value = '$negativka' WHERE id = '227'";
                    $stmt = $this->db->prepare($sql);
                    $stmt->execute();
                    
-                   $sql = "UPDATE reporting_budget SET aurinko = '$teplo' + '$water' + '$stoki' + '$elektro' + '$trash' + '$negativka' WHERE id = '24'";
+                   $sql = "UPDATE reporting_budget SET $name_value = '$teplo' + '$water' + '$stoki' + '$elektro' + '$trash' + '$negativka' WHERE id = '24'";
                    $stmt = $this->db->prepare($sql);
                    $stmt->execute();
+                   
+                   }
                    
                        echo "Синхронизация выполненна";
             

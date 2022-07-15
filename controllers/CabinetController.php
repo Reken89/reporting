@@ -36,6 +36,9 @@ class CabinetController extends Controller {
         # Для корректного отображения таблицы прогноз коммуналки
         $_SESSION['variant_prognoz'] = "teplo";
         
+        # Для корректного отображения таблицы ремонты
+        $_SESSION['variant_repair'] = "one";
+        
 
         $this->view->render($this->pageTpl, $this->pageData);
         

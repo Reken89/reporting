@@ -37,7 +37,7 @@ class RepairfuController extends Controller {
         
         $this->pageData['info'] = $this->model->repairfu_back($variant_repair);
         #$this->pageData['total'] = $this->model->total($variant_repair);
-        #$this->pageData['status'] = $this->model->status();
+        $this->pageData['status'] = $this->model->status();
         
         $this->view->render($this->pageTpl_back, $this->pageData);
     }

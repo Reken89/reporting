@@ -55,7 +55,23 @@
               switch ($_SESSION['variant_repair']) {
         
             case "one":
-                echo "Первый раздел";
+
+                # Определяем статус выбранного раздела таблицы
+            if($pageData['status'][1]['status'] == "open"){
+              ?>
+              <body>
+              <div class="div">
+                  <b>Отдел строительства ещё работает с таблицей</b>
+              </div>
+              </body>
+              <?php
+           } elseif ($pageData['status'][1]['status'] == "close") {
+           ?>
+              <input type="button" style="width:250px;height:25px" name="formSubmit" id="open" class="btn" value="Разрешить редактирование"><br>
+           <?php
+       }
+              
+                
                 break;
             
             case "two":

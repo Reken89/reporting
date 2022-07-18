@@ -81,6 +81,10 @@
                         <form action="/reporting/communal/com" method="post">
                         <button type="submit" style="width:400px;height:25px" class="btn">Коммунальные услуги</button>
                         </form>
+                
+                        <form action="/reporting/repairfu/table" method="post">
+                        <button type="submit" style="width:400px;height:25px" class="btn">Таблица ремонты</button>
+                        </form>
             
                         <form action="/reporting/editor/editor_ofs" method="post">
                         <button type="submit" style="width:400px;height:25px" class="btn">Редактор таблицы ОФС</button>

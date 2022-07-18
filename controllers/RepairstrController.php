@@ -36,7 +36,7 @@ class RepairstrController extends Controller {
         }
         
         $this->pageData['info'] = $this->model->repairstr_back($variant_repair);
-        #$this->pageData['total'] = $this->model->total($variant_budget);
+        $this->pageData['total'] = $this->model->total($variant_repair);
         #$this->pageData['status'] = $this->model->status();
         
         $this->view->render($this->pageTpl_back, $this->pageData);
@@ -72,12 +72,13 @@ class RepairstrController extends Controller {
         $ekr = $_POST['ekr'];
         $title = $_POST['title'];
         
+        $variant_repair = $_SESSION['variant_repair'];
         $str = $_POST['str'];
         # Убираем пробелы и меняем запятые на точки
         $str = str_replace(" ", "", $str);
         $str = str_replace(",", ".", $str);
         
-        $this->model->add($marker_b, $ekr, $title, $str);
+        $this->model->add($marker_b, $ekr, $title, $str, $variant_repair);
         
         
              

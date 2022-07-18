@@ -117,6 +117,29 @@
            })
 
         })
+        
+        
+        
+        
+        
+                $(document).on('click', '#btn2', function(){
+                                          
+
+       $.ajax({  
+                url:"/reporting/repairstr/update_status",  
+
+                success:function(data)  
+                {  
+                    // alert(data);
+                     fetch_data();  
+                   //$('#live_data').html(data);
+                   //setKeydownmyForm()
+                }  
+
+           })
+
+        })
+        
             
             
             

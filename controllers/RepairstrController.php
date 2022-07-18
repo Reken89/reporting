@@ -37,7 +37,7 @@ class RepairstrController extends Controller {
         
         $this->pageData['info'] = $this->model->repairstr_back($variant_repair);
         $this->pageData['total'] = $this->model->total($variant_repair);
-        #$this->pageData['status'] = $this->model->status();
+        $this->pageData['status'] = $this->model->status();
         
         $this->view->render($this->pageTpl_back, $this->pageData);
     }
@@ -82,6 +82,18 @@ class RepairstrController extends Controller {
         
         
              
+         }
+         
+         public function update_status(){
+             
+                                        if (!$_SESSION['user']) {
+                       header("Location: /reporting");
+        } 
+             
+        $variant_repair = $_SESSION['variant_repair'];
+        
+        $this->model->update_status($variant_repair);
+        
          }
     
 }

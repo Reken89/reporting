@@ -50,15 +50,26 @@
               </form>
 
 <?php
-              
+
               # Определяем какую таблицу отображать
               switch ($_SESSION['variant_repair']) {
         
             case "one":
                 
+      #Определяем статус в таблице (открыт/закрыт/запрос)
+      $status = $pageData['status'][1]['status'];
+      
+      #Рисуем кнопку в зависимости от статуса
+      if ($status == "open"){
+          echo <<<HTML
+          <input type="button" style="width:250px;height:25px" name="formSubmit" id="btn2" class="btn" value="Отправить в ФУ"><br>
+          HTML;
+      } 
+                
                 # Рисуем таблицу
                 ?>
               
+              </br>
                             <table class="freeze-table" width="700px">
                   
                   <thead>
@@ -92,10 +103,12 @@
                               
                               if ($value['marker_a'] == 5 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
+                                  
+                                  if($status == "open"){
                                   echo "<input type=hidden class='marker_b' value=" . $j . ">";
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<input type=hidden class='ekr' value=" . $value['ekr'] . ">";
-                                  
+
                                   echo "<td class='col-id-no' scope='row'></td>";
                                   echo <<<HTML
                                     <td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea>></td>
@@ -106,13 +119,22 @@
                                     <td><input type="text" id='user' class='str' value="$value[str]"></td>
                                   HTML;
                                   echo "<td><input type=button id='edit' value='Изменить'></td>";
+                                  
+                                  } elseif ($status == "close") {
+                                  echo "<td class='col-id-no' scope='row'></td>";
+                                  echo "<td>$value[title]</td>";
+                                  echo "<td>" . $value['ekr'] . "</td>";
+                                  echo "<td>$value[str]</td>";
+                                  echo "<td></td>";
+                              }
+                                  
                                   echo "</tr>";
                               }
                               
                               
                           }
                           
-                     
+            if($status == "open"){
                           echo "<tr>";
 
                           echo "<input type=hidden class='marker_b' value=" . $j . ">";
@@ -130,6 +152,7 @@
                           echo "<td><input type=button id='add' value='Добавить'></td>";
 
                           echo "</tr>";
+            }
                           
                           }
                           
@@ -166,9 +189,20 @@
         
             case "two":
                 
+      #Определяем статус в таблице (открыт/закрыт/запрос)
+      $status = $pageData['status'][2]['status'];
+      
+      #Рисуем кнопку в зависимости от статуса
+      if ($status == "open"){
+          echo <<<HTML
+          <input type="button" style="width:250px;height:25px" name="formSubmit" id="btn2" class="btn" value="Отправить в ФУ"><br>
+          HTML;
+      } 
+                
  # Рисуем таблицу
                 ?>
               
+              </br>
                             <table class="freeze-table" width="700px">
                   
                   <thead>
@@ -202,10 +236,11 @@
                               
                               if ($value['marker_a'] == 5 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
+                                  if($status == "open"){
                                   echo "<input type=hidden class='marker_b' value=" . $j . ">";
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<input type=hidden class='ekr' value=" . $value['ekr'] . ">";
-                                  
+
                                   echo "<td class='col-id-no' scope='row'></td>";
                                   echo <<<HTML
                                     <td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea>></td>
@@ -216,13 +251,22 @@
                                     <td><input type="text" id='user' class='str' value="$value[str]"></td>
                                   HTML;
                                   echo "<td><input type=button id='edit' value='Изменить'></td>";
+                                  
+                                  } elseif ($status == "close") {
+                                  echo "<td class='col-id-no' scope='row'></td>";
+                                  echo "<td>$value[title]</td>";
+                                  echo "<td>" . $value['ekr'] . "</td>";
+                                  echo "<td>$value[str]</td>";
+                                  echo "<td></td>";
+                              }
+                                  
                                   echo "</tr>";
                               }
                               
                               
                           }
                           
-                     
+            if($status == "open"){
                           echo "<tr>";
 
                           echo "<input type=hidden class='marker_b' value=" . $j . ">";
@@ -240,6 +284,7 @@
                           echo "<td><input type=button id='add' value='Добавить'></td>";
 
                           echo "</tr>";
+            }
                           
                           }
                           
@@ -317,9 +362,20 @@
         
             case "three":
                 
+      #Определяем статус в таблице (открыт/закрыт/запрос)
+      $status = $pageData['status'][3]['status'];
+      
+      #Рисуем кнопку в зависимости от статуса
+      if ($status == "open"){
+          echo <<<HTML
+          <input type="button" style="width:250px;height:25px" name="formSubmit" id="btn2" class="btn" value="Отправить в ФУ"><br>
+          HTML;
+      } 
+                
                 # Рисуем таблицу
                 ?>
               
+              </br>
                             <table class="freeze-table" width="700px">
                   
                   <thead>
@@ -353,10 +409,11 @@
                               
                               if ($value['marker_a'] == 5 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
+                                                                   if($status == "open"){
                                   echo "<input type=hidden class='marker_b' value=" . $j . ">";
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<input type=hidden class='ekr' value=" . $value['ekr'] . ">";
-                                  
+
                                   echo "<td class='col-id-no' scope='row'></td>";
                                   echo <<<HTML
                                     <td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea>></td>
@@ -367,13 +424,22 @@
                                     <td><input type="text" id='user' class='str' value="$value[str]"></td>
                                   HTML;
                                   echo "<td><input type=button id='edit' value='Изменить'></td>";
+                                  
+                                  } elseif ($status == "close") {
+                                  echo "<td class='col-id-no' scope='row'></td>";
+                                  echo "<td>$value[title]</td>";
+                                  echo "<td>" . $value['ekr'] . "</td>";
+                                  echo "<td>$value[str]</td>";
+                                  echo "<td></td>";
+                              }
+                                  
                                   echo "</tr>";
                               }
                               
                               
                           }
                           
-                     
+            if($status == "open"){
                           echo "<tr>";
 
                           echo "<input type=hidden class='marker_b' value=" . $j . ">";
@@ -391,6 +457,7 @@
                           echo "<td><input type=button id='add' value='Добавить'></td>";
 
                           echo "</tr>";
+            }
                           
                           }
                     
@@ -403,10 +470,21 @@
             break; 
                 
             case "four":
+                
+      #Определяем статус в таблице (открыт/закрыт/запрос)
+      $status = $pageData['status'][4]['status'];
+      
+      #Рисуем кнопку в зависимости от статуса
+      if ($status == "open"){
+          echo <<<HTML
+          <input type="button" style="width:250px;height:25px" name="formSubmit" id="btn2" class="btn" value="Отправить в ФУ"><br>
+          HTML;
+      } 
 
                  # Рисуем таблицу
                 ?>
               
+              </br>
                             <table class="freeze-table" width="700px">
                   
                   <thead>
@@ -440,10 +518,11 @@
                               
                               if ($value['marker_a'] == 5 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
+                                                                    if($status == "open"){
                                   echo "<input type=hidden class='marker_b' value=" . $j . ">";
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<input type=hidden class='ekr' value=" . $value['ekr'] . ">";
-                                  
+
                                   echo "<td class='col-id-no' scope='row'></td>";
                                   echo <<<HTML
                                     <td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea>></td>
@@ -454,13 +533,22 @@
                                     <td><input type="text" id='user' class='str' value="$value[str]"></td>
                                   HTML;
                                   echo "<td><input type=button id='edit' value='Изменить'></td>";
+                                  
+                                  } elseif ($status == "close") {
+                                  echo "<td class='col-id-no' scope='row'></td>";
+                                  echo "<td>$value[title]</td>";
+                                  echo "<td>" . $value['ekr'] . "</td>";
+                                  echo "<td>$value[str]</td>";
+                                  echo "<td></td>";
+                              }
+                                  
                                   echo "</tr>";
                               }
                               
                               
                           }
                           
-                     
+            if($status == "open"){
                           echo "<tr>";
 
                           echo "<input type=hidden class='marker_b' value=" . $j . ">";
@@ -478,6 +566,7 @@
                           echo "<td><input type=button id='add' value='Добавить'></td>";
 
                           echo "</tr>";
+            }
                           
                           }
                           
@@ -554,9 +643,20 @@
         
             case "five":
                 
+      #Определяем статус в таблице (открыт/закрыт/запрос)
+      $status = $pageData['status'][5]['status'];
+      
+      #Рисуем кнопку в зависимости от статуса
+      if ($status == "open"){
+          echo <<<HTML
+          <input type="button" style="width:250px;height:25px" name="formSubmit" id="btn2" class="btn" value="Отправить в ФУ"><br>
+          HTML;
+      } 
+                
                                 # Рисуем таблицу
                 ?>
               
+              </br>
                             <table class="freeze-table" width="700px">
                   
                   <thead>
@@ -590,10 +690,11 @@
                               
                               if ($value['marker_a'] == 5 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
+                                                                    if($status == "open"){
                                   echo "<input type=hidden class='marker_b' value=" . $j . ">";
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<input type=hidden class='ekr' value=" . $value['ekr'] . ">";
-                                  
+
                                   echo "<td class='col-id-no' scope='row'></td>";
                                   echo <<<HTML
                                     <td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea>></td>
@@ -604,13 +705,22 @@
                                     <td><input type="text" id='user' class='str' value="$value[str]"></td>
                                   HTML;
                                   echo "<td><input type=button id='edit' value='Изменить'></td>";
+                                  
+                                  } elseif ($status == "close") {
+                                  echo "<td class='col-id-no' scope='row'></td>";
+                                  echo "<td>$value[title]</td>";
+                                  echo "<td>" . $value['ekr'] . "</td>";
+                                  echo "<td>$value[str]</td>";
+                                  echo "<td></td>";
+                              }
+                                  
                                   echo "</tr>";
                               }
                               
                               
                           }
                           
-                     
+            if($status == "open"){
                           echo "<tr>";
 
                           echo "<input type=hidden class='marker_b' value=" . $j . ">";
@@ -628,6 +738,7 @@
                           echo "<td><input type=button id='add' value='Добавить'></td>";
 
                           echo "</tr>";
+            }
                           
                           }
                     
@@ -657,17 +768,15 @@
                   <tbody>
                     <?php
                     
-                    $a = $pageData['total'];
-                    var_dump($a);
                     
-                          $str225 = $pageData['total'][225]['SUM(str)'];
-                          $str226 = $pageData['total'][226]['SUM(str)'];
-                          $str228 = $pageData['total'][228]['SUM(str)'];
-                          $str344 = $pageData['total'][344]['SUM(str)'];
-                          $str346 = $pageData['total'][346]['SUM(str)'];
-                          $str310 = $pageData['total'][310]['SUM(str)'];
-                          $str241 = $pageData['total'][241]['SUM(str)'];
-                          $str530 = $pageData['total'][530]['SUM(str)'];
+                          $str225 = $pageData['info'][225]['SUM(str)'];
+                          $str226 = $pageData['info'][226]['SUM(str)'];
+                          $str228 = $pageData['info'][228]['SUM(str)'];
+                          $str344 = $pageData['info'][344]['SUM(str)'];
+                          $str346 = $pageData['info'][346]['SUM(str)'];
+                          $str310 = $pageData['info'][310]['SUM(str)'];
+                          $str241 = $pageData['info'][241]['SUM(str)'];
+                          $str530 = $pageData['info'][530]['SUM(str)'];
                           
                           $str225 = number_format($str225, 2, ',', ' ');
                           $str226 = number_format($str226, 2, ',', ' ');
@@ -679,6 +788,13 @@
                           $str530 = number_format($str530, 2, ',', ' ');
                           
                           echo "<tr><td><b>Общий СВОД</b></td><td><b>241</b></td><td><b>$str241</b></td></tr>";
+                          echo "<tr><td><b>Общий СВОД</b></td><td><b>530</b></td><td><b>$str530</b></td></tr>";
+                          echo "<tr><td><b>Общий СВОД</b></td><td><b>225</b></td><td><b>$str225</b></td></tr>";
+                          echo "<tr><td><b>Общий СВОД</b></td><td><b>226</b></td><td><b>$str226</b></td></tr>";
+                          echo "<tr><td><b>Общий СВОД</b></td><td><b>228</b></td><td><b>$str228</b></td></tr>";
+                          echo "<tr><td><b>Общий СВОД</b></td><td><b>344</b></td><td><b>$str344</b></td></tr>";
+                          echo "<tr><td><b>Общий СВОД</b></td><td><b>346</b></td><td><b>$str346</b></td></tr>";
+                          echo "<tr><td><b>Общий СВОД</b></td><td><b>310</b></td><td><b>$str310</b></td></tr>";
                 
             break;
         

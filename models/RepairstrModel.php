@@ -200,6 +200,8 @@ class RepairstrModel extends Model {
                                "241" => $r241,
                                "530" => $r530
                            ];
+                            
+                            
                            
                            return $row;
                 
@@ -472,6 +474,56 @@ class RepairstrModel extends Model {
                 break;
             
               }
+             
+         }
+         
+         
+         public function status(){
+             
+             $sql = "SELECT * FROM repair_status";
+             
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       
+                       $res[$row['id']] = $row;
+                   }
+        
+                   return $res;
+             
+         }
+         
+         
+         public function update_status($variant_repair){
+             
+                           switch ($variant_repair) {
+        
+            case "one":
+                $id = 1;
+                break;
+            
+            case "two":
+                $id = 2;
+                break;
+            
+            case "three":
+                $id = 3;
+                break;
+            
+            case "four":
+                $id = 4;
+                break;
+            
+            case "five":
+                $id = 5;
+                break;
+                           }
+                           
+                           $sql = "UPDATE repair_status SET `status` = 'close' WHERE id = '$id'";
+                           $stmt = $this->db->prepare($sql);
+                           $stmt->execute();
              
          }
     

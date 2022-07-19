@@ -130,6 +130,19 @@ class RepairfuController extends Controller {
         $this->view->render($this->pageTpl_excel, $this->pageData);
               
           }
+          
+          
+          public function synch(){
+              
+              if (!$_SESSION['user']) {
+                       header("Location: /reporting");
+                  }
+                  
+                  $variant_repair = $_SESSION['variant_repair'];
+                  
+                  $this->model->synch($variant_repair);
+              
+          }
     
 }
 

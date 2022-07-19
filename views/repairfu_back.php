@@ -53,6 +53,8 @@
             <button type="submit" style="width:250px;height:25px" class="btn">EXCEL</button>
             </form>
               
+              <p><input type="button" style="width:250px;height:25px" name="formSubmit" id="btn2" class="btn" value="Синхронизация с таблицей Смета" /></p> 
+              
               <?php
               
               # Определяем какую таблицу отображать

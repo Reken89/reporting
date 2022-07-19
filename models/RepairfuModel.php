@@ -570,6 +570,109 @@ class RepairfuModel extends Model {
              
          }
          
+         public function synch($variant_repair){
+             
+             # Определяем какую информацию нужно обновить в БД
+              switch ($variant_repair) {
+        
+            case "one":
+                
+                # Получаем информацию по БУ и АУ на 241 и 530 ЭКР
+                
+                $sql = "SELECT SUM(fu) FROM repair WHERE marker_a = '10' AND ekr = '241'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $sum241 = $row['SUM(fu)'];
+                
+                $sql = "SELECT SUM(fu) FROM repair WHERE marker_a = '10' AND ekr = '530'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $sum530 = $row['SUM(fu)'];
+                
+                ###################################################################################################
+                
+                # Выполняем запись в таблицу СМЕТА по 241 ЭКР
+                $sql = "UPDATE reporting_budget SET adm = '$sum241' WHERE id = '230'";
+                           $stmt = $this->db->prepare($sql);
+                           $stmt->execute();
+                           
+                   # Выполняем пересчет итоговой суммы по 241 в таблице СМЕТА
+                 $sql = "SELECT SUM(adm) FROM reporting_budget WHERE marker_a = '0' AND ekr = '241'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $sum = $row['SUM(adm)'];
+                
+                $sql = "UPDATE reporting_budget SET adm = '$sum' WHERE marker_a = '10' AND ekr = '241'";
+                           $stmt = $this->db->prepare($sql);
+                           $stmt->execute();
+                           
+                           # Выполняем перерасчет по 240 ЭКР таблицы СМЕТА
+                           $sql = "SELECT SUM(adm) FROM reporting_budget WHERE marker_a = '10' AND marker_b BETWEEN '16' AND '18'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $sum = $row['SUM(adm)'];
+                
+                $sql = "UPDATE reporting_budget SET adm = '$sum' WHERE marker_a = '10' AND ekr = '240'";
+                           $stmt = $this->db->prepare($sql);
+                           $stmt->execute();
+                
+                ################################################################################################################
+                           
+                           # Выполняем запись в таблицу СМЕТА по 530 ЭКР
+                $sql = "UPDATE reporting_budget SET adm = '$sum530' WHERE id = '229'";
+                           $stmt = $this->db->prepare($sql);
+                           $stmt->execute();
+                           
+                   # Выполняем пересчет итоговой суммы по 530 в таблице СМЕТА
+                 $sql = "SELECT SUM(adm) FROM reporting_budget WHERE marker_a = '0' AND ekr = '530'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $sum = $row['SUM(adm)'];
+                
+                $sql = "UPDATE reporting_budget SET adm = '$sum' WHERE marker_a = '10' AND ekr = '530'";
+                           $stmt = $this->db->prepare($sql);
+                           $stmt->execute();
+                           
+                           
+                ################################################################################################################
+                           
+                echo "Синхронизация выполнена успешно";
+                break;
+            
+            case "two":
+                echo "Синхронизация выполнена успешно";
+                break;
+            
+            case "three":
+                echo "Синхронизация выполнена успешно";
+                break;
+            
+            case "four":
+                echo "Синхронизация выполнена успешно";
+                break;
+            
+            case "five":
+                echo "Синхронизация выполнена успешно";
+                break;
+            
+            case "six":
+                echo "В СВОДЕ синхронизация не выполняется!";
+                break;
+            
+              }
+             
+         }
+         
         
     
 }

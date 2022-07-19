@@ -1,76 +1,21 @@
-
-<head>
-             <meta charset="utf-8">
-              <title>Таблица</title>
-              </head>
-              <body>
-
-              <style>
-               body { background: url(../images/bg.png); }
-              </style>
-
-              <link rel="stylesheet" href="../css/table2.css">
-
-              <form id="my-form" method="post">
-                  
-                  <p><b>Выберите раздел</b></p> 
-                  
-                     <label class="container">
-   <input type="checkbox" name="variant" value="one">
-   <span class="checkmark">Учреждения АУ, БУ</span>
-   </label>
-                  
-                     <label class="container">
-   <input type="checkbox" name="variant" value="two">
-   <span class="checkmark">Детские сады</span>
-   </label>
-                  
-                      <label class="container">
-   <input type="checkbox" name="variant" value="three">
-   <span class="checkmark">Администрация и КУМС</span>
-   </label>
-                  
-                      <label class="container">
-   <input type="checkbox" name="variant" value="four">
-   <span class="checkmark">ДМШ и ДХШ</span>
-   </label>
-                  
-                     <label class="container">
-   <input type="checkbox" name="variant" value="five">
-   <span class="checkmark">ВСОШ</span>
-   </label>
-                  
-                     <label class="container">
-   <input type="checkbox" name="variant" value="six">
-   <span class="checkmark">Общий СВОД</span>
-   </label>
-                  
-                  <p><input type="button" style="width:250px;height:25px" name="formSubmit" id="btn1" class="btn" value="Сформировать таблицу" /></p>              
-                  
-              </form>
-              
-              <form action="/reporting/repairstr/excel" method="post">       
-            <button type="submit" style="width:250px;height:25px" class="btn">EXCEL</button>
-            </form>
-
 <?php
 
-              # Определяем какую таблицу отображать
+header('Content-Type: application/vnd.ms-excel; format=attachment;');
+header('Content-Disposition: attachment; filename=Таблица_' . date('Y-m-d H:i:s') . '.xls');
+header('Expires: Mon, 18 Jul 1998 01:00:00 GMT');
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Cache-Control: post-check=0, pre-check=0', FALSE);
+header('Pragma: no-cache');
+echo <<<HTML
+                <meta http-equiv="content-type" content="text/html; charset=utf-8">
+HTML;
+
+# Определяем какую таблицу отображать
               switch ($_SESSION['variant_repair']) {
         
             case "one":
-                
-      #Определяем статус в таблице (открыт/закрыт/запрос)
-      $status = $pageData['status'][1]['status'];
-      
-      #Рисуем кнопку в зависимости от статуса
-      if ($status == "open"){
-          echo <<<HTML
-          <input type="button" style="width:250px;height:25px" name="formSubmit" id="btn2" class="btn" value="Отправить в ФУ"><br>
-          HTML;
-      } 
-                
-                # Рисуем таблицу
+
+                       # Рисуем таблицу
                 ?>
               
               </br>
@@ -81,98 +26,60 @@
                           <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Учреждение</th>
                           <th style="min-width: 200px; width: 200px;">Наименование вида работ</th>
                           <th style="min-width: 200px; width: 200px;">КОСГУ</th>
-                          <th style="min-width: 200px; width: 200px;">Сумма</th>
-                          <th style="min-width: 200px; width: 200px;"></th>
+                          <th style="min-width: 200px; width: 200px;">Сумма отдела строительства</th>
                       </tr>
                   </thead>
                   
                   <tbody>
                     <?php
-                      
-                      # Этот бред в цикле нужно убрать!!! Переменную J нужно получать иначе!!!
+                    
+                    # Этот бред в цикле нужно убрать!!! Переменную J нужно получать иначе!!!
                       for ($j = 1 ; $j < 11 ; ++$j){
                           
                           foreach ($pageData['info'] as $key => $value) {
-
+                              
                               if ($value['marker_a'] == 10 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
                                   echo "<td class='col-id-no' scope='row'><b>" . $value['nik'] . "</td></b>";
                                   echo "<td><b>" . $value['title'] . "</td></b>";
                                   echo "<td><b>" . $value['ekr'] . "</td></b>";
                                   echo "<td><b>" . $value['str'] . "</td></b>";
-                                  echo "<td></td>";
                                   echo "</tr>";
                               }
-                              
                               
                               if ($value['marker_a'] == 5 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
-                                  
-                                  if($status == "open"){
                                   echo "<input type=hidden class='marker_b' value=" . $j . ">";
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<input type=hidden class='ekr' value=" . $value['ekr'] . ">";
-
-                                  echo "<td class='col-id-no' scope='row'></td>";
-                                  echo <<<HTML
-                                    <td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea>></td>
-                                  HTML;
-                                  #echo "<td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea></td>";
-                                  echo "<td>" . $value['ekr'] . "</td>";
-                                  echo <<<HTML
-                                    <td><input type="text" id='user' class='str' value="$value[str]"></td>
-                                  HTML;
-                                  echo "<td><input type=button id='edit' value='Изменить'></td>";
                                   
-                                  } elseif ($status == "close") {
                                   echo "<td class='col-id-no' scope='row'></td>";
-                                  echo "<td>$value[title]</td>";
+                                  echo "<td>" . $value['title'] . "</td>";
                                   echo "<td>" . $value['ekr'] . "</td>";
-                                  echo "<td>$value[str]</td>";
-                                  echo "<td></td>";
-                              }
+                                  echo "<td>" . $value['str'] . "</td>";
                                   
                                   echo "</tr>";
                               }
                               
-                              
                           }
                           
-            if($status == "open"){
-                          echo "<tr>";
-
-                          echo "<input type=hidden class='marker_b' value=" . $j . ">";
-                          echo "<td></td>";
-                          echo "<td><textarea rows='5' cols='45' type=text class='title'>Новый подпункт</textarea></td>";
-                          /*
-                          echo "<td>"
-                          . "<select name='ekr'><option value='241'>241</option><option value='530'>530</option><option value='s2' selected>Выберите ЭКР</option></select>"
-                                  . "</td>";
-
-                           */
-                           
-                          echo "<td><input type='text' id='user' class='ekr'></td>";
-                          echo "<td><input type='text' id='user' class='str'></td>";
-                          echo "<td><input type=button id='add' value='Добавить'></td>";
-
-                          echo "</tr>";
-            }
                           
-                          }
-                          
+                      }
+                      
                           # Итоговая строка
                           $str241 = $pageData['total'][241]['SUM(str)'];
                           $str530 = $pageData['total'][530]['SUM(str)'];
                           
+                          
                           $str241 = number_format($str241, 2, ',', ' ');
                           $str530 = number_format($str530, 2, ',', ' ');
+                          
                           
                           echo "<tr>";
                           echo "<td><b>ИТОГО БУ АУ</b></td>";
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>241</b></td>";
                           echo "<td><b>$str241</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                           
                           echo "<tr>";
@@ -180,7 +87,6 @@
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>530</b></td>";
                           echo "<td><b>$str530</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                     
                       ?>
@@ -189,21 +95,11 @@
               
               <?php
                 
-            break;   
-        
+                break;
+            
             case "two":
                 
-      #Определяем статус в таблице (открыт/закрыт/запрос)
-      $status = $pageData['status'][2]['status'];
-      
-      #Рисуем кнопку в зависимости от статуса
-      if ($status == "open"){
-          echo <<<HTML
-          <input type="button" style="width:250px;height:25px" name="formSubmit" id="btn2" class="btn" value="Отправить в ФУ"><br>
-          HTML;
-      } 
-                
- # Рисуем таблицу
+                       # Рисуем таблицу
                 ?>
               
               </br>
@@ -214,84 +110,46 @@
                           <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Учреждение</th>
                           <th style="min-width: 200px; width: 200px;">Наименование вида работ</th>
                           <th style="min-width: 200px; width: 200px;">КОСГУ</th>
-                          <th style="min-width: 200px; width: 200px;">Сумма</th>
-                          <th style="min-width: 200px; width: 200px;"></th>
+                          <th style="min-width: 200px; width: 200px;">Сумма отдела строительства</th>
                       </tr>
                   </thead>
                   
                   <tbody>
                     <?php
-                      
-                      # Этот бред в цикле нужно убрать!!! Переменную J нужно получать иначе!!!
+                    
+                    # Этот бред в цикле нужно убрать!!! Переменную J нужно получать иначе!!!
                       for ($j = 11 ; $j < 18 ; ++$j){
                           
                           foreach ($pageData['info'] as $key => $value) {
-
+                              
                               if ($value['marker_a'] == 10 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
                                   echo "<td class='col-id-no' scope='row'><b>" . $value['nik'] . "</td></b>";
                                   echo "<td><b>" . $value['title'] . "</td></b>";
                                   echo "<td><b>" . $value['ekr'] . "</td></b>";
                                   echo "<td><b>" . $value['str'] . "</td></b>";
-                                  echo "<td></td>";
                                   echo "</tr>";
                               }
-                              
                               
                               if ($value['marker_a'] == 5 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
-                                  if($status == "open"){
                                   echo "<input type=hidden class='marker_b' value=" . $j . ">";
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<input type=hidden class='ekr' value=" . $value['ekr'] . ">";
+                                  
+                                  echo "<td class='col-id-no' scope='row'></td>";
+                                  echo "<td>" . $value['title'] . "</td>";
 
-                                  echo "<td class='col-id-no' scope='row'></td>";
-                                  echo <<<HTML
-                                    <td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea>></td>
-                                  HTML;
-                                  #echo "<td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea></td>";
                                   echo "<td>" . $value['ekr'] . "</td>";
-                                  echo <<<HTML
-                                    <td><input type="text" id='user' class='str' value="$value[str]"></td>
-                                  HTML;
-                                  echo "<td><input type=button id='edit' value='Изменить'></td>";
-                                  
-                                  } elseif ($status == "close") {
-                                  echo "<td class='col-id-no' scope='row'></td>";
-                                  echo "<td>$value[title]</td>";
-                                  echo "<td>" . $value['ekr'] . "</td>";
-                                  echo "<td>$value[str]</td>";
-                                  echo "<td></td>";
-                              }
-                                  
+                                  echo "<td>" . $value['str'] . "</td>";
+
                                   echo "</tr>";
                               }
                               
-                              
                           }
-                          
-            if($status == "open"){
-                          echo "<tr>";
-
-                          echo "<input type=hidden class='marker_b' value=" . $j . ">";
-                          echo "<td></td>";
-                          echo "<td><textarea rows='5' cols='45' type=text class='title'>Новый подпункт</textarea></td>";
-                          /*
-                          echo "<td>"
-                          . "<select name='ekr'><option value='241'>241</option><option value='530'>530</option><option value='s2' selected>Выберите ЭКР</option></select>"
-                                  . "</td>";
-
-                           */
-                           
-                          echo "<td><input type='text' id='user' class='ekr'></td>";
-                          echo "<td><input type='text' id='user' class='str'></td>";
-                          echo "<td><input type=button id='add' value='Добавить'></td>";
-
-                          echo "</tr>";
-            }
-                          
-                          }
-                          
+                                                   
+                      }
+                      
                           # Итоговая строка
                           $str225 = $pageData['total'][225]['SUM(str)'];
                           $str226 = $pageData['total'][226]['SUM(str)'];
@@ -300,6 +158,7 @@
                           $str346 = $pageData['total'][346]['SUM(str)'];
                           $str310 = $pageData['total'][310]['SUM(str)'];
                           
+                          
                           $str225 = number_format($str225, 2, ',', ' ');
                           $str226 = number_format($str226, 2, ',', ' ');
                           $str228 = number_format($str228, 2, ',', ' ');
@@ -307,12 +166,12 @@
                           $str346 = number_format($str346, 2, ',', ' ');
                           $str310 = number_format($str310, 2, ',', ' ');
                           
+                          
                           echo "<tr>";
                           echo "<td><b>ИТОГО ПО САДАМ</b></td>";
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>225</b></td>";
                           echo "<td><b>$str225</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                           
                           echo "<tr>";
@@ -320,7 +179,6 @@
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>226</b></td>";
                           echo "<td><b>$str226</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                           
                           echo "<tr>";
@@ -328,7 +186,6 @@
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>228</b></td>";
                           echo "<td><b>$str228</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                           
                           echo "<tr>";
@@ -336,7 +193,6 @@
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>344</b></td>";
                           echo "<td><b>$str344</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                           
                           echo "<tr>";
@@ -344,7 +200,6 @@
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>346</b></td>";
                           echo "<td><b>$str346</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                           
                           echo "<tr>";
@@ -352,7 +207,6 @@
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>310</b></td>";
                           echo "<td><b>$str310</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                     
                       ?>
@@ -361,22 +215,12 @@
               
               <?php
                 
-                
-            break; 
-        
+                break;
+            
             case "three":
                 
-      #Определяем статус в таблице (открыт/закрыт/запрос)
-      $status = $pageData['status'][3]['status'];
-      
-      #Рисуем кнопку в зависимости от статуса
-      if ($status == "open"){
-          echo <<<HTML
-          <input type="button" style="width:250px;height:25px" name="formSubmit" id="btn2" class="btn" value="Отправить в ФУ"><br>
-          HTML;
-      } 
-                
-                # Рисуем таблицу
+              
+                       # Рисуем таблицу
                 ?>
               
               </br>
@@ -387,105 +231,58 @@
                           <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Учреждение</th>
                           <th style="min-width: 200px; width: 200px;">Наименование вида работ</th>
                           <th style="min-width: 200px; width: 200px;">КОСГУ</th>
-                          <th style="min-width: 200px; width: 200px;">Сумма</th>
-                          <th style="min-width: 200px; width: 200px;"></th>
+                          <th style="min-width: 200px; width: 200px;">Сумма отдела строительства</th>
                       </tr>
                   </thead>
                   
                   <tbody>
                     <?php
-                      
-                      # Этот бред в цикле нужно убрать!!! Переменную J нужно получать иначе!!!
+                    
+                    # Этот бред в цикле нужно убрать!!! Переменную J нужно получать иначе!!!
                       for ($j = 18 ; $j < 20 ; ++$j){
                           
                           foreach ($pageData['info'] as $key => $value) {
-
+                              
                               if ($value['marker_a'] == 10 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
                                   echo "<td class='col-id-no' scope='row'><b>" . $value['nik'] . "</td></b>";
                                   echo "<td><b>" . $value['title'] . "</td></b>";
                                   echo "<td><b>" . $value['ekr'] . "</td></b>";
                                   echo "<td><b>" . $value['str'] . "</td></b>";
-                                  echo "<td></td>";
                                   echo "</tr>";
                               }
-                              
                               
                               if ($value['marker_a'] == 5 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
-                                                                   if($status == "open"){
                                   echo "<input type=hidden class='marker_b' value=" . $j . ">";
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<input type=hidden class='ekr' value=" . $value['ekr'] . ">";
+                                  
+                                  echo "<td class='col-id-no' scope='row'></td>";
+                                  echo "<td>" . $value['title'] . "</td>";
 
-                                  echo "<td class='col-id-no' scope='row'></td>";
-                                  echo <<<HTML
-                                    <td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea>></td>
-                                  HTML;
-                                  #echo "<td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea></td>";
                                   echo "<td>" . $value['ekr'] . "</td>";
-                                  echo <<<HTML
-                                    <td><input type="text" id='user' class='str' value="$value[str]"></td>
-                                  HTML;
-                                  echo "<td><input type=button id='edit' value='Изменить'></td>";
-                                  
-                                  } elseif ($status == "close") {
-                                  echo "<td class='col-id-no' scope='row'></td>";
-                                  echo "<td>$value[title]</td>";
-                                  echo "<td>" . $value['ekr'] . "</td>";
-                                  echo "<td>$value[str]</td>";
-                                  echo "<td></td>";
-                              }
-                                  
+                                  echo "<td>" . $value['str'] . "</td>";
+
                                   echo "</tr>";
                               }
                               
-                              
                           }
-                          
-            if($status == "open"){
-                          echo "<tr>";
+                                                   
+                      }
 
-                          echo "<input type=hidden class='marker_b' value=" . $j . ">";
-                          echo "<td></td>";
-                          echo "<td><textarea rows='5' cols='45' type=text class='title'>Новый подпункт</textarea></td>";
-                          /*
-                          echo "<td>"
-                          . "<select name='ekr'><option value='241'>241</option><option value='530'>530</option><option value='s2' selected>Выберите ЭКР</option></select>"
-                                  . "</td>";
-
-                           */
-                           
-                          echo "<td><input type='text' id='user' class='ekr'></td>";
-                          echo "<td><input type='text' id='user' class='str'></td>";
-                          echo "<td><input type=button id='add' value='Добавить'></td>";
-
-                          echo "</tr>";
-            }
-                          
-                          }
-                    
                       ?>
                   </tbody>  
                             </table>
               
               <?php
                 
-            break; 
-                
+                break;
+            
             case "four":
                 
-      #Определяем статус в таблице (открыт/закрыт/запрос)
-      $status = $pageData['status'][4]['status'];
-      
-      #Рисуем кнопку в зависимости от статуса
-      if ($status == "open"){
-          echo <<<HTML
-          <input type="button" style="width:250px;height:25px" name="formSubmit" id="btn2" class="btn" value="Отправить в ФУ"><br>
-          HTML;
-      } 
-
-                 # Рисуем таблицу
+              
+                       # Рисуем таблицу
                 ?>
               
               </br>
@@ -496,84 +293,46 @@
                           <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Учреждение</th>
                           <th style="min-width: 200px; width: 200px;">Наименование вида работ</th>
                           <th style="min-width: 200px; width: 200px;">КОСГУ</th>
-                          <th style="min-width: 200px; width: 200px;">Сумма</th>
-                          <th style="min-width: 200px; width: 200px;"></th>
+                          <th style="min-width: 200px; width: 200px;">Сумма отдела строительства</th>
                       </tr>
                   </thead>
                   
                   <tbody>
                     <?php
-                      
-                      # Этот бред в цикле нужно убрать!!! Переменную J нужно получать иначе!!!
+                    
+                    # Этот бред в цикле нужно убрать!!! Переменную J нужно получать иначе!!!
                       for ($j = 20 ; $j < 22 ; ++$j){
                           
                           foreach ($pageData['info'] as $key => $value) {
-
+                              
                               if ($value['marker_a'] == 10 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
                                   echo "<td class='col-id-no' scope='row'><b>" . $value['nik'] . "</td></b>";
                                   echo "<td><b>" . $value['title'] . "</td></b>";
                                   echo "<td><b>" . $value['ekr'] . "</td></b>";
                                   echo "<td><b>" . $value['str'] . "</td></b>";
-                                  echo "<td></td>";
                                   echo "</tr>";
                               }
-                              
                               
                               if ($value['marker_a'] == 5 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
-                                                                    if($status == "open"){
                                   echo "<input type=hidden class='marker_b' value=" . $j . ">";
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<input type=hidden class='ekr' value=" . $value['ekr'] . ">";
+                                  
+                                  echo "<td class='col-id-no' scope='row'></td>";
+                                  echo "<td>" . $value['title'] . "</td>";
 
-                                  echo "<td class='col-id-no' scope='row'></td>";
-                                  echo <<<HTML
-                                    <td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea>></td>
-                                  HTML;
-                                  #echo "<td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea></td>";
                                   echo "<td>" . $value['ekr'] . "</td>";
-                                  echo <<<HTML
-                                    <td><input type="text" id='user' class='str' value="$value[str]"></td>
-                                  HTML;
-                                  echo "<td><input type=button id='edit' value='Изменить'></td>";
-                                  
-                                  } elseif ($status == "close") {
-                                  echo "<td class='col-id-no' scope='row'></td>";
-                                  echo "<td>$value[title]</td>";
-                                  echo "<td>" . $value['ekr'] . "</td>";
-                                  echo "<td>$value[str]</td>";
-                                  echo "<td></td>";
-                              }
-                                  
+                                  echo "<td>" . $value['str'] . "</td>";
+
                                   echo "</tr>";
                               }
                               
-                              
-                          }
+                          }                          
                           
-            if($status == "open"){
-                          echo "<tr>";
-
-                          echo "<input type=hidden class='marker_b' value=" . $j . ">";
-                          echo "<td></td>";
-                          echo "<td><textarea rows='5' cols='45' type=text class='title'>Новый подпункт</textarea></td>";
-                          /*
-                          echo "<td>"
-                          . "<select name='ekr'><option value='241'>241</option><option value='530'>530</option><option value='s2' selected>Выберите ЭКР</option></select>"
-                                  . "</td>";
-
-                           */
-                           
-                          echo "<td><input type='text' id='user' class='ekr'></td>";
-                          echo "<td><input type='text' id='user' class='str'></td>";
-                          echo "<td><input type=button id='add' value='Добавить'></td>";
-
-                          echo "</tr>";
-            }
-                          
-                          }
-                          
+                      }
+                      
                           # Итоговая строка
                           $str225 = $pageData['total'][225]['SUM(str)'];
                           $str226 = $pageData['total'][226]['SUM(str)'];
@@ -582,6 +341,7 @@
                           $str346 = $pageData['total'][346]['SUM(str)'];
                           $str310 = $pageData['total'][310]['SUM(str)'];
                           
+                          
                           $str225 = number_format($str225, 2, ',', ' ');
                           $str226 = number_format($str226, 2, ',', ' ');
                           $str228 = number_format($str228, 2, ',', ' ');
@@ -589,12 +349,12 @@
                           $str346 = number_format($str346, 2, ',', ' ');
                           $str310 = number_format($str310, 2, ',', ' ');
                           
+                          
                           echo "<tr>";
                           echo "<td><b>ИТОГО ДМШ ДХШ</b></td>";
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>225</b></td>";
                           echo "<td><b>$str225</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                           
                           echo "<tr>";
@@ -602,7 +362,6 @@
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>226</b></td>";
                           echo "<td><b>$str226</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                           
                           echo "<tr>";
@@ -610,7 +369,6 @@
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>228</b></td>";
                           echo "<td><b>$str228</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                           
                           echo "<tr>";
@@ -618,7 +376,6 @@
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>344</b></td>";
                           echo "<td><b>$str344</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                           
                           echo "<tr>";
@@ -626,7 +383,6 @@
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>346</b></td>";
                           echo "<td><b>$str346</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                           
                           echo "<tr>";
@@ -634,7 +390,6 @@
                           echo "<td><b>ИТОГО</b></td>";
                           echo "<td><b>310</b></td>";
                           echo "<td><b>$str310</b></td>";
-                          echo "<td></td>";
                           echo "</tr>";
                     
                       ?>
@@ -643,21 +398,12 @@
               
               <?php
                 
-            break; 
-        
+                break;
+            
             case "five":
                 
-      #Определяем статус в таблице (открыт/закрыт/запрос)
-      $status = $pageData['status'][5]['status'];
-      
-      #Рисуем кнопку в зависимости от статуса
-      if ($status == "open"){
-          echo <<<HTML
-          <input type="button" style="width:250px;height:25px" name="formSubmit" id="btn2" class="btn" value="Отправить в ФУ"><br>
-          HTML;
-      } 
-                
-                                # Рисуем таблицу
+              
+                       # Рисуем таблицу
                 ?>
               
               </br>
@@ -668,92 +414,54 @@
                           <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Учреждение</th>
                           <th style="min-width: 200px; width: 200px;">Наименование вида работ</th>
                           <th style="min-width: 200px; width: 200px;">КОСГУ</th>
-                          <th style="min-width: 200px; width: 200px;">Сумма</th>
-                          <th style="min-width: 200px; width: 200px;"></th>
+                          <th style="min-width: 200px; width: 200px;">Сумма отдела строительства</th>
                       </tr>
                   </thead>
                   
                   <tbody>
                     <?php
-                      
-                      # Этот бред в цикле нужно убрать!!! Переменную J нужно получать иначе!!!
+                    
+                    # Этот бред в цикле нужно убрать!!! Переменную J нужно получать иначе!!!
                       for ($j = 22 ; $j < 23 ; ++$j){
                           
                           foreach ($pageData['info'] as $key => $value) {
-
+                              
                               if ($value['marker_a'] == 10 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
                                   echo "<td class='col-id-no' scope='row'><b>" . $value['nik'] . "</td></b>";
                                   echo "<td><b>" . $value['title'] . "</td></b>";
                                   echo "<td><b>" . $value['ekr'] . "</td></b>";
                                   echo "<td><b>" . $value['str'] . "</td></b>";
-                                  echo "<td></td>";
                                   echo "</tr>";
                               }
-                              
                               
                               if ($value['marker_a'] == 5 && $value['marker_b'] == $j ) {
                                   echo "<tr>";
-                                                                    if($status == "open"){
                                   echo "<input type=hidden class='marker_b' value=" . $j . ">";
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<input type=hidden class='ekr' value=" . $value['ekr'] . ">";
+                                  
+                                  echo "<td class='col-id-no' scope='row'></td>";
+                                  echo "<td>" . $value['title'] . "</td>";
 
-                                  echo "<td class='col-id-no' scope='row'></td>";
-                                  echo <<<HTML
-                                    <td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea>></td>
-                                  HTML;
-                                  #echo "<td><textarea rows='5' cols='45' type=text class='title'>$value[title]</textarea></td>";
                                   echo "<td>" . $value['ekr'] . "</td>";
-                                  echo <<<HTML
-                                    <td><input type="text" id='user' class='str' value="$value[str]"></td>
-                                  HTML;
-                                  echo "<td><input type=button id='edit' value='Изменить'></td>";
-                                  
-                                  } elseif ($status == "close") {
-                                  echo "<td class='col-id-no' scope='row'></td>";
-                                  echo "<td>$value[title]</td>";
-                                  echo "<td>" . $value['ekr'] . "</td>";
-                                  echo "<td>$value[str]</td>";
-                                  echo "<td></td>";
-                              }
-                                  
+                                  echo "<td>" . $value['str'] . "</td>";
+
                                   echo "</tr>";
                               }
                               
-                              
                           }
-                          
-            if($status == "open"){
-                          echo "<tr>";
+                                                
+                      }
 
-                          echo "<input type=hidden class='marker_b' value=" . $j . ">";
-                          echo "<td></td>";
-                          echo "<td><textarea rows='5' cols='45' type=text class='title'>Новый подпункт</textarea></td>";
-                          /*
-                          echo "<td>"
-                          . "<select name='ekr'><option value='241'>241</option><option value='530'>530</option><option value='s2' selected>Выберите ЭКР</option></select>"
-                                  . "</td>";
-
-                           */
-                           
-                          echo "<td><input type='text' id='user' class='ekr'></td>";
-                          echo "<td><input type='text' id='user' class='str'></td>";
-                          echo "<td><input type=button id='add' value='Добавить'></td>";
-
-                          echo "</tr>";
-            }
-                          
-                          }
-                    
                       ?>
                   </tbody>  
                             </table>
               
               <?php
                 
-            break; 
-        
+                break;
+            
             case "six":
                 
                 # Рисуем таблицу
@@ -765,7 +473,7 @@
                       <tr>
                           <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Учреждение</th>
                           <th style="min-width: 200px; width: 200px;">КОСГУ</th>
-                          <th style="min-width: 200px; width: 200px;">Сумма</th>
+                          <th style="min-width: 200px; width: 200px;">Сумма отдела строительства</th>
                       </tr>
                   </thead>
                   
@@ -790,7 +498,7 @@
                           $str310 = number_format($str310, 2, ',', ' ');
                           $str241 = number_format($str241, 2, ',', ' ');
                           $str530 = number_format($str530, 2, ',', ' ');
-                          
+                                                
                           echo "<tr><td><b>Общий СВОД</b></td><td><b>241</b></td><td><b>$str241</b></td></tr>";
                           echo "<tr><td><b>Общий СВОД</b></td><td><b>530</b></td><td><b>$str530</b></td></tr>";
                           echo "<tr><td><b>Общий СВОД</b></td><td><b>225</b></td><td><b>$str225</b></td></tr>";
@@ -800,6 +508,10 @@
                           echo "<tr><td><b>Общий СВОД</b></td><td><b>346</b></td><td><b>$str346</b></td></tr>";
                           echo "<tr><td><b>Общий СВОД</b></td><td><b>310</b></td><td><b>$str310</b></td></tr>";
                 
-            break;
-        
+                break;
+            
               }
+
+
+
+

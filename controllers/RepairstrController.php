@@ -4,6 +4,7 @@ class RepairstrController extends Controller {
     
         private $pageTpl = "/views/repairstr.php";
         private $pageTpl_back = "/views/repairstr_back.php";
+        private $pageTpl_excel = "/views/repairstr_excel.php";
         
                 public function __construct() {
         $this->model = new RepairstrModel();
@@ -95,6 +96,24 @@ class RepairstrController extends Controller {
         $this->model->update_status($variant_repair);
         
          }
+         
+         
+         public function excel() {
+              
+              if (!$_SESSION['user']) {
+                       header("Location: /reporting");
+                  }
+                  
+                 
+            $variant_repair = $_SESSION['variant_repair'];
+        
+        
+        $this->pageData['info'] = $this->model->repairstr_back($variant_repair);
+        $this->pageData['total'] = $this->model->total($variant_repair);
+        
+        $this->view->render($this->pageTpl_excel, $this->pageData);
+              
+          }
     
 }
 

@@ -4,6 +4,7 @@ class RepairfuController extends Controller {
     
         private $pageTpl = "/views/repairfu.php";
         private $pageTpl_back = "/views/repairfu_back.php";
+        private $pageTpl_excel = "/views/repairfu_excel.php";
         
                 public function __construct() {
         $this->model = new RepairfuModel();
@@ -111,6 +112,23 @@ class RepairfuController extends Controller {
                   $variant_repair = $_SESSION['variant_repair'];
                  
                   $this->model->update_status($variant_repair);
+          }
+          
+          public function excel() {
+              
+              if (!$_SESSION['user']) {
+                       header("Location: /reporting");
+                  }
+                  
+                 
+            $variant_repair = $_SESSION['variant_repair'];
+        
+        
+        $this->pageData['info'] = $this->model->repairfu_back($variant_repair);
+        $this->pageData['total'] = $this->model->total($variant_repair);
+        
+        $this->view->render($this->pageTpl_excel, $this->pageData);
+              
           }
     
 }

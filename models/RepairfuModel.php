@@ -565,6 +565,11 @@ class RepairfuModel extends Model {
               
          }
          
+         
+         public function excel(){
+             
+         }
+         
         
     
 }

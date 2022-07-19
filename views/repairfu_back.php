@@ -49,6 +49,10 @@
                   
               </form>
               
+              <form action="/reporting/repairfu/excel" method="post">       
+            <button type="submit" style="width:250px;height:25px" class="btn">EXCEL</button>
+            </form>
+              
               <?php
               
               # Определяем какую таблицу отображать

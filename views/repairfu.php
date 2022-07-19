@@ -46,6 +46,131 @@
 
         })
         
+        
+        
+                                $(document).on('click', '#edit', function(){
+                 
+           var tr = this.closest('tr');
+           var marker_b = $('.marker_b', tr).val();
+           
+           var tr = this.closest('tr');
+           var id = $('.id', tr).val();
+           
+           var tr = this.closest('tr');
+           var ekr = $('.ekr', tr).val();
+           
+           var tr = this.closest('tr');
+           var title = $('.title', tr).val();
+           
+           var tr = this.closest('tr');
+           var fu = $('.fu', tr).val();
+
+       $.ajax({  
+                url:"/reporting/repairfu/update", 
+                method:"POST",  
+                data:{ id:id, marker_b:marker_b, ekr:ekr, title:title, fu:fu },
+                dataType:"text",
+
+                success:function(data)  
+                {  
+                    // alert(data);
+                     fetch_data();  
+
+                }  
+
+           })
+
+        })
+        
+        
+        
+        
+        $(document).on('click', '#add', function(){
+                 
+           var tr = this.closest('tr');
+           var marker_b = $('.marker_b', tr).val();
+           
+           var tr = this.closest('tr');
+           var ekr = $('.ekr', tr).val();
+           
+           var tr = this.closest('tr');
+           var title = $('.title', tr).val();
+           
+           var tr = this.closest('tr');
+           var fu = $('.fu', tr).val();
+
+       $.ajax({  
+                url:"/reporting/repairfu/add", 
+                method:"POST",  
+                data:{ marker_b:marker_b, ekr:ekr, title:title, fu:fu },
+                dataType:"text",
+
+                success:function(data)  
+                {  
+                     alert(data);
+                     fetch_data();  
+
+                }  
+
+           })
+
+        })
+        
+        
+        
+        
+        
+        $(document).on('click', '#delete', function(){
+                 
+           var tr = this.closest('tr');
+           var marker_b = $('.marker_b', tr).val();
+           
+           var tr = this.closest('tr');
+           var ekr = $('.ekr', tr).val();
+           
+           var tr = this.closest('tr');
+           var id = $('.id', tr).val();
+           
+
+       $.ajax({  
+                url:"/reporting/repairfu/delete", 
+                method:"POST",  
+                data:{ marker_b:marker_b, ekr:ekr, id:id },
+                dataType:"text",
+
+                success:function(data)  
+                {  
+                     //alert(data);
+                     fetch_data();  
+
+                }  
+
+           })
+
+        })
+        
+        
+        
+        $(document).on('click', '#open', function(){
+                                          
+
+       $.ajax({  
+                url:"/reporting/repairfu/update_status",  
+
+                success:function(data)  
+                {  
+                    // alert(data);
+                     fetch_data();  
+                   //$('#live_data').html(data);
+                   //setKeydownmyForm()
+                }  
+
+           })
+
+        })
+        
+        
+        
      
             
         }); 

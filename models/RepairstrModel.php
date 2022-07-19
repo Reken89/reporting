@@ -264,6 +264,8 @@ class RepairstrModel extends Model {
              }
              }
              # Проверяем ЭКР на соответствие
+             if($variant_repair !== "one"){
+             
              if($ekr == 225 || $ekr == 226 || $ekr == 228 || $ekr == 344 || $ekr == 346 || $ekr == 310){
              
              # Вставляем новую запись в БД
@@ -276,6 +278,8 @@ class RepairstrModel extends Model {
                      $stmt->bindValue(":title", $title, PDO::PARAM_STR);
                      
                      $stmt->execute();
+             }
+             
              }
              
              

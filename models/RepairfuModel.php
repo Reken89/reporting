@@ -371,7 +371,7 @@ class RepairfuModel extends Model {
                     $stmt = $this->db->prepare($sql);
                     $stmt->execute();
               
-              echo "$fu и $str";
+                    var_dump($row);
              
              
          }

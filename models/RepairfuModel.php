@@ -362,7 +362,14 @@ class RepairfuModel extends Model {
                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
                    
                    $fu = $row['SUM(fu)'];
+                   if($fu == NULL){
+                       $fu = 0;
+                   }
+                   
                    $str = $row['SUM(str)'];
+                   if($str == NULL){
+                       $str = 0;
+                   }
                    
                    
                    $sql = "UPDATE repair SET fu = '$fu', str = '$str' "
@@ -371,7 +378,6 @@ class RepairfuModel extends Model {
                     $stmt = $this->db->prepare($sql);
                     $stmt->execute();
               
-                    var_dump($row);
              
              
          }

@@ -650,7 +650,159 @@ class RepairfuModel extends Model {
                 break;
             
             case "two":
+                
+                # Применяем цикл
+                $user_budget = ["aurinko", "berezka", "gnomik", "zoloto", "korablik", "skazka", "solnishko"];
+                $user_repair = [11, 12, 13, 14, 15, 16, 17];
+                
+                foreach ( $user_budget as $key=>$vol1 ) {
+                        foreach($user_repair as $key1=>$vol2) {
+                            if ($key == $key1){
+                                $user_b = $vol1;
+                                $user_r = $vol2;
+                            }
+                        }
+                
+                # Получаем нужную информацию из таблицы Ремонтов
+                
+                $sql = "SELECT fu FROM repair WHERE marker_a = '10' AND marker_b = '$user_r' AND ekr = '225'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $sum225 = $row['fu'];
+                
+                $sql = "SELECT fu FROM repair WHERE marker_a = '10' AND marker_b = '$user_r' AND ekr = '226'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $sum226 = $row['fu'];
+                
+                $sql = "SELECT fu FROM repair WHERE marker_a = '10' AND marker_b = '$user_r' AND ekr = '228'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $sum228 = $row['fu'];
+                
+                $sql = "SELECT fu FROM repair WHERE marker_a = '10' AND marker_b = '$user_r' AND ekr = '344'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $sum344 = $row['fu'];
+                
+                $sql = "SELECT fu FROM repair WHERE marker_a = '10' AND marker_b = '$user_r' AND ekr = '346'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $sum346 = $row['fu'];
+                
+                $sql = "SELECT fu FROM repair WHERE marker_a = '10' AND marker_b = '$user_r' AND ekr = '310'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $sum310 = $row['fu'];
+                
+                $sum = ["$sum225", "$sum226", "$sum228", "$sum344", "$sum346", "$sum310"];
+                $id = [231, 232, 233, 236, 237, 234];
+                
+                # Записываем значения в таблицу СМЕТА
+                                    foreach ( $sum as $key=>$volume_1 ) {
+                        foreach($id as $key1=>$volume_2) {
+                            if ($key == $key1){
+                                $a = $volume_1;
+                                $b = $volume_2;
+                            }
+                        }
+
+                        $sql = "UPDATE reporting_budget SET $user_b = '$a' WHERE id = '$b'";
+                
+                           $stmt = $this->db->prepare($sql);
+                           $stmt->execute();
+                        
+                        
+                    }
+                    
+                    
+                    
+                    # пересчитываем общие блоки в таблице СМЕТА
+                    $ekr = [225, 226, 228, 310, 344, 346];
+                foreach ($ekr as $key => $value) {
+                    
+                $sql = "SELECT SUM($user_b) FROM reporting_budget WHERE marker_a = '0' AND ekr = '$value'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                if($user_b == "aurinko"){
+                $sum_ = $row['SUM(aurinko)'];
+                }
+                if($user_b == "berezka"){
+                $sum_ = $row['SUM(berezka)'];
+                }
+                if($user_b == "gnomik"){
+                $sum_ = $row['SUM(gnomik)'];
+                }
+                if($user_b == "zoloto"){
+                $sum_ = $row['SUM(zoloto)'];
+                }
+                if($user_b == "korablik"){
+                $sum_ = $row['SUM(korablik)'];
+                }
+                if($user_b == "skazka"){
+                $sum_ = $row['SUM(skazka)'];
+                }
+                if($user_b == "solnishko"){
+                $sum_ = $row['SUM(solnishko)'];
+                }
+                
+                $sql = "UPDATE reporting_budget SET $user_b = '$sum_' WHERE marker_a = '10' AND ekr = '$value'";
+                           $stmt = $this->db->prepare($sql);
+                           $stmt->execute();
+                }
+                
+                
+                # Пересчитываем итоговые блоки по 340 ЭКР
+                $sql = "SELECT SUM($user_b) FROM reporting_budget WHERE marker_a = '10' AND marker_b BETWEEN '35' AND '41'";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                if($user_b == "aurinko"){
+                $sum340 = $row['SUM(aurinko)'];
+                }
+                if($user_b == "berezka"){
+                $sum340 = $row['SUM(berezka)'];
+                }
+                if($user_b == "gnomik"){
+                $sum340 = $row['SUM(gnomik)'];
+                }
+                if($user_b == "zoloto"){
+                $sum340 = $row['SUM(zoloto)'];
+                }
+                if($user_b == "korablik"){
+                $sum340 = $row['SUM(korablik)'];
+                }
+                if($user_b == "skazka"){
+                $sum340 = $row['SUM(skazka)'];
+                }
+                if($user_b == "solnishko"){
+                $sum340 = $row['SUM(solnishko)'];
+                }
+                
+                $sql = "UPDATE reporting_budget SET $user_b = '$sum340' WHERE marker_a = '10' AND ekr = '340'";
+                           $stmt = $this->db->prepare($sql);
+                           $stmt->execute();
+                
+                
+                     
+                }   
                 echo "Синхронизация выполнена успешно";
+                     
                 break;
             
             case "three":

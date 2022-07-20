@@ -140,7 +140,7 @@
 
                 success:function(data)  
                 {  
-                     alert(data);
+                     //alert(data);
                      fetch_data();  
 
                 }  

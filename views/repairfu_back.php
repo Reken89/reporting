@@ -89,7 +89,7 @@
                           <th style="min-width: 200px; width: 200px;">Наименование вида работ</th>
                           <th style="min-width: 200px; width: 200px;">КОСГУ</th>
                           <th style="min-width: 200px; width: 200px;">Сумма отдела строительства</th>
-                          <th style="min-width: 200px; width: 200px;">Сумма ФУ</th>
+                          <th style="min-width: 200px; width: 200px;">Утверждено</th>
                           <th style="min-width: 200px; width: 200px;"></th>
                           <th style="min-width: 200px; width: 200px;"></th>
                       </tr>
@@ -223,7 +223,7 @@
                           <th style="min-width: 200px; width: 200px;">Наименование вида работ</th>
                           <th style="min-width: 200px; width: 200px;">КОСГУ</th>
                           <th style="min-width: 200px; width: 200px;">Сумма отдела строительства</th>
-                          <th style="min-width: 200px; width: 200px;">Сумма ФУ</th>
+                          <th style="min-width: 200px; width: 200px;">Утверждено</th>
                           <th style="min-width: 200px; width: 200px;"></th>
                           <th style="min-width: 200px; width: 200px;"></th>
                       </tr>
@@ -413,7 +413,7 @@
                           <th style="min-width: 200px; width: 200px;">Наименование вида работ</th>
                           <th style="min-width: 200px; width: 200px;">КОСГУ</th>
                           <th style="min-width: 200px; width: 200px;">Сумма отдела строительства</th>
-                          <th style="min-width: 200px; width: 200px;">Сумма ФУ</th>
+                          <th style="min-width: 200px; width: 200px;">Утверждено</th>
                           <th style="min-width: 200px; width: 200px;"></th>
                           <th style="min-width: 200px; width: 200px;"></th>
                       </tr>
@@ -514,7 +514,7 @@
                           <th style="min-width: 200px; width: 200px;">Наименование вида работ</th>
                           <th style="min-width: 200px; width: 200px;">КОСГУ</th>
                           <th style="min-width: 200px; width: 200px;">Сумма отдела строительства</th>
-                          <th style="min-width: 200px; width: 200px;">Сумма ФУ</th>
+                          <th style="min-width: 200px; width: 200px;">Утверждено</th>
                           <th style="min-width: 200px; width: 200px;"></th>
                           <th style="min-width: 200px; width: 200px;"></th>
                       </tr>
@@ -704,7 +704,7 @@
                           <th style="min-width: 200px; width: 200px;">Наименование вида работ</th>
                           <th style="min-width: 200px; width: 200px;">КОСГУ</th>
                           <th style="min-width: 200px; width: 200px;">Сумма отдела строительства</th>
-                          <th style="min-width: 200px; width: 200px;">Сумма ФУ</th>
+                          <th style="min-width: 200px; width: 200px;">Утверждено</th>
                           <th style="min-width: 200px; width: 200px;"></th>
                           <th style="min-width: 200px; width: 200px;"></th>
                       </tr>
@@ -788,7 +788,7 @@
                           <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Учреждение</th>
                           <th style="min-width: 200px; width: 200px;">КОСГУ</th>
                           <th style="min-width: 200px; width: 200px;">Сумма отдела строительства</th>
-                          <th style="min-width: 200px; width: 200px;">Сумма ФУ</th>
+                          <th style="min-width: 200px; width: 200px;">Утверждено</th>
                       </tr>
                   </thead>
                   

@@ -364,13 +364,14 @@ class RepairfuModel extends Model {
                    $fu = $row['SUM(fu)'];
                    $str = $row['SUM(str)'];
                    
+                   
                    $sql = "UPDATE repair SET fu = '$fu', str = '$str' "
                            . "WHERE marker_a = '10' AND marker_b = '$marker_b' AND ekr = '$ekr'";
                    
                     $stmt = $this->db->prepare($sql);
                     $stmt->execute();
               
-              
+              echo "$fu и $str";
              
              
          }

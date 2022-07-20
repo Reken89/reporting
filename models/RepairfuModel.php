@@ -353,7 +353,7 @@ class RepairfuModel extends Model {
              $stmt->execute();
              
              # Пересчитываем значения
-             /*
+             
              $sql = "SELECT SUM(fu), SUM(str) from repair "
                . "WHERE marker_b = '$marker_b' AND marker_a = '5' AND ekr = '$ekr'";
               
@@ -370,21 +370,8 @@ class RepairfuModel extends Model {
                     $stmt = $this->db->prepare($sql);
                     $stmt->execute();
               
-              */
-             $sql = "SELECT SUM(fu) from repair "
-               . "WHERE marker_b = '$marker_b' AND marker_a = '5' AND ekr = '$ekr'";
               
-                   $stmt = $this->db->prepare($sql);
-                   $stmt->execute();
-                   $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                   
-                   $fu = $row['SUM(fu)'];
-                   
-                   $sql = "UPDATE repair SET fu = '$fu' "
-                           . "WHERE marker_a = '10' AND marker_b = '$marker_b' AND ekr = '$ekr'";
-                   
-                    $stmt = $this->db->prepare($sql);
-                    $stmt->execute();
+             
              
          }
          

@@ -49,6 +49,10 @@
                         <form action="/reporting/budgetuser/table" method="post">
                         <button type="submit" style="width:400px;height:25px" class="btn">Таблица смета</button>
                         </form>
+                
+                        <form action="/reporting/repaircb/table" method="post">
+                        <button type="submit" style="width:400px;height:25px" class="btn">Таблица ремонты</button>
+                        </form>
                 HTML;
             }
             

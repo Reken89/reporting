@@ -1,105 +1,91 @@
 <head>
-             <meta charset="utf-8">
-              <title>Таблица</title>
-              </head>
-              <body>
+    <meta charset="utf-8">
+    <title>Таблица</title>
+</head>
+<style>
+    body { background: url(../images/bg.png); }
+</style>
+<link rel="stylesheet" href="../css/table2.css">
 
-              <style>
-               body { background: url(../images/bg.png); }
-              </style>
-
-              <link rel="stylesheet" href="../css/table2.css">
-
-              <form id="my-form" method="post">
-                  
-                  <p><b>Выберите год </b></p>
-                  
-                  <div class="size_block">
-                  
-                     <label class="container">
-   <input type="checkbox" name="svod_year[]" value="2018">
-   <span class="checkmark">2018</span>
-   </label>
-                  
-                 <label class="container">
-   <input type="checkbox" name="svod_year[]" value="2019">
-   <span class="checkmark">2019</span>
-   </label>
-                  
-                 <label class="container">
-   <input type="checkbox" name="svod_year[]" value="2020">
-   <span class="checkmark">2020</span>
-   </label>
-                  
-                <label class="container">
-   <input type="checkbox" name="svod_year[]" value="2021">
-   <span class="checkmark">2021</span>
-   </label>
-                  
-                 <label class="container">
-   <input type="checkbox" name="svod_year[]" value="2022">
-   <span class="checkmark">2022</span>
-   </label>
-                  
-                  </div>
+<form id="my-form" method="post">                 
+<p><b>Выберите год </b></p>                 
+    <div class="size_block">                  
+        <label class="container">
+            <input type="checkbox" name="svod_year[]" value="2018">
+            <span class="checkmark">2018</span>
+        </label>                 
+        <label class="container">
+            <input type="checkbox" name="svod_year[]" value="2019">
+            <span class="checkmark">2019</span>
+        </label>                  
+        <label class="container">
+            <input type="checkbox" name="svod_year[]" value="2020">
+            <span class="checkmark">2020</span>
+        </label>                  
+        <label class="container">
+            <input type="checkbox" name="svod_year[]" value="2021">
+            <span class="checkmark">2021</span>
+        </label>                 
+        <label class="container">
+            <input type="checkbox" name="svod_year[]" value="2022">
+            <span class="checkmark">2022</span>
+        </label>                  
+    </div>
                          
-                         <p><b>Выберите месяц</b></p>                     
-               
-                         <div class="size_block">
+<p><b>Выберите месяц</b></p>                                   
+<div class="size_block">                         
+    <label class="container">
+        <input type="checkbox" name="svod_mounth[]" value="1">
+        <span class="checkmark">Январь</span>
+    </label>
+    <label class="container">
+        <input type="checkbox" name="svod_mounth[]" value="2">
+        <span class="checkmark">Февраль</span>
+    </label>
+    <label class="container">
+        <input type="checkbox" name="svod_mounth[]" value="3">
+        <span class="checkmark">Март</span>
+    </label>
+    <label class="container">
+        <input type="checkbox" name="svod_mounth[]" value="4">
+        <span class="checkmark">Апрель</span>
+    </label>
+    <label class="container">
+        <input type="checkbox" name="svod_mounth[]" value="5">
+        <span class="checkmark">Май</span>
+    </label>
+    <label class="container">
+        <input type="checkbox" name="svod_mounth[]" value="6">
+        <span class="checkmark">Июнь</span>
+    </label>
+    <label class="container">
+        <input type="checkbox" name="svod_mounth[]" value="7">
+        <span class="checkmark">Июль</span>
+    </label>
+    <label class="container">
+        <input type="checkbox" name="svod_mounth[]" value="8">
+        <span class="checkmark">Август</span>
+    </label>
+    <label class="container">
+        <input type="checkbox" name="svod_mounth[]" value="9">
+        <span class="checkmark">Сентябрь</span>
+    </label>
+    <label class="container">
+        <input type="checkbox" name="svod_mounth[]" value="10">
+        <span class="checkmark">Октябрь</span>
+    </label>
+    <label class="container">
+        <input type="checkbox" name="svod_mounth[]" value="11">
+        <span class="checkmark">Ноябрь</span>
+    </label>
+    <label class="container">
+        <input type="checkbox" name="svod_mounth[]" value="12">
+        <span class="checkmark">Декабрь</span>
+    </label>                            
+</div>
                          
-   <label class="container">
-   <input type="checkbox" name="svod_mounth[]" value="1">
-   <span class="checkmark">Январь</span>
-   </label>
-   <label class="container">
-   <input type="checkbox" name="svod_mounth[]" value="2">
-   <span class="checkmark">Февраль</span>
-   </label>
-   <label class="container">
-   <input type="checkbox" name="svod_mounth[]" value="3">
-   <span class="checkmark">Март</span>
-   </label>
-   <label class="container">
-   <input type="checkbox" name="svod_mounth[]" value="4">
-   <span class="checkmark">Апрель</span>
-   </label>
-   <label class="container">
-   <input type="checkbox" name="svod_mounth[]" value="5">
-   <span class="checkmark">Май</span>
-   </label>
-   <label class="container">
-   <input type="checkbox" name="svod_mounth[]" value="6">
-   <span class="checkmark">Июнь</span>
-   </label>
-   <label class="container">
-   <input type="checkbox" name="svod_mounth[]" value="7">
-   <span class="checkmark">Июль</span>
-   </label>
-   <label class="container">
-   <input type="checkbox" name="svod_mounth[]" value="8">
-   <span class="checkmark">Август</span>
-   </label>
-   <label class="container">
-   <input type="checkbox" name="svod_mounth[]" value="9">
-   <span class="checkmark">Сентябрь</span>
-   </label>
-   <label class="container">
-   <input type="checkbox" name="svod_mounth[]" value="10">
-   <span class="checkmark">Октябрь</span>
-   </label>
-   <label class="container">
-   <input type="checkbox" name="svod_mounth[]" value="11">
-   <span class="checkmark">Ноябрь</span>
-   </label>
-   <label class="container">
-   <input type="checkbox" name="svod_mounth[]" value="12">
-   <span class="checkmark">Декабрь</span>
-   </label>
-                             
-                         </div>
-                         
-    <p><input type="button" style="width:250px;height:25px" name="formSubmit" id="communal" class="btn" value="Сформировать таблицу" /></p>                     
-              </form>
+<p><input type="button" style="width:250px;height:25px" name="formSubmit" id="communal" class="btn" value="Сформировать таблицу" /></p>                     
+</form>
     <p><input type="button" style="width:250px;height:25px" name="formSubmit" id="email" class="btn" value="Отправить напоминания" /></p>
     
             <form action="/reporting/communal/excel" method="post">

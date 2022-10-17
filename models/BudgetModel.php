@@ -155,6 +155,34 @@ class BudgetModel extends Model {
                    return $res;
                     
                 break;
+                
+            case "seven";
+                
+            
+                $sql = "SELECT *, "
+                        . "(glava + adm + sovet + kso + cb + zakupki + aurinko + berezka + zoloto + korablik + gnomik + skazka + solnishko + dmsh + dhsh + vsosh_ds + vsosh_school + kums + uprava + edds) AS fu, "
+                        . "(u_glava + u_adm + u_sovet + u_kso + u_cb + u_zakupki + u_aurinko + u_berezka + u_zoloto + u_korablik + u_gnomik + u_skazka + u_solnishko + u_dmsh + u_dhsh + u_vsosh_ds + u_vsosh_school + u_kums + u_uprava + u_edds) AS cb "
+                . " from reporting_budget";
+
+
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       
+               # Разделяем число на блоки
+               $block = ['fu', 'cb'];
+               for ($num = 0 ; $num <= 1 ; ++$num) {
+               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+               }
+                       
+                       $res[$row['id']] = $row;
+                   }
+        
+                   return $res;
+                
+                break;
             
            }
 
@@ -839,6 +867,33 @@ class BudgetModel extends Model {
                # Разделяем число на блоки
                $block = ['SUM(kums)', 'SUM(uprava)', 'SUM(edds)', 'SUM(u_kums)', 'SUM(u_uprava)', 'SUM(u_edds)'];
                for ($num = 0 ; $num <= 5 ; ++$num) {
+               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+               }
+                       
+                       $res[$row['id']] = $row;
+                   }
+        
+                   return $res;
+                
+                break;
+                
+            case "seven";
+                
+                $sql = "SELECT *, "
+                        . "(SUM(glava) + SUM(adm) + SUM(sovet) + SUM(kso) + SUM(cb) + SUM(zakupki) + SUM(aurinko) + SUM(berezka) + SUM(zoloto) + SUM(korablik) + SUM(gnomik) + SUM(skazka) + SUM(solnishko) + SUM(dmsh) + SUM(dhsh) + SUM(vsosh_ds) + SUM(vsosh_school) + SUM(kums) + SUM(uprava) + SUM(edds)) AS fu, "
+                        . "(SUM(u_glava) + SUM(u_adm) + SUM(u_sovet) + SUM(u_kso) + SUM(u_cb) + SUM(u_zakupki) + SUM(u_aurinko) + SUM(u_berezka) + SUM(u_zoloto) + SUM(u_korablik) + SUM(u_gnomik) + SUM(u_skazka) + SUM(u_solnishko) + SUM(u_dmsh) + SUM(u_dhsh) + SUM(u_vsosh_ds) + SUM(u_vsosh_school) + SUM(u_kums) + SUM(u_uprava) + SUM(u_edds)) AS cb"
+                . " from reporting_budget WHERE marker_a = '10' AND "
+                    . "id != '118' AND id != '151' AND id != '171' AND id != '197'";
+
+                   $res = [];
+                   $stmt = $this->db->prepare($sql);
+                   $stmt->execute();
+                   
+                   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       
+               # Разделяем число на блоки
+               $block = ['fu', 'cb'];
+               for ($num = 0 ; $num <= 1 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        

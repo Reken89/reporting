@@ -14,7 +14,8 @@ class BudgetModel extends Model {
             case "one":
                 
                     $sql = "SELECT id, marker_a, marker_b, name, ekr, glava, adm, sovet, kso, u_glava, "
-                . "u_adm, u_sovet, u_kso from reporting_budget";
+                . "u_adm, u_sovet, u_kso, "
+                    . "(glava + adm + sovet + kso) AS fu, (u_glava + u_adm + u_sovet + u_kso) AS cb from reporting_budget";
 
                    $res = [];
                    $stmt = $this->db->prepare($sql);
@@ -23,8 +24,8 @@ class BudgetModel extends Model {
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                        
                # Разделяем число на блоки
-               $block = ['glava', 'adm', 'sovet', 'kso', 'u_glava', 'u_adm', 'u_sovet', 'u_kso'];
-               for ($num = 0 ; $num <= 7 ; ++$num) {
+               $block = ['glava', 'adm', 'sovet', 'kso', 'u_glava', 'u_adm', 'u_sovet', 'u_kso', 'fu', 'cb'];
+               for ($num = 0 ; $num <= 9 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        
@@ -37,7 +38,8 @@ class BudgetModel extends Model {
             
             case "two":
        
-                   $sql = "SELECT id, marker_a, marker_b, name, ekr, cb, zakupki, u_cb, u_zakupki"
+                   $sql = "SELECT id, marker_a, marker_b, name, ekr, cb, zakupki, u_cb, u_zakupki, "
+                    . "(cb + zakupki) AS fu, (u_cb + u_zakupki) AS itog_cb"
                 . " from reporting_budget";
 
                    $res = [];
@@ -47,8 +49,8 @@ class BudgetModel extends Model {
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                        
                # Разделяем число на блоки
-               $block = ['cb', 'zakupki', 'u_cb', 'u_zakupki'];
-               for ($num = 0 ; $num <= 3 ; ++$num) {
+               $block = ['cb', 'zakupki', 'u_cb', 'u_zakupki', 'fu', 'itog_cb'];
+               for ($num = 0 ; $num <= 5 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        
@@ -63,7 +65,9 @@ class BudgetModel extends Model {
                     case "three":
        
                     $sql = "SELECT id, marker_a, marker_b, name, ekr, aurinko, berezka, zoloto, korablik, gnomik, skazka, solnishko, "
-                . "u_aurinko, u_berezka, u_zoloto, u_korablik, u_gnomik, u_skazka, u_solnishko from reporting_budget";
+                . "u_aurinko, u_berezka, u_zoloto, u_korablik, u_gnomik, u_skazka, u_solnishko, "
+                            . "(aurinko + berezka + zoloto + korablik + gnomik + skazka + solnishko) AS fu, "
+                            . "(u_aurinko + u_berezka + u_zoloto + u_korablik + u_gnomik + u_skazka + u_solnishko) AS cb from reporting_budget";
 
                    $res = [];
                    $stmt = $this->db->prepare($sql);
@@ -72,8 +76,8 @@ class BudgetModel extends Model {
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                        
                # Разделяем число на блоки
-               $block = ['aurinko', 'berezka', 'zoloto', 'korablik', 'gnomik', 'skazka', 'solnishko', 'u_aurinko', 'u_berezka', 'u_zoloto', 'u_korablik', 'u_gnomik', 'u_skazka', 'u_solnishko'];
-               for ($num = 0 ; $num <= 13 ; ++$num) {
+               $block = ['aurinko', 'berezka', 'zoloto', 'korablik', 'gnomik', 'skazka', 'solnishko', 'u_aurinko', 'u_berezka', 'u_zoloto', 'u_korablik', 'u_gnomik', 'u_skazka', 'u_solnishko', 'fu', 'cb'];
+               for ($num = 0 ; $num <= 15 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        

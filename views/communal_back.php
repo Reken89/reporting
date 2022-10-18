@@ -129,6 +129,24 @@
                       <td></td>
                   </tr>
                   
+                  <tr>                     
+                      <td>Тариф</td><td></td>
+                      <?php
+                      $tarif = $pageData['tarif'];
+                      echo "<input type=hidden class='id' value=" . $tarif['id'] . ">";
+                      echo <<<HTML
+                      <td><input type="text" id='user' class='heat' value="$tarif[heat]"></td><td></td>
+                      <td><input type="text" id='user' class='drainage' value="$tarif[drainage]"></td><td></td>
+                      <td><input type="text" id='user' class='negative' value="$tarif[negative]"></td><td></td>
+                      <td><input type="text" id='user' class='water' value="$tarif[water]"></td><td></td>
+                      <td><input type="text" id='user' class='electro_one' value="$tarif[electro_one]"></td><td><input type="text" id='user' class='electro_two' value="$tarif[electro_two]"></td>
+                      <td><input type="text" id='user' class='trash' value="$tarif[trash]"></td><td></td>
+                      <td>X</td><td></td>
+                      HTML;
+                      ?>
+                      <td></td>
+                  </tr>
+                  
                   <?php
                   
                       foreach ($pageData['info'] as $key => $value) {

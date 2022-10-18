@@ -137,5 +137,41 @@ class CommunalModel extends Model {
         
     }
     
+    public function tarif($svod_mounth, $svod_year)
+    {
+        $sql = "SELECT * FROM tariffs WHERE year = '$svod_year[0]' AND mounth = '$svod_mounth[0]'";       
+        $res = [];
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+           
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+               # Разделяем число на блоки
+               $block = [
+                   'heat', 'drainage', 'negative', 'water', 'electro_one', 'electro_two', 'trash'
+                   ];
+               for ($num = 0 ; $num <= 6 ; ++$num){
+               $row[$block[$num]] = number_format($row[$block[$num]], 3, ',', ' ');
+               }                              
+               $res = $row;              
+        }    
+        return $res;        
+    }
+    
+    public function update_tarif($id, $heat, $drainage, $negative, $water, $electro_one, $electro_two, $trash)
+    {
+        $sql = "UPDATE tariffs SET heat = :heat, drainage = :drainage, negative = :negative, "
+                . "water = :water, electro_one = :electro_one, electro_two = :electro_two, "
+                . "trash = :trash WHERE id = '$id'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":heat", $heat, PDO::PARAM_STR);
+        $stmt->bindValue(":drainage", $drainage, PDO::PARAM_STR);
+        $stmt->bindValue(":negative", $negative, PDO::PARAM_STR);
+        $stmt->bindValue(":water", $water, PDO::PARAM_STR);
+        $stmt->bindValue(":electro_one", $electro_one, PDO::PARAM_STR);
+        $stmt->bindValue(":electro_two", $electro_two, PDO::PARAM_STR);
+        $stmt->bindValue(":trash", $trash, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    
 }
 

@@ -155,12 +155,12 @@
                       echo "<tr>";
                       echo "<td class='col-id-no' scope='row'><b>ИТОГО</td>";
                       echo "<td></td>";
-                      echo "<td></td>";
+                      echo "<td><b>" . $value['fu'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(glava)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(adm)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(sovet)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(kso)'] . "</b></td>";
-                      echo "<td></td>";
+                      echo "<td><b>" . $value['cb'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_glava)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_adm)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_sovet)'] . "</b></td>";
@@ -202,7 +202,7 @@
                       <tr>
                           <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Наименование расходов</th>
                           <th style="min-width: 70px; width: 70px;">ЭКР</th>
-                          <th style="min-width: 200px; width: 200px;">Итог финуправление</th>
+                          <th style="min-width: 200px; width: 200px;">Итог Финуправление</th>
                           <th style="min-width: 200px; width: 200px;">Централизованная бухгалтерия</th>
                           <th style="min-width: 200px; width: 200px;">Закупки</th>
                           <th style="min-width: 200px; width: 200px;">Итог ЦБ</th>
@@ -259,10 +259,10 @@
                       echo "<tr>";
                       echo "<td class='col-id-no' scope='row'><b>ИТОГО</td>";
                       echo "<td></td>";
-                      echo "<td></td>";
+                      echo "<td><b>" . $value['fu'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(cb)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(zakupki)'] . "</b></td>";
-                      echo "<td></td>";
+                      echo "<td><b>" . $value['cb'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_cb)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_zakupki)'] . "</b></td>";
                       echo "</tr>";
@@ -304,7 +304,7 @@
                       <tr>
                           <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Наименование расходов</th>
                           <th style="min-width: 70px; width: 70px;">ЭКР</th>
-                          <th style="min-width: 200px; width: 200px;">Итог финуправление</th>
+                          <th style="min-width: 200px; width: 200px;">Итог Финуправление</th>
                           <th style="min-width: 200px; width: 200px;">Детский сад Ауринко</th>
                           <th style="min-width: 200px; width: 200px;">Детский сад Березка</th>
                           <th style="min-width: 200px; width: 200px;">Детский сад Золотой ключик</th>
@@ -393,7 +393,7 @@
                       echo "<tr>";
                       echo "<td class='col-id-no' scope='row'><b>ИТОГО</td>";
                       echo "<td></td>";
-                      echo "<td></td>";
+                      echo "<td><b>" . $value['fu'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(aurinko)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(berezka)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(zoloto)'] . "</b></td>";
@@ -402,7 +402,7 @@
                       echo "<td><b>" . $value['SUM(skazka)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(solnishko)'] . "</b></td>";
                       
-                      echo "<td></td>";
+                      echo "<td><b>" . $value['cb'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_aurinko)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_berezka)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_zoloto)'] . "</b></td>";
@@ -448,8 +448,10 @@
                       <tr>
                           <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Наименование расходов</th>
                           <th style="min-width: 70px; width: 70px;">ЭКР</th>
+                          <th style="min-width: 200px; width: 200px;">Итог Финуправление</th>
                           <th style="min-width: 200px; width: 200px;">ДМШ</th>
                           <th style="min-width: 200px; width: 200px;">ДХШ</th>
+                          <th style="min-width: 200px; width: 200px;">Итог ЦБ</th>
                           <th style="min-width: 200px; width: 200px;">ДМШ</th>
                           <th style="min-width: 200px; width: 200px;">ДХШ</th>
                       </tr>
@@ -468,8 +470,10 @@
                                   echo "<tr>";
                                   echo "<td class='col-id-no' scope='row'><b>" . $value['name'] . "</td></b>";
                                   echo "<td><b>" . $value['ekr'] . "</td></b>";
+                                  echo "<td><b>" . $value['fu'] . "</td></b>";
                                   echo "<td><b>" . $value['dmsh'] . "</td></b>";
                                   echo "<td><b>" . $value['dhsh'] . "</td></b>";
+                                  echo "<td><b>" . $value['cb'] . "</td></b>";
                                   echo "<td><b>" . $value['u_dmsh'] . "</td></b>";
                                   echo "<td><b>" . $value['u_dhsh'] . "</td></b>";
                                   echo "</tr>";
@@ -481,10 +485,12 @@
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<td class='col-id-no' scope='row'>" . $value['name'] . "</td>";
                                   echo "<td>" . $value['ekr'] . "</td>";
+                                  echo "<td>" . $value['fu'] . "</td>";
                                   echo <<<HTML
                                   <td><input type="text" id='user' class='dmsh' value="$value[dmsh]"></td>
                                   <td><input type="text" id='user' class='dhsh' value="$value[dhsh]"></td>
                                   HTML;
+                                  echo "<td>" . $value['cb'] . "</td>";
                                   echo "<td>" . $value['u_dmsh'] . "</td>";
                                   echo "<td>" . $value['u_dhsh'] . "</td>";
                                   echo "</tr>";
@@ -499,8 +505,10 @@
                       echo "<tr>";
                       echo "<td class='col-id-no' scope='row'><b>ИТОГО</td>";
                       echo "<td></td>";
+                      echo "<td><b>" . $value['fu'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(dmsh)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(dhsh)'] . "</b></td>";
+                      echo "<td><b>" . $value['cb'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_dmsh)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_dhsh)'] . "</b></td>";
                       echo "</tr>";
@@ -540,8 +548,10 @@
                       <tr>
                           <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Наименование расходов</th>
                           <th style="min-width: 70px; width: 70px;">ЭКР</th>
+                          <th style="min-width: 200px; width: 200px;">Итог Финуправление</th>
                           <th style="min-width: 200px; width: 200px;">ВСОШ детский сад</th>
                           <th style="min-width: 200px; width: 200px;">ВСОШ школа</th>
+                          <th style="min-width: 200px; width: 200px;">Итог ЦБ</th>
                           <th style="min-width: 200px; width: 200px;">ВСОШ детский сад</th>
                           <th style="min-width: 200px; width: 200px;">ВСОШ школа</th>
                       </tr>
@@ -560,8 +570,10 @@
                                   echo "<tr>";
                                   echo "<td class='col-id-no' scope='row'><b>" . $value['name'] . "</td></b>";
                                   echo "<td><b>" . $value['ekr'] . "</td></b>";
+                                  echo "<td><b>" . $value['fu'] . "</td></b>";
                                   echo "<td><b>" . $value['vsosh_ds'] . "</td></b>";
                                   echo "<td><b>" . $value['vsosh_school'] . "</td></b>";
+                                  echo "<td><b>" . $value['cb'] . "</td></b>";
                                   echo "<td><b>" . $value['u_vsosh_ds'] . "</td></b>";
                                   echo "<td><b>" . $value['u_vsosh_school'] . "</td></b>";
                                   echo "</tr>";
@@ -573,10 +585,12 @@
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<td class='col-id-no' scope='row'>" . $value['name'] . "</td>";
                                   echo "<td>" . $value['ekr'] . "</td>";
+                                  echo "<td>" . $value['fu'] . "</td>";
                                   echo <<<HTML
                                   <td><input type="text" id='user' class='vsosh_ds' value="$value[vsosh_ds]"></td>
                                   <td><input type="text" id='user' class='vsosh_school' value="$value[vsosh_school]"></td>
                                   HTML;
+                                  echo "<td>" . $value['cb'] . "</td>";
                                   echo "<td>" . $value['u_vsosh_ds'] . "</td>";
                                   echo "<td>" . $value['u_vsosh_school'] . "</td>";
                                   echo "</tr>";
@@ -591,8 +605,10 @@
                       echo "<tr>";
                       echo "<td class='col-id-no' scope='row'><b>ИТОГО</td>";
                       echo "<td></td>";
+                      echo "<td><b>" . $value['fu'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(vsosh_ds)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(vsosh_school)'] . "</b></td>";
+                      echo "<td><b>" . $value['cb'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_vsosh_ds)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_vsosh_school)'] . "</b></td>";
                       echo "</tr>";
@@ -633,9 +649,11 @@
                       <tr>
                           <th style="min-width: 200px; width: 200px;" class="col-id-no fixed-header">Наименование расходов</th>
                           <th style="min-width: 70px; width: 70px;">ЭКР</th>
+                          <th style="min-width: 200px; width: 200px;">Итог Финуправление</th>
                           <th style="min-width: 200px; width: 200px;">КУМС</th>
                           <th style="min-width: 200px; width: 200px;">Управление собственностью</th>
                           <th style="min-width: 200px; width: 200px;">ЕДДС</th>
+                          <th style="min-width: 200px; width: 200px;">Итог ЦБ</th>
                           <th style="min-width: 200px; width: 200px;">КУМС</th>
                           <th style="min-width: 200px; width: 200px;">Управление собственностью</th>
                           <th style="min-width: 200px; width: 200px;">ЕДДС</th>
@@ -656,9 +674,11 @@
                                   echo "<tr>";
                                   echo "<td class='col-id-no' scope='row'><b>" . $value['name'] . "</td></b>";
                                   echo "<td><b>" . $value['ekr'] . "</td></b>";
+                                  echo "<td><b>" . $value['fu'] . "</td></b>";
                                   echo "<td><b>" . $value['kums'] . "</td></b>";
                                   echo "<td><b>" . $value['uprava'] . "</td></b>";
                                   echo "<td><b>" . $value['edds'] . "</td></b>";
+                                  echo "<td><b>" . $value['cb'] . "</td></b>";
                                   echo "<td><b>" . $value['u_kums'] . "</td></b>";
                                   echo "<td><b>" . $value['u_uprava'] . "</td></b>";
                                   echo "<td><b>" . $value['u_edds'] . "</td></b>";
@@ -671,11 +691,13 @@
                                   echo "<input type=hidden class='id' value=" . $value['id'] . ">";
                                   echo "<td class='col-id-no' scope='row'>" . $value['name'] . "</td>";
                                   echo "<td>" . $value['ekr'] . "</td>";
+                                  echo "<td>" . $value['fu'] . "</td>";
                                   echo <<<HTML
                                   <td><input type="text" id='user' class='kums' value="$value[kums]"></td>
                                   <td><input type="text" id='user' class='uprava' value="$value[uprava]"></td>
                                   <td><input type="text" id='user' class='edds' value="$value[edds]"></td>
                                   HTML;
+                                  echo "<td>" . $value['cb'] . "</td>";
                                   echo "<td>" . $value['u_kums'] . "</td>";
                                   echo "<td>" . $value['u_uprava'] . "</td>";
                                   echo "<td>" . $value['u_edds'] . "</td>";
@@ -691,9 +713,11 @@
                       echo "<tr>";
                       echo "<td class='col-id-no' scope='row'><b>ИТОГО</td>";
                       echo "<td></td>";
+                      echo "<td><b>" . $value['fu'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(kums)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(uprava)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(edds)'] . "</b></td>";
+                      echo "<td><b>" . $value['cb'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_kums)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_uprava)'] . "</b></td>";
                       echo "<td><b>" . $value['SUM(u_edds)'] . "</b></td>";

@@ -90,7 +90,8 @@ class BudgetModel extends Model {
                  
                         case "four":
 
-                     $sql = "SELECT id, marker_a, marker_b, name, ekr, dmsh, dhsh, u_dmsh, u_dhsh"
+                     $sql = "SELECT id, marker_a, marker_b, name, ekr, dmsh, dhsh, u_dmsh, u_dhsh, "
+                                . "(dmsh + dhsh) AS fu, (u_dmsh + u_dhsh) AS cb"
                 . " from reporting_budget";
 
                    $res = [];
@@ -100,8 +101,8 @@ class BudgetModel extends Model {
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                        
                # Разделяем число на блоки
-               $block = ['dmsh', 'dhsh', 'u_dmsh', 'u_dhsh'];
-               for ($num = 0 ; $num <= 3 ; ++$num) {
+               $block = ['dmsh', 'dhsh', 'u_dmsh', 'u_dhsh', 'fu', 'cb'];
+               for ($num = 0 ; $num <= 5 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        
@@ -114,7 +115,8 @@ class BudgetModel extends Model {
                    
             case "five";
                 
-                $sql = "SELECT id, marker_a, marker_b, name, ekr, vsosh_ds, vsosh_school, u_vsosh_ds, u_vsosh_school"
+                $sql = "SELECT id, marker_a, marker_b, name, ekr, vsosh_ds, vsosh_school, u_vsosh_ds, u_vsosh_school, "
+                        . "(vsosh_ds + vsosh_school) AS fu, (u_vsosh_ds + u_vsosh_school) AS cb"
                 . " from reporting_budget";
 
                    $res = [];
@@ -124,8 +126,8 @@ class BudgetModel extends Model {
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                        
                # Разделяем число на блоки
-               $block = ['vsosh_ds', 'vsosh_school', 'u_vsosh_ds', 'u_vsosh_school'];
-               for ($num = 0 ; $num <= 3 ; ++$num) {
+               $block = ['vsosh_ds', 'vsosh_school', 'u_vsosh_ds', 'u_vsosh_school', 'fu', 'cb'];
+               for ($num = 0 ; $num <= 5 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        
@@ -138,7 +140,8 @@ class BudgetModel extends Model {
                 
                 case "six":
                     
-                    $sql = "SELECT id, marker_a, marker_b, name, ekr, kums, uprava, edds, u_kums, u_uprava, u_edds"
+                    $sql = "SELECT id, marker_a, marker_b, name, ekr, kums, uprava, edds, u_kums, u_uprava, u_edds, "
+                        . "(kums + uprava + edds) AS fu, (u_kums + u_uprava + u_edds) AS cb"
                 . " from reporting_budget";
 
                    $res = [];
@@ -148,8 +151,8 @@ class BudgetModel extends Model {
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                        
                # Разделяем число на блоки
-               $block = ['kums', 'uprava', 'edds', 'u_kums', 'u_uprava', 'u_edds'];
-               for ($num = 0 ; $num <= 5 ; ++$num) {
+               $block = ['kums', 'uprava', 'edds', 'u_kums', 'u_uprava', 'u_edds', 'fu', 'cb'];
+               for ($num = 0 ; $num <= 7 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        
@@ -732,7 +735,8 @@ class BudgetModel extends Model {
             case "one":
                 
                     $sql = "SELECT id, SUM(glava), SUM(adm), SUM(sovet), SUM(kso), SUM(u_glava), "
-                . "SUM(u_adm), SUM(u_sovet), SUM(u_kso) from reporting_budget WHERE marker_a = '10' AND "
+                . "SUM(u_adm), SUM(u_sovet), SUM(u_kso), (SUM(glava) + SUM(adm) + SUM(sovet) + SUM(kso)) AS fu, "
+                    . "(SUM(u_glava) + SUM(u_adm) + SUM(u_sovet) + SUM(u_kso)) AS cb from reporting_budget WHERE marker_a = '10' AND "
                     . "id != '118' AND id != '151' AND id != '171' AND id != '197'";
 
                    $res = [];
@@ -742,8 +746,8 @@ class BudgetModel extends Model {
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                        
                # Разделяем число на блоки
-               $block = ['SUM(glava)', 'SUM(adm)', 'SUM(sovet)', 'SUM(kso)', 'SUM(u_glava)', 'SUM(u_adm)', 'SUM(u_sovet)', 'SUM(u_kso)'];
-               for ($num = 0 ; $num <= 7 ; ++$num) {
+               $block = ['SUM(glava)', 'SUM(adm)', 'SUM(sovet)', 'SUM(kso)', 'SUM(u_glava)', 'SUM(u_adm)', 'SUM(u_sovet)', 'SUM(u_kso)', 'fu', 'cb'];
+               for ($num = 0 ; $num <= 9 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        
@@ -756,7 +760,8 @@ class BudgetModel extends Model {
             
                    case "two":
 
-                       $sql = "SELECT id, SUM(cb), SUM(zakupki), SUM(u_cb), SUM(u_zakupki)"
+                       $sql = "SELECT id, SUM(cb), SUM(zakupki), SUM(u_cb), SUM(u_zakupki), "
+                           . "(SUM(cb) + SUM(zakupki)) AS fu, (SUM(u_cb) + SUM(u_zakupki)) AS cb"
                 . " from reporting_budget WHERE marker_a = '10' AND "
                     . "id != '118' AND id != '151' AND id != '171' AND id != '197'";
 
@@ -767,8 +772,8 @@ class BudgetModel extends Model {
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                        
                # Разделяем число на блоки
-               $block = ['SUM(cb)', 'SUM(zakupki)', 'SUM(u_cb)', 'SUM(u_zakupki)'];
-               for ($num = 0 ; $num <= 3 ; ++$num) {
+               $block = ['SUM(cb)', 'SUM(zakupki)', 'SUM(u_cb)', 'SUM(u_zakupki)', 'fu', 'cb'];
+               for ($num = 0 ; $num <= 5 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        
@@ -782,7 +787,9 @@ class BudgetModel extends Model {
                    case "three":
        
                     $sql = "SELECT id, SUM(aurinko), SUM(berezka), SUM(zoloto), SUM(korablik), SUM(gnomik), SUM(skazka), SUM(solnishko), "
-                           . "SUM(u_aurinko), SUM(u_berezka), SUM(u_zoloto), SUM(u_korablik), SUM(u_gnomik), SUM(u_skazka), SUM(u_solnishko)"
+                           . "SUM(u_aurinko), SUM(u_berezka), SUM(u_zoloto), SUM(u_korablik), SUM(u_gnomik), SUM(u_skazka), SUM(u_solnishko), "
+                           . "(SUM(aurinko) + SUM(berezka) + SUM(zoloto) + SUM(korablik) + SUM(gnomik) + SUM(skazka) + SUM(solnishko)) AS fu, "
+                           . "(SUM(u_aurinko) + SUM(u_berezka) + SUM(u_zoloto) + SUM(u_korablik) + SUM(u_gnomik) + SUM(u_skazka) + SUM(u_solnishko)) AS cb"
                 . " from reporting_budget WHERE marker_a = '10' AND "
                     . "id != '118' AND id != '151' AND id != '171' AND id != '197'";
 
@@ -794,8 +801,8 @@ class BudgetModel extends Model {
                        
                # Разделяем число на блоки
                $block = ['SUM(aurinko)', 'SUM(berezka)', 'SUM(zoloto)', 'SUM(korablik)', 'SUM(gnomik)', 'SUM(skazka)', 'SUM(solnishko)', 
-                   'SUM(u_aurinko)', 'SUM(u_berezka)', 'SUM(u_zoloto)', 'SUM(u_korablik)', 'SUM(u_gnomik)', 'SUM(u_skazka)', 'SUM(u_solnishko)'];
-               for ($num = 0 ; $num <= 13 ; ++$num) {
+                   'SUM(u_aurinko)', 'SUM(u_berezka)', 'SUM(u_zoloto)', 'SUM(u_korablik)', 'SUM(u_gnomik)', 'SUM(u_skazka)', 'SUM(u_solnishko)', 'fu', 'cb'];
+               for ($num = 0 ; $num <= 15 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        
@@ -808,7 +815,8 @@ class BudgetModel extends Model {
                  
                     case "four":
       
-                        $sql = "SELECT id, SUM(dmsh), SUM(dhsh), SUM(u_dmsh), SUM(u_dhsh)"
+                        $sql = "SELECT id, SUM(dmsh), SUM(dhsh), SUM(u_dmsh), SUM(u_dhsh), "
+                            . "(SUM(dmsh) + SUM(dhsh)) AS fu, (SUM(u_dmsh) + SUM(u_dhsh)) AS cb"
                 . " from reporting_budget WHERE marker_a = '10' AND "
                     . "id != '118' AND id != '151' AND id != '171' AND id != '197'";
 
@@ -819,8 +827,8 @@ class BudgetModel extends Model {
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                        
                # Разделяем число на блоки
-               $block = ['SUM(dmsh)', 'SUM(dhsh)', 'SUM(u_dmsh)', 'SUM(u_dhsh)'];
-               for ($num = 0 ; $num <= 3 ; ++$num) {
+               $block = ['SUM(dmsh)', 'SUM(dhsh)', 'SUM(u_dmsh)', 'SUM(u_dhsh)', 'fu', 'cb'];
+               for ($num = 0 ; $num <= 5 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        
@@ -833,7 +841,8 @@ class BudgetModel extends Model {
                    
                    case "five":
                        
-                    $sql = "SELECT id, SUM(vsosh_ds), SUM(vsosh_school), SUM(u_vsosh_ds), SUM(u_vsosh_school)"
+                    $sql = "SELECT id, SUM(vsosh_ds), SUM(vsosh_school), SUM(u_vsosh_ds), SUM(u_vsosh_school), "
+                           . "(SUM(vsosh_ds) + SUM(vsosh_school)) AS fu, (SUM(u_vsosh_ds) + SUM(u_vsosh_school)) AS cb"
                 . " from reporting_budget WHERE marker_a = '10' AND "
                     . "id != '118' AND id != '151' AND id != '171' AND id != '197'";
 
@@ -844,8 +853,8 @@ class BudgetModel extends Model {
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                        
                # Разделяем число на блоки
-               $block = ['SUM(vsosh_ds)', 'SUM(vsosh_school)', 'SUM(u_vsosh_ds)', 'SUM(u_vsosh_school)'];
-               for ($num = 0 ; $num <= 3 ; ++$num) {
+               $block = ['SUM(vsosh_ds)', 'SUM(vsosh_school)', 'SUM(u_vsosh_ds)', 'SUM(u_vsosh_school)', 'fu', 'cb'];
+               for ($num = 0 ; $num <= 5 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        
@@ -858,7 +867,8 @@ class BudgetModel extends Model {
                    
             case "six";
                 
-                    $sql = "SELECT id, SUM(kums), SUM(uprava), SUM(edds), SUM(u_kums), SUM(u_uprava), SUM(u_edds)"
+                    $sql = "SELECT id, SUM(kums), SUM(uprava), SUM(edds), SUM(u_kums), SUM(u_uprava), SUM(u_edds), "
+                            . "(SUM(kums) + SUM(uprava) + SUM(edds)) AS fu, (SUM(u_kums) + SUM(u_uprava) + SUM(u_edds)) AS cb"
                 . " from reporting_budget WHERE marker_a = '10' AND "
                     . "id != '118' AND id != '151' AND id != '171' AND id != '197'";
 
@@ -869,8 +879,8 @@ class BudgetModel extends Model {
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                        
                # Разделяем число на блоки
-               $block = ['SUM(kums)', 'SUM(uprava)', 'SUM(edds)', 'SUM(u_kums)', 'SUM(u_uprava)', 'SUM(u_edds)'];
-               for ($num = 0 ; $num <= 5 ; ++$num) {
+               $block = ['SUM(kums)', 'SUM(uprava)', 'SUM(edds)', 'SUM(u_kums)', 'SUM(u_uprava)', 'SUM(u_edds)', 'fu', 'cb'];
+               for ($num = 0 ; $num <= 7 ; ++$num) {
                $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        

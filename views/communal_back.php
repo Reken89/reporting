@@ -135,12 +135,12 @@
                       $tarif = $pageData['tarif'];
                       echo "<input type=hidden class='id' value=" . $tarif['id'] . ">";
                       echo <<<HTML
-                      <td><input type="text" id='user' class='heat' value="$tarif[heat]"></td><td></td>
-                      <td><input type="text" id='user' class='drainage' value="$tarif[drainage]"></td><td></td>
-                      <td><input type="text" id='user' class='negative' value="$tarif[negative]"></td><td></td>
-                      <td><input type="text" id='user' class='water' value="$tarif[water]"></td><td></td>
+                      <td><input type="text" id='user' class='heat_one' value="$tarif[heat_one]"></td><td><input type="text" id='user' class='heat_two' value="$tarif[heat_two]"></td>
+                      <td><input type="text" id='user' class='drainage_one' value="$tarif[drainage_one]"></td><td><input type="text" id='user' class='drainage_two' value="$tarif[drainage_two]"></td>
+                      <td><input type="text" id='user' class='negative_one' value="$tarif[negative_one]"></td><td><input type="text" id='user' class='negative_two' value="$tarif[negative_two]"></td>
+                      <td><input type="text" id='user' class='water_one' value="$tarif[water_one]"></td><td><input type="text" id='user' class='water_two' value="$tarif[water_two]"></td>
                       <td><input type="text" id='user' class='electro_one' value="$tarif[electro_one]"></td><td><input type="text" id='user' class='electro_two' value="$tarif[electro_two]"></td>
-                      <td><input type="text" id='user' class='trash' value="$tarif[trash]"></td><td></td>
+                      <td><input type="text" id='user' class='trash_one' value="$tarif[trash_one]"></td><td><input type="text" id='user' class='trash_two' value="$tarif[trash_two]"></td>
                       <td>X</td><td></td>
                       HTML;
                       ?>

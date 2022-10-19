@@ -17,16 +17,28 @@
                     var id = $('.id', tr).val();
            
                     var tr = this.closest('tr');
-                    var heat = $('.heat', tr).val();
+                    var heat_one = $('.heat_one', tr).val();
+                    
+                    var tr = this.closest('tr');
+                    var heat_two = $('.heat_two', tr).val();
            
                     var tr = this.closest('tr');
-                    var drainage = $('.drainage', tr).val();
+                    var drainage_one = $('.drainage_one', tr).val();
+                    
+                    var tr = this.closest('tr');
+                    var drainage_two = $('.drainage_two', tr).val();
            
                     var tr = this.closest('tr');
-                    var negative = $('.negative', tr).val();
+                    var negative_one = $('.negative_one', tr).val();
+                    
+                    var tr = this.closest('tr');
+                    var negative_two = $('.negative_two', tr).val();
            
                     var tr = this.closest('tr');
-                    var water = $('.water', tr).val();
+                    var water_one = $('.water_one', tr).val();
+                    
+                    var tr = this.closest('tr');
+                    var water_two = $('.water_two', tr).val();
            
                     var tr = this.closest('tr');
                     var electro_one = $('.electro_one', tr).val();
@@ -35,12 +47,15 @@
                     var electro_two = $('.electro_two', tr).val();
                     
                     var tr = this.closest('tr');
-                    var trash = $('.trash', tr).val();
+                    var trash_one = $('.trash_one', tr).val();
+                    
+                    var tr = this.closest('tr');
+                    var trash_two = $('.trash_two', tr).val();
            
                     $.ajax({  
                         url:"/reporting/communal/update_tarif",  
                         method:"POST",  
-                        data:{ id:id, heat:heat, drainage:drainage, negative:negative, water:water, electro_one:electro_one, electro_two:electro_two, trash:trash },
+                        data:{ id:id, heat_one:heat_one, heat_two:heat_two, drainage_one:drainage_one, drainage_two:drainage_two, negative_one:negative_one, negative_two:negative_two, water_one:water_one, water_two:water_two, electro_one:electro_one, electro_two:electro_two, trash_one:trash_one, trash_two:trash_two },
                         dataType:"text",  
                         success:function(data)  
                         {  

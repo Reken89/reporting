@@ -56,14 +56,19 @@ class CommunalController extends Controller {
             $this->pageData['tarif'] = $this->model->tarif($svod_mounth, $svod_year);
         }else{
             $this->pageData['tarif'] = [
-                'id'          => NULL,
-                'heat'        => 'X',
-                'drainage'    => 'X',
-                'negative'    => 'X',
-                'water'       => 'X',
-                'electro_one' => 'X',
-                'electro_two' => 'X',
-                'trash'       => 'X'
+                'id'           => NULL,
+                'heat_one'     => 'X',
+                'heat_two'     => 'X',
+                'drainage_one' => 'X',
+                'drainage_two' => 'X',
+                'negative_one' => 'X',
+                'negative_two' => 'X',
+                'water_one'    => 'X',
+                'water_two'    => 'X',
+                'electro_one'  => 'X',
+                'electro_two'  => 'X',
+                'trash_one'    => 'X',
+                'trash_two'    => 'X'
             ];
         }   
         
@@ -124,21 +129,37 @@ class CommunalController extends Controller {
         public function update_tarif()
         {
             $id = $_POST['id'];
-            $heat = $_POST['heat'];
-            $heat = str_replace(" ", "", $heat);
-            $heat = str_replace(",", ".", $heat);
+            $heat_one = $_POST['heat_one'];
+            $heat_one = str_replace(" ", "", $heat_one);
+            $heat_one = str_replace(",", ".", $heat_one);
             
-            $drainage = $_POST['drainage'];
-            $drainage = str_replace(" ", "", $drainage);
-            $drainage = str_replace(",", ".", $drainage);
+            $heat_two = $_POST['heat_two'];
+            $heat_two = str_replace(" ", "", $heat_two);
+            $heat_two = str_replace(",", ".", $heat_two);
             
-            $negative = $_POST['negative'];
-            $negative = str_replace(" ", "", $negative);
-            $negative = str_replace(",", ".", $negative);
+            $drainage_one = $_POST['drainage_one'];
+            $drainage_one = str_replace(" ", "", $drainage_one);
+            $drainage_one = str_replace(",", ".", $drainage_one);
             
-            $water = $_POST['water'];
-            $water = str_replace(" ", "", $water);
-            $water = str_replace(",", ".", $water);
+            $drainage_two = $_POST['drainage_two'];
+            $drainage_two = str_replace(" ", "", $drainage_two);
+            $drainage_two = str_replace(",", ".", $drainage_two);
+            
+            $negative_one = $_POST['negative_one'];
+            $negative_one = str_replace(" ", "", $negative_one);
+            $negative_one = str_replace(",", ".", $negative_one);
+            
+            $negative_two = $_POST['negative_two'];
+            $negative_two = str_replace(" ", "", $negative_two);
+            $negative_two = str_replace(",", ".", $negative_two);
+            
+            $water_one = $_POST['water_one'];
+            $water_one = str_replace(" ", "", $water_one);
+            $water_one = str_replace(",", ".", $water_one);
+            
+            $water_two = $_POST['water_two'];
+            $water_two = str_replace(" ", "", $water_two);
+            $water_two = str_replace(",", ".", $water_two);
             
             $electro_one = $_POST['electro_one'];
             $electro_one = str_replace(" ", "", $electro_one);
@@ -148,11 +169,30 @@ class CommunalController extends Controller {
             $electro_two = str_replace(" ", "", $electro_two);
             $electro_two = str_replace(",", ".", $electro_two);
             
-            $trash = $_POST['trash'];
-            $trash = str_replace(" ", "", $trash);
-            $trash = str_replace(",", ".", $trash);
+            $trash_one = $_POST['trash_one'];
+            $trash_one = str_replace(" ", "", $trash_one);
+            $trash_one = str_replace(",", ".", $trash_one);
             
-            $this->model->update_tarif($id, $heat, $drainage, $negative, $water, $electro_one, $electro_two, $trash);
+            $trash_two = $_POST['trash_two'];
+            $trash_two = str_replace(" ", "", $trash_two);
+            $trash_two = str_replace(",", ".", $trash_two);
+            
+            $values = [
+                'heat_one'     => $heat_one,
+                'heat_two'     => $heat_two,
+                'drainage_one' => $drainage_one,
+                'drainage_two' => $drainage_two,
+                'negative_one' => $negative_one,
+                'negative_two' => $negative_two,
+                'water_one'    => $water_one,
+                'water_two'    => $water_two,
+                'electro_one'  => $electro_one,
+                'electro_two'  => $electro_two,
+                'trash_one'    => $trash_one,
+                'trash_two'    => $trash_two
+            ];
+            
+            $this->model->update_tarif($id, $values);
         }
     
 }

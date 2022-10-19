@@ -141,9 +141,14 @@ class CommunalModel extends Model {
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                # Разделяем число на блоки
                $block = [
-                   'heat', 'drainage', 'negative', 'water', 'electro_one', 'electro_two', 'trash'
+                   'heat_one', 'heat_two',
+                   'drainage_one', 'drainage_two',
+                   'negative_one', 'negative_two',
+                   'water_one', 'water_two',
+                   'electro_one', 'electro_two',
+                   'trash_one', 'trash_two'
                    ];
-               for ($num = 0 ; $num <= 6 ; ++$num){
+               for ($num = 0 ; $num <= 11 ; ++$num){
                $row[$block[$num]] = number_format($row[$block[$num]], 3, ',', ' ');
                }                              
                $res = $row;              
@@ -151,19 +156,27 @@ class CommunalModel extends Model {
         return $res;        
     }
     
-    public function update_tarif($id, $heat, $drainage, $negative, $water, $electro_one, $electro_two, $trash)
+    public function update_tarif($id, $values)
     {
-        $sql = "UPDATE tariffs SET heat = :heat, drainage = :drainage, negative = :negative, "
-                . "water = :water, electro_one = :electro_one, electro_two = :electro_two, "
-                . "trash = :trash WHERE id = '$id'";
+        $sql = "UPDATE tariffs SET heat_one = :heat_one, heat_two = :heat_two, "
+                . "drainage_one = :drainage_one, drainage_two = :drainage_two, "
+                . "negative_one = :negative_one, negative_two = :negative_two, "
+                . "water_one = :water_one, water_two = :water_two, "
+                . "electro_one = :electro_one, electro_two = :electro_two, "
+                . "trash_one = :trash_one, trash_two = :trash_two WHERE id = '$id'";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(":heat", $heat, PDO::PARAM_STR);
-        $stmt->bindValue(":drainage", $drainage, PDO::PARAM_STR);
-        $stmt->bindValue(":negative", $negative, PDO::PARAM_STR);
-        $stmt->bindValue(":water", $water, PDO::PARAM_STR);
-        $stmt->bindValue(":electro_one", $electro_one, PDO::PARAM_STR);
-        $stmt->bindValue(":electro_two", $electro_two, PDO::PARAM_STR);
-        $stmt->bindValue(":trash", $trash, PDO::PARAM_STR);
+        $stmt->bindValue(":heat_one", $values['heat_one'], PDO::PARAM_STR);
+        $stmt->bindValue(":heat_two", $values['heat_two'], PDO::PARAM_STR);
+        $stmt->bindValue(":drainage_one", $values['drainage_one'], PDO::PARAM_STR);
+        $stmt->bindValue(":drainage_two", $values['drainage_two'], PDO::PARAM_STR);
+        $stmt->bindValue(":negative_one", $values['negative_one'], PDO::PARAM_STR);
+        $stmt->bindValue(":negative_two", $values['negative_two'], PDO::PARAM_STR);
+        $stmt->bindValue(":water_one", $values['water_one'], PDO::PARAM_STR);
+        $stmt->bindValue(":water_two", $values['water_two'], PDO::PARAM_STR);
+        $stmt->bindValue(":electro_one", $values['electro_one'], PDO::PARAM_STR);
+        $stmt->bindValue(":electro_two", $values['electro_two'], PDO::PARAM_STR);
+        $stmt->bindValue(":trash_one", $values['trash_one'], PDO::PARAM_STR);
+        $stmt->bindValue(":trash_two", $values['trash_two'], PDO::PARAM_STR);
         $stmt->execute();
     }
     

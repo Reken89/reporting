@@ -39,7 +39,11 @@ class CommunalModel extends Model {
                # Разделяем число на блоки
                $block = ['SUM(volume1)', 'SUM(sum1)', 'SUM(volume2)', 'SUM(sum2)', 'SUM(volume3)', 'SUM(sum3)', 'SUM(volume4)', 'SUM(sum4)', 'SUM(volume5)', 'SUM(sum5)', 'SUM(volume6)', 'SUM(sum6)', 'SUM(volume7)', 'SUM(sum7)', 'SUM(total)'];
                for ($num = 0 ; $num <= 14 ; ++$num) {
-               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+                   if($num == 0 || $num == 2 || $num == 4 || $num == 6 || $num == 8 || $num == 10 || $num == 12){
+                       $row[$block[$num]] = number_format($row[$block[$num]], 3, ',', ' ');
+                   } else {
+                       $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+                   }
                }
                
                } else {
@@ -47,7 +51,11 @@ class CommunalModel extends Model {
                    # Разделяем число на блоки
                    $block = ['volume1', 'sum1', 'volume2', 'sum2', 'volume3', 'sum3', 'volume4', 'sum4', 'volume5', 'sum5', 'volume6', 'sum6', 'volume7', 'sum7', 'total'];
                    for ($num = 0 ; $num <= 14 ; ++$num) {
-                   $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+                       if($num == 0 || $num == 2 || $num == 4 || $num == 6 || $num == 8 || $num == 10 || $num == 12){
+                       $row[$block[$num]] = number_format($row[$block[$num]], 3, ',', ' ');
+                   } else {
+                       $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+                   }                 
                    }
                }
    
@@ -77,11 +85,14 @@ class CommunalModel extends Model {
 
                # Разделяем число на блоки
                $block = ['SUM(volume1)', 'SUM(sum1)', 'SUM(volume2)', 'SUM(sum2)', 'SUM(volume3)', 'SUM(sum3)', 'SUM(volume4)', 'SUM(sum4)', 'SUM(volume5)', 'SUM(sum5)', 'SUM(volume6)', 'SUM(sum6)', 'SUM(volume7)', 'SUM(sum7)', 'SUM(total)'];
-               for ($num = 0 ; $num <= 14 ; ++$num) {
-               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+               for ($num = 0 ; $num <= 14 ; ++$num){
+               if($num == 0 || $num == 2 || $num == 4 || $num == 6 || $num == 8 || $num == 10 || $num == 12){
+                       $row[$block[$num]] = number_format($row[$block[$num]], 3, ',', ' ');
+                   } else {
+                       $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+                   }
                }
-               
-               
+                              
                $res[$row['SUM(volume1)']] = $row;
                
            }

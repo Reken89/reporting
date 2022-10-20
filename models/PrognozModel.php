@@ -32,7 +32,14 @@ class PrognozModel extends Model {
                    'teplo_sum', 'teplo_vol', 'water_vol', 'water_sum', 'stoki_vol', 'stoki_sum',
                    'elektro_vol', 'elektro_sum', 'trash_vol', 'trash_sum', 'negativka_vol', 'negativka_sum'];
                for ($num = 0 ; $num <= 35 ; ++$num) {
-               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+                   if($num == 0 || $num == 1 || $num == 4 || $num == 5 || $num == 8 || $num == 9 || $num == 12 || $num == 13 || 
+                           $num == 16 || $num == 17 || $num == 20 || $num == 21 || $num == 25 || $num == 26 || $num == 28 || $num == 30 || $num == 32 || $num == 34){
+                       $row[$block[$num]] = number_format($row[$block[$num]], 3, ',', ' ');
+                   } else {
+                       $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+                   }
+
+               //$row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
                }
                        
                        $res[$row['id']] = $row;
@@ -79,7 +86,12 @@ class PrognozModel extends Model {
                    'teplo_sum', 'teplo_vol', 'water_vol', 'water_sum', 'stoki_vol', 'stoki_sum',
                    'elektro_vol', 'elektro_sum', 'trash_vol', 'trash_sum', 'negativka_vol', 'negativka_sum'];
                for ($num = 0 ; $num <= 35 ; ++$num) {
-               $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+               if($num == 0 || $num == 1 || $num == 4 || $num == 5 || $num == 8 || $num == 9 || $num == 12 || $num == 13 || 
+                           $num == 16 || $num == 17 || $num == 20 || $num == 21 || $num == 25 || $num == 26 || $num == 28 || $num == 30 || $num == 32 || $num == 34){
+                       $row[$block[$num]] = number_format($row[$block[$num]], 3, ',', ' ');
+                   } else {
+                       $row[$block[$num]] = number_format($row[$block[$num]], 2, ',', ' ');
+                   }
                }
                         
                        
@@ -99,6 +111,10 @@ class PrognozModel extends Model {
                    $stmt->execute();
                    
                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       $block = ['tarif1', 'tarif2'];
+                       for ($num = 0 ; $num <= 1 ; ++$num) {
+                           $row[$block[$num]] = number_format($row[$block[$num]], 3, ',', ' ');
+                       }
                        $res[$row['name']] = $row;
                    }
         

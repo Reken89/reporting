@@ -62,7 +62,20 @@
                 
                 echo <<<HTML
                 
-                                                <form action="/reporting/table/ofs" method="post">
+                        <form action="/reporting/table/ofs" method="post">
+                        <button type="submit" style="width:400px;height:25px" class="btn">Отчет по финансовому состоянию</button>
+                        </form>
+                
+                        <form action="/reporting/budget/table" method="post">
+                        <button type="submit" style="width:400px;height:25px" class="btn">Таблица смета</button>
+                        </form>
+                HTML;
+                                
+            }
+            
+/*
+
+<form action="/reporting/table/ofs" method="post">
                         <button type="submit" style="width:400px;height:25px" class="btn">Отчет по финансовому состоянию</button>
                         </form>
 
@@ -97,6 +110,5 @@
                         <form action="/reporting/editoruser/editor_user" method="post">
                         <button type="submit" style="width:400px;height:25px" class="btn">Редактор учетных записей</button>
                         </form>
-                HTML;
-                                
-            }
+
+ */            
